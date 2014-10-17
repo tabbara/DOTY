@@ -18,10 +18,12 @@ var app = {
     onDeviceReady: function () {
         app.receivedEvent('deviceready');
         console.log("e");
+        alert("a");
     },
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         console.log("d");
         console.log('Received Event: ' + id);
+        alert("b");
     }
 };
