@@ -64,6 +64,7 @@ body {
     }
 
     .day {
+        width: 98%;
         max-width: 98%;
         margin: 10px auto 0 auto;
         background: white;
@@ -75,29 +76,31 @@ body {
         height: 100%;
         display: block;
         position: relative;
+
     }
 
-    .card-title {
-        font-size: 2em;
-        padding: 5px 20px;
+    .day-image-container {
+        display: inline-block;
+        max-height: 100%;
+        position: relative;
     }
 
-    .card-image {
+    .day-image {
         display: block;
         max-width: 100%;
         max-height: 100%;
     }
 
 
-    .day .day-title {
+    .day-title {
         background: black;
         /*
         opacity: 0.6;
         filter: alpha(opacity=60);  For IE8 and earlier
         */
         position: absolute;
-        bottom: 0px;
-        height: 20%;
+        bottom: 0%;
+        height: 15%;
         display: block;
 
         /* Fallback for web browsers that doesn't support RGBa */
@@ -110,18 +113,22 @@ body {
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
         width: 100%;
 
+
     }
 
     .day-title h1 {
-        position: absolute;
+        position: relative;
         color: white;
-        top: 18%;
         left: 3%;
+        top: 5%;
         font-size: 5vw;
+
     }
 
-    .card-description {
-        font-size: 1em;
+    .day-description {
+        height: 4vw;
+        display: block;
+        font-size: 3vw;
     }
 
 
