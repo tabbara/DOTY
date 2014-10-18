@@ -1,0 +1,40 @@
+A Day:
+  A day has three img sizes. (L)arge, (M)edium, (S)mall.
+  Thumbnail:
+      Image + Title
+      Press on a day-thumbnail to go to the Day Page
+      Thumbnail Icons
+        - Alert Me: if selected, the user will be notified on the day of the event at 10 AM local-time
+        - Social Sharing: in V2, users will be able to like, tweet, mail, message a day
+  Day Page:
+    Thumbnail (L) + Title
+    Date
+    Description
+           
+Home Page:
+  Today Is (L)
+  Yesterday Is (M)    Tomorrow Is (M)
+  Coming up over the next few days (S) (3x2 days after Tomorrow)
+  This Month Is  This Year Is
+  
+Bottom:
+  Home Page
+  Categories
+  Calender
+    PopRow: Today (Overview), Tomorrow (Overview), All Months (Overview)
+  Alerts  
+    Overview of all days for which the user chose an alert (max 30)
+    Auto-remove alerts older than one week(?)
+  Settings
+    Feedback button
+    Rate the game button
+  Search
+    PopRow: Search Field, Search Button
+  
+Popup Row (PopRow):
+  Pops up above the bottom row to provide choices before pulling new content, changing state/page
+
+Day Overviews:
+  Single day-date (today, tomorrow etc)
+  Home Overview (Today (L), Yesterday & Tomorrow (M), 4-6 Days after tomorrow (M or S)
+  Month overview
