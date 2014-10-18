@@ -10,6 +10,7 @@ html {
 
 body {
     font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
     padding: 0;
     margin: 0;
     background: rgb(234,234,234);
@@ -67,8 +68,10 @@ body {
         margin: 10px auto 0 auto;
         background: white;
         border-style: solid;
-        border: 0px solid rgb(180,180,180);;
-        border-bottom-width: 2px;
+        border: 1px solid #d0d0d0;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 0 1px 0 #bfbfbf;
         height: 100%;
         display: block;
         position: relative;
@@ -94,7 +97,7 @@ body {
         */
         position: absolute;
         bottom: 0px;
-        height: 50px;
+        height: 20%;
         display: block;
 
         /* Fallback for web browsers that doesn't support RGBa */
@@ -105,12 +108,16 @@ body {
         filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
         /* For IE 8*/
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
-}
+        width: 100%;
+
     }
 
     .day-title h1 {
+        position: absolute;
         color: white;
-        padding: 10px 20px;
+        top: 18%;
+        left: 3%;
+        font-size: 5vw;
     }
 
     .card-description {
