@@ -5,17 +5,26 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
 		<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <title>DOTY</title>
     </head>
     <body>
         <div class="app">
+            <div class ="header">
+                <h1>Welcome</h1>
+            </div>
 
-            <h1>Welcome</h1>
-			<p>to the DAYS app</p>
+            <div id='days-container'>
+                <ul>
+                    <li class="day">
+                        <div class="card-title">Day Title</div>
+                        <img class="card-image" src="https://cdn2.daysoftheyear.com/wp-content/images/world-wildlife-conservation-day-764x382.jpg">
+                        <div class="day-title"><h1>Test</h1></div>
 
-            <div>
-                Test
+                        <!-- <span class="card-description">Day Description</span> -->
+                    </li>
+                </ul>
             </div>
 
         </div>
@@ -24,8 +33,6 @@
 		<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type='text/javascript' src="js/lib/handlebars-v2.0.0.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+        <script type="text/javascript">app.initialize();</script>
     </body>
 </html>

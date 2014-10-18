@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+
+    width: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    background: rgb(234,234,234);
+
+    width: 100%;
+}
+
+/*--#####################################################
+    HEADER
+#######################################################*/
+
+    .header {
+        background: rgb(95,125,140);
+        padding: 0 20px;
+        margin: 0;
+        height: 55px;
+        position: absolute;
+        width: 100%;
+    }
+
+    .header h1 {
+        padding: 10px 20px;
+        margin: 0;
+        color: white;
+    }
+
+/*--#####################################################
+    HEADER
+#######################################################*/
+
+    #days-container {
+        border-style: solid;
+        border: 2px solid rgb(210,210,210);
+        padding: 0;
+        margin: 0;
+        -moz-box-sizing:    border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing:         border-box;
+        top: 55px;
+        bottom: 0px;
+        position: absolute;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #days-container ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .day {
+        max-width: 98%;
+        margin: 10px auto 0 auto;
+        background: white;
+        border-style: solid;
+        border: 0px solid rgb(180,180,180);;
+        border-bottom-width: 2px;
+        height: 100%;
+        display: block;
+        position: relative;
+    }
+
+    .card-title {
+        font-size: 2em;
+        padding: 5px 20px;
+    }
+
+    .card-image {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+
+    .day .day-title {
+        background: black;
+        /*
+        opacity: 0.6;
+        filter: alpha(opacity=60);  For IE8 and earlier
+        */
+        position: absolute;
+        bottom: 0px;
+        height: 50px;
+        display: block;
+
+        /* Fallback for web browsers that doesn't support RGBa */
+        background: rgb(0, 0, 0);
+        /* RGBa with 0.6 opacity */
+        background: rgba(0, 0, 0, 0.6);
+        /* For IE 5.5 - 7*/
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+        /* For IE 8*/
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+    }
+
+    .day-title h1 {
+        color: white;
+        padding: 10px 20px;
+    }
+
+    .card-description {
+        font-size: 1em;
+    }
+
+
+
