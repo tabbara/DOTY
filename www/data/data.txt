@@ -1,0 +1,82 @@
+﻿{
+  "meta":
+  {
+    "results_total": "4",
+    "results_count": 2
+  },
+  "days": [
+  {
+    "title": "No Beard Day",
+    "dates": ["1382054400", "1413590400", "1445126400"],
+    "image":
+    {
+      "thumbnail":
+      {
+        "url": "https://www.daysoftheyear.com/wp-content/images/no-beard-day-252x136.jpg",
+        "w": 252,
+        "h": 136
+      },
+      "medium":
+      {
+        "url": "https://www.daysoftheyear.com/wp-content/images/no-beard-day-524x262.jpg",
+        "w": 524,
+        "h": 262
+      },
+      "large":
+      {
+        "url": "https://www.daysoftheyear.com/wp-content/images/no-beard-day-764x382.jpg",
+        "w": 764,
+        "h": 382
+      },
+      "full":
+      {
+        "url": "https://www.daysoftheyear.com/wp-content/images/no-beard-day.jpg",
+        "w": 800,
+        "h": 400
+      },
+      "attribution":
+      {
+        "url": "https://www.flickr.com/photos/andrewdyer/350938953",
+        "txt": "At The Cutting Edge ... by Andrew Dyer"
+      }
+    },
+    "content": "Although this day may fall upon deaf ears for those who are fans of the band ZZ Top, No Beard Day is enjoyed by a growing number of individuals throughout the world. As the name hints, it is all about \"hair today, gone tomorrow\" and indeed, celebrating this event takes a great deal of commitment when shaving off one's beard.\r\n\r\nWhile origins are difficult to exactly trace, it is thought that No Beard Day is a counterpart to the seasonal tradition when one would shave his beard in the early part of spring (to celebrate warmer weather arriving). The fact that No Beard Day falls in the autumn may be a way to show the upcoming winter who is boss in a slight act of beardless defiance. \r\n\r\nFor those who wish to get a \"fresh\" start before the gloomy days of winter settle in, No Beard Day may be just what the doctor (and the razor) ordered."
+  },
+  {
+    "title": "Sweetest Day",
+    "dates": ["1413590400", "1445040000", "1382140800"],
+    "image":
+    {
+      "thumbnail":
+      {
+        "url": "https://www.daysoftheyear.com/wp-content/images/sweetest-day-252x136.jpg",
+        "w": 252,
+        "h": 136
+      },
+      "medium":
+      {
+        "url": "https://www.daysoftheyear.com/wp-content/images/sweetest-day-524x262.jpg",
+        "w": 524,
+        "h": 262
+      },
+      "large":
+      {
+        "url": "https://www.daysoftheyear.com/wp-content/images/sweetest-day-764x382.jpg",
+        "w": 764,
+        "h": 382
+      },
+      "full":
+      {
+        "url": "https://www.daysoftheyear.com/wp-content/images/sweetest-day.jpg",
+        "w": 800,
+        "h": 400
+      },
+      "attribution":
+      {
+        "url": "https://www.flickr.com/photos/v230gh/14194016272",
+        "txt": "Sweet Porsche by G\u00fcnter Hentschel"
+      }
+    },
+    "content": "Sweetest Day is in many respects similar to Valentines Day except that the traditional giving of candy is not limited to a loved one. Sweet offerings are generally distributed in heart-shaped boxes coloured the traditional red or pink to children or others who are thought to be deserving of a little sugar-based pampering. Many, however, do take this opportunity to sweeten up a romantic attachment and Hallmark provides an adequate range of sentiments to bolster such dedicated, twice-declared commitment.\r\n\r\nWith it not being an official day for declaring an undying love of the person who gets the pulses racing, Sweetest Day can be utilised to tilt the balance in favour of a suitor who has yet to establish credible credentials with an overly suspicious set of parents, or influential siblings. Nothing removes obstacles and says \u2018I\u2019m worthy\u2019 like Swiss chocolate melting on the, otherwise, bitter tongue of a formidable adversary."
+  }]
+}
