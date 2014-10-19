@@ -18,19 +18,23 @@
 
             <div id='days-container'>
                 <ul>
-                    <li class="day">
-                        <div class="day-image-container">
-                            <img class="day-image" src="https://cdn2.daysoftheyear.com/wp-content/images/world-wildlife-conservation-day-764x382.jpg">
-                            <div class="day-title">
-                                <h1>World Wildlife Conservation Day</h1>
+                    <script id="day-card-template" type="text/x-handlebars-tempate">
+                        {{#each this}}
+                        <li class="day">
+                            <div class="day-image-container">
+                                <img class="day-image" src={{image.large.url}}>
+                                <div class="day-title">
+                                    <h1>{{title}}</h1>
+                                </div>
                             </div>
-                        </div>
-                        <div class="day-description">
-                            <p>Raise awareness and contribute to the conservation and protection of endangered species such as elephants, rhinos and tigers on World Wildlife Conservation Day. First celebrated in 2012, this global occasion provides everyone with the opportunity to learn more about wildlife conservation and to be part of the solution in putting a stop to wildlife crime.
-                            </p>
-                        </div>
-                        <!-- <span class="card-description">Day Description</span> -->
-                    </li>
+                            <div class="day-description">
+                                <p>Raise awareness and contribute to the conservation and protection of endangered species such as elephants, rhinos and tigers on World Wildlife Conservation Day. First celebrated in 2012, this global occasion provides everyone with the opportunity to learn more about wildlife conservation and to be part of the solution in putting a stop to wildlife crime.
+                                </p>
+                            </div>
+                            <!-- <span class="card-description">Day Description</span> -->
+                        </li>
+                        {{/each}}
+                    </script>
                 </ul>
             </div>
 
@@ -41,5 +45,20 @@
 		<script type='text/javascript' src="js/lib/handlebars-v2.0.0.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript">app.initialize();</script>
+
+        <script type="text/javascript">
+            (function (){
+                $.getJSON(
+                    "http://app.daysoftheyear.com/api.php?date_start=17-10-2014&date_end=17-10-2014&limit=100",
+                    function(data) {
+                        var template_source = $("#day-card-template").html();
+                        var template = Handlebars.compile(template_source);
+                        $("#days-container").children("ul").html(template(data.days));
+                    }
+                );
+            })();
+
+        </script>
+
     </body>
 </html>
