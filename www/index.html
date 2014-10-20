@@ -7,6 +7,7 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
         <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <title>DOTY</title>
     </head>
@@ -23,9 +24,9 @@
                         <li class="day">
                             <div class="day-image-container">
                                 <img class="day-image" src={{image.large.url}}>
-                                <div class="day-title">
-                                    <h1>{{title}}</h1>
-                                </div>
+                            </div>
+                            <div class="day-title">
+                                <h1>{{title}}</h1>
                             </div>
 <!--
                             <div class="day-description">
@@ -56,8 +57,10 @@
                         var template_source = $("#day-card-template").html();
                         var template = Handlebars.compile(template_source);
                         $("#days-container").children("ul").html(template(data.days));
+                        app.setDayColors();
                     }
                 );
+
             })();
 
         </script>
