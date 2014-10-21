@@ -9,12 +9,22 @@
         <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="css/responsive.css"/>
+
         <title>DOTY</title>
     </head>
     <body>
         <div class="app">
             <div class ="header">
-                <h1>Welcome</h1>
+                <div class="headerdiv">
+                    <span class="fa fa-search search-button"></span>
+                </div>
+                <div class="headerdiv">
+                    <h1 class="logo">Welcome</h1>
+                </div>
+                <div class="headerdiv">
+                    <span class="fa fa-navicon nav-button"></span>
+                </div>
             </div>
 
             <div id='days-container'>
@@ -28,13 +38,6 @@
                             <div class="day-title">
                                 <h1>{{title}}</h1>
                             </div>
-<!--
-                            <div class="day-description">
-                                <p>Raise awareness and contribute to the conservation and protection of endangered species such as elephants, rhinos and tigers on World Wildlife Conservation Day. First celebrated in 2012, this global occasion provides everyone with the opportunity to learn more about wildlife conservation and to be part of the solution in putting a stop to wildlife crime.
-                                </p>
-                            </div>
--->
-                            <!-- <span class="card-description">Day Description</span> -->
                         </li>
                         {{/each}}
                     </script>
@@ -46,6 +49,7 @@
 		<script type="text/javascript" src="phonegap.js"></script>
 		<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type='text/javascript' src="js/lib/handlebars-v2.0.0.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.quickfit.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript">app.initialize();</script>
 
@@ -54,6 +58,9 @@
                 $.getJSON(
                     "http://app.daysoftheyear.com/api.php?date_start=17-10-2014&date_end=17-10-2014&limit=100",
                     function(data) {
+                        for (i=0;i<data.days.length;i++) {
+                            data.days[i].title = data.days[i].title.toUpperCase();
+                        }
                         var template_source = $("#day-card-template").html();
                         var template = Handlebars.compile(template_source);
                         $("#days-container").children("ul").html(template(data.days));
@@ -62,6 +69,25 @@
                 );
 
             })();
+
+          $(function() {
+            $(window).on('resize', function() {
+
+                var longestTextL = -1, longestText;
+                $(".day-title h1").each( function () {
+                    var t = $(this);
+                    if(t.text().length > longestTextL) { longestTextL = t.text().length; longestText = t; }
+                });
+
+                longestText.quickfit({ max: 40, min: 15, truncate: false, tolerance: 0.20 });
+
+              $('h1').each( function ( index) {
+                  $(this).css("font-size",longestText.css("font-size"));
+              });
+
+            });
+            $(window).trigger('resize');
+          });
 
         </script>
 

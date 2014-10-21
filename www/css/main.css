@@ -24,18 +24,45 @@ body {
 #######################################################*/
 
     .header {
-        background: rgb(95,125,140);
+        background: white;
+        border: 1px solid #cac8bc;
         padding: 0;
         margin: 0;
-        height: 55px;
-        position: absolute;
+        height: 90px;
         width: 100%;
     }
 
-    .header h1 {
-        padding: 10px 20px;
-        margin: 0;
-        color: white;
+    .headerdiv {
+        display: inline-block;
+        float: left;
+        width: 33.3333%;
+    }
+
+    .header .search-button {
+        display: block;
+        margin-left: 10%;
+        text-align: left;
+        font-size: 3em;
+        line-height: 90px;
+        color: #ababaa;
+    }
+
+    .header .logo {
+        display: block;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        line-height: 90px;
+    }
+
+    .header .nav-button {
+        display: block;
+        margin-right: 10%;
+        text-align: right;
+        font-size: 3em;
+        line-height: 90px;
+        color: #ababaa;
     }
 
 /*--#####################################################
@@ -43,17 +70,6 @@ body {
 #######################################################*/
 
     #days-container {
-        border-style: solid;
-        border: 2px solid rgb(210,210,210);
-        padding: 0;
-        margin: 0;
-        -moz-box-sizing:    border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing:         border-box;
-        top: 55px;
-        bottom: 0px;
-        position: absolute;
-        width: 100%;
     }
 
     #days-container ul {
@@ -65,7 +81,7 @@ body {
 
     .day {
         width: 96.875%;
-/*        max-width: 98%;*/
+        max-width: 764px;
         margin: 3.5% auto;
         background: white;
         border-style: solid;
@@ -82,6 +98,12 @@ body {
 
     .day-image-container {
         max-height: 100%;
+        border-style: solid;
+        border: 1px solid rgb(210,210,210);
+        border-bottom: 0px;
+        -moz-box-sizing:    border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing:         border-box;
     }
 
     .day-image {
@@ -92,27 +114,29 @@ body {
 
 
     .day-title {
-        background: black;
-/*
-        position: absolute;
-        bottom: 0%;
-*/
         display: block;
         width: 100%;
+/*
         height: 0;
         padding-bottom: 12%;
-
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+*/
     }
 
     .day-title h1 {
-        position: relative;
         color: white;
-        padding: 0.2em 0.4em;
+        text-align: center;
 /*
-        left: 3%;
-        top: 5%;
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
 */
-        font-size: 1.2em;
+        text-shadow: 0px 2px 0px rgba(0,0,0,0.2);
+        white-space: nowrap;
 
     }
 
