@@ -1,4 +1,38 @@
-var app = {
+var app = angular.module("doty", ["ionic","ui.router"]);
+
+app.controller('DaysCtrl', function($scope) {
+
+  $scope.views = [
+    { title: 'Home', url: "home" },
+    { title: 'Explore', url: "explore" },
+    { title: 'Favorites', url: "favorites" },
+    { title: 'Settings', url: "settings" }
+  ];
+
+});
+
+app.config( function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/");
+    $stateProvider
+    .state('home', {
+      url: "/",
+      templateUrl: "views/home.html"
+    })
+    .state('explore', {
+      url: "/explore",
+      templateUrl: "views/explore.html"
+    })
+    .state('favorites', {
+      url: "/favorites",
+      templateUrl: "views/favorites.html"
+    })
+    .state('settings', {
+      url: "/settings",
+      templateUrl: "views/settings.html"
+    })
+});
+
+var jsapp = {
     // Application Constructor
 
     initialize: function () {

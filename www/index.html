@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="doty">
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -7,52 +7,103 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
         <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
-        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/ionic.css">
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
-        <link rel="stylesheet" type="text/css" href="css/responsive.css"/>
+
+		<script type='text/javascript' src="js/lib/jquery.min.js"></script>
+<!--<script type='text/javascript' src="js/lib/handlebars-v2.0.0.js"></script>-->
+        <script type='text/javascript' src="js/lib/ionic.bundle.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.quickfit.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript">jsapp.initialize();</script>
 
         <title>DOTY</title>
     </head>
-    <body>
-        <div class="app">
+    <body ng-controller="DaysCtrl">>
+        <div>
+
+            <ion-side-menus>
+            <!-- Center content -->
+                <ion-side-menu-content>
+                  <ion-header-bar class="bar-light">
+                    <button menu-toggle="left" class="button button-icon">
+                        <i class="icon ion-navicon-round"></i>
+                    </button>
+                    <h1 class="title">Todo</h1>
+                    <button class="button button-icon" ng-click="newTask()">
+                        <i class="icon ion-search"></i>
+                    </button>
+                  </ion-header-bar>
+                  <ion-content>
+                      <div ui-view></div>
+<!--
             <div class ="header">
                 <div class="headerdiv">
-                    <span class="fa fa-search search-button"></span>
+                    <span class="fa fa-navicon nav-button"></span>
                 </div>
                 <div class="headerdiv">
                     <h1 class="logo">Welcome</h1>
                 </div>
                 <div class="headerdiv">
-                    <span class="fa fa-navicon nav-button"></span>
+                    <span class="fa fa-search search-button"></span>
                 </div>
             </div>
+-->
 
-            <div id='days-container'>
-                <ul>
-                    <script id="day-card-template" type="text/x-handlebars-tempate">
-                        {{#each this}}
-                        <li class="day">
-                            <div class="day-image-container">
-                                <img class="day-image" src={{image.large.url}}>
-                            </div>
-                            <div class="day-title">
-                                <h1>{{title}}</h1>
-                            </div>
-                        </li>
-                        {{/each}}
-                    </script>
-                </ul>
-            </div>
+<!--
+                    <div id='days-container'>
+                        <ul>
+                            <script id="day-card-template" type="text/x-handlebars-tempate">
+                                {{#each this}}
+                                <li class="day">
+                                    <div class="day-image-container">
+                                        <img class="day-image" src={{image.large.url}}>
+                                    </div>
+                                    <div class="day-title">
+                                        <h1>{{title}}</h1>
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </script>
+                        </ul>
+                    </div>
+-->
+
+                    <!-- our list and list items -->
+<!--
+                    <ion-list>
+                      <ion-item ng-repeat="day in days">
+                        {{day.title}}
+                      </ion-item>
+                    </ion-list>
+-->
+                  </ion-content>
+
+                </ion-side-menu-content>
+
+                <!-- Left menu -->
+                <ion-side-menu side="left">
+                    <ion-header-bar class="bar-light">
+                        <h1 class="title">Navigation</h1>
+                    </ion-header-bar>
+                    <ion-content>
+                    <ion-list>
+                      <ion-item ng-repeat="view in views">
+                        <a menu-close ui-sref={{view.url}}>{{view.title}}</a>
+                      </ion-item>
+                    </ion-list>
+                    </ion-content>
+                </ion-side-menu>
+
+            </ion-side-menus>
+
 
         </div>
 
-		<script type="text/javascript" src="phonegap.js"></script>
-		<script type='text/javascript' src="js/lib/jquery.min.js"></script>
-		<script type='text/javascript' src="js/lib/handlebars-v2.0.0.js"></script>
-        <script type="text/javascript" src="js/lib/jquery.quickfit.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript">app.initialize();</script>
 
+
+<!--
         <script type="text/javascript">
             (function (){
                 $.getJSON(
@@ -79,9 +130,11 @@
                     if(t.text().length > longestTextL) { longestTextL = t.text().length; longestText = t; }
                 });
 
-                longestText.quickfit({ max: 40, min: 15, truncate: false, tolerance: 0.20 });
+                if(longestTextL > 0) {
+                    longestText.quickfit({ max: 40, min: 15, truncate: false, tolerance: 0.20 });
+                }
 
-              $('h1').each( function ( index) {
+              $('.days-title h1').each( function ( index) {
                   $(this).css("font-size",longestText.css("font-size"));
               });
 
@@ -90,6 +143,13 @@
           });
 
         </script>
+-->
+<!--
+        <script type="application/javascript">
 
+        </script>
+-->
+
+		<script type="text/javascript" src="phonegap.js"></script>
     </body>
 </html>
