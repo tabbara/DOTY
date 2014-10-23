@@ -20,7 +20,7 @@
 
         <title>DOTY</title>
     </head>
-    <body ng-controller="DaysCtrl">>
+    <body ng-controller="DaysCtrl">
         <div>
 
             <ion-side-menus>
@@ -30,7 +30,7 @@
                     <button menu-toggle="left" class="button button-icon">
                         <i class="icon ion-navicon-round"></i>
                     </button>
-                    <h1 class="title">Todo</h1>
+                    <h1 class="title">Days of the Year</h1>
                     <button class="button button-icon" ng-click="newTask()">
                         <i class="icon ion-search"></i>
                     </button>
@@ -49,7 +49,7 @@
                     <ion-content>
                     <ion-list>
                       <ion-item ng-repeat="view in views">
-                        <a menu-close ui-sref={{view.url}}>{{view.title}}</a>
+                        <a menu-close ui-sref="{{view.url}}" ui-sref-active="active">{{view.title}}</a>
                       </ion-item>
                     </ion-list>
                     </ion-content>
@@ -59,39 +59,6 @@
 
 
         </div>
-
-
-
-<!--
-        <script type="text/javascript">
-          $(function() {
-            $(window).on('resize', function() {
-
-                var longestTextL = -1, longestText;
-                $(".day-title h1").each( function () {
-                    var t = $(this);
-                    if(t.text().length > longestTextL) { longestTextL = t.text().length; longestText = t; }
-                });
-
-                if(longestTextL > 0) {
-                    longestText.quickfit({ max: 40, min: 15, truncate: false, tolerance: 0.20 });
-                }
-
-              $('.days-title h1').each( function ( index) {
-                  $(this).css("font-size",longestText.css("font-size"));
-              });
-
-            });
-            $(window).trigger('resize');
-          });
-
-        </script>
--->
-<!--
-        <script type="application/javascript">
-
-        </script>
--->
 
 		<script type="text/javascript" src="phonegap.js"></script>
     </body>

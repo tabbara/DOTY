@@ -28,7 +28,7 @@ app.config( function($stateProvider, $urlRouterProvider) {
     })
     .state('favorites', {
       url: "/favorites",
-      templateUrl: "views/favorites.html"
+      templateUrl: "views/favorites.html",
     })
     .state('settings', {
       url: "/settings",
