@@ -1,6 +1,6 @@
 var app = angular.module("doty", ["ionic","ui.router"]);
 
-app.controller('DaysCtrl', function($scope) {
+app.controller('DaysCtrl', function($scope, $http) {
 
     $scope.views = [
         { title: 'Home', url: "home" },
@@ -9,20 +9,10 @@ app.controller('DaysCtrl', function($scope) {
         { title: 'Settings', url: "settings" }
     ];
 
-    $.getJSON("data/data.txt",
-//"http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=16-10-2014&limit=100",
-        function(data, status) {
-        $scope.datadays = data
-        a = $scope.datadays;
-        console.log(status);
-//            $scope.days = [ {title: "a"}, {title: "b"} ];
-//            var template_source = $("#day-card-template").html();
-//            var template = Handlebars.compile(template_source);
-//            $("#days-container").children("ul").html(template(data.days));
-//            app.setDayColors();
-        }
-    );
-
+    $http.get("http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=16-10-2014&limit=100")
+        .then(function(res){
+    $scope.datadays = res.data;
+    });
 });
 
 app.config( function($stateProvider, $urlRouterProvider) {
