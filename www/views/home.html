@@ -1,1 +1,9 @@
-<h1>Home</h1>
+<div ng-repeat="aday in datadays.days" class="list card">
+  <div class="item item-image">
+    <img src={{aday.image.large.url}}>
+  </div>
+  <a class="item item-icon-left assertive" href="#">
+    <i class="icon ion-music-note"></i>
+      {{aday.title}}
+  </a>
+</div>

@@ -35,51 +35,10 @@
                         <i class="icon ion-search"></i>
                     </button>
                   </ion-header-bar>
-                  <ion-content>
-                      <div ui-view></div>
-<!--
-            <div class ="header">
-                <div class="headerdiv">
-                    <span class="fa fa-navicon nav-button"></span>
-                </div>
-                <div class="headerdiv">
-                    <h1 class="logo">Welcome</h1>
-                </div>
-                <div class="headerdiv">
-                    <span class="fa fa-search search-button"></span>
-                </div>
-            </div>
--->
 
-<!--
-                    <div id='days-container'>
-                        <ul>
-                            <script id="day-card-template" type="text/x-handlebars-tempate">
-                                {{#each this}}
-                                <li class="day">
-                                    <div class="day-image-container">
-                                        <img class="day-image" src={{image.large.url}}>
-                                    </div>
-                                    <div class="day-title">
-                                        <h1>{{title}}</h1>
-                                    </div>
-                                </li>
-                                {{/each}}
-                            </script>
-                        </ul>
-                    </div>
--->
-
-                    <!-- our list and list items -->
-<!--
-                    <ion-list>
-                      <ion-item ng-repeat="day in days">
-                        {{day.title}}
-                      </ion-item>
-                    </ion-list>
--->
+                  <ion-content class="bgcolor">
+                      <div ui-view ></div>
                   </ion-content>
-
                 </ion-side-menu-content>
 
                 <!-- Left menu -->
@@ -105,22 +64,6 @@
 
 <!--
         <script type="text/javascript">
-            (function (){
-                $.getJSON(
-                    "http://app.daysoftheyear.com/api.php?date_start=17-10-2014&date_end=17-10-2014&limit=100",
-                    function(data) {
-                        for (i=0;i<data.days.length;i++) {
-                            data.days[i].title = data.days[i].title.toUpperCase();
-                        }
-                        var template_source = $("#day-card-template").html();
-                        var template = Handlebars.compile(template_source);
-                        $("#days-container").children("ul").html(template(data.days));
-                        app.setDayColors();
-                    }
-                );
-
-            })();
-
           $(function() {
             $(window).on('resize', function() {
 
