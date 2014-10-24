@@ -4,16 +4,35 @@ app.controller('DaysCtrl', function($scope, $http) {
 
     $scope.views = [
         { title: 'Home', url: "home", icon: "ion-home" },
+        { title: 'Calendar', url: "calendar", icon: "ion-ios7-calendar-outline" },
         { title: 'Explore', url: "explore", icon: "ion-earth" },
         { title: 'Favorites', url: "favorites", icon: "ion-ios7-heart" },
         { title: 'Settings', url: "settings", icon: "ion-ios7-gear" }
     ];
 
-    $http.get("http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=16-10-2014&limit=100")
+//    $scope.dataLoaded = false;
+    $http.get("http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=18-10-2014&limit=100")
         .then(function(res){
-    $scope.datadays = res.data;
+    $scope.days = res.data.days;
+//    $scope.dataLoaded = true;
     });
 });
+
+//app.factory('countriesService', function($http, $scope) {
+//    return {
+//        getCountryData: function(done) {
+//            $scope.dataLoaded = false;
+//            $http.get('/resources/json/countries.json')
+//            .success(function(data) {
+//                done(data);
+//                $scope.dataLoaded = true;
+//             })
+//            .error(function(error) {
+//                alert('An error occured');
+//            });
+//        }
+//    }
+//});
 
 app.config( function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/home");
@@ -21,6 +40,10 @@ app.config( function($stateProvider, $urlRouterProvider) {
     .state('home', {
       url: "/home",
       templateUrl: "views/home.html"
+    })
+    .state('calendar', {
+      url: "/calendar",
+      templateUrl: "views/calendar.html"
     })
     .state('explore', {
       url: "/explore",

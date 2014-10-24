@@ -1,9 +1,24 @@
-<div ng-repeat="aday in datadays.days" class="list card">
-  <div class="item item-image">
-    <img src={{aday.image.large.url}}>
-  </div>
+<ion-view title="Today">
+<div ng-repeat="day in days" class="list card">
+
+    <div class="item item-image">
+        <img src={{day.image.large.url}}>
+    </div>
+
   <a class="item item-icon-left assertive" href="#">
     <i class="icon ion-music-note"></i>
-      {{aday.title}}
+      {{day.title}}
   </a>
 </div>
+</ion-view>
+
+<!--
+    <div ng-hide="dataLoaded" class="text-center padding">
+        <h1 class="icon ion-loading-c"></h1>
+    </div>
+
+    <div ng-show="dataLoaded" class="item item-image">
+        <img src={{day.image.large.url}}>
+    </div>
+
+http://stackoverflow.com/questions/20984183/best-way-to-preload-images-with-angular-js-->
