@@ -22,9 +22,7 @@ body {
     background: #fbf1e8;
 }
 
-.active {
- color: #F55;
-}
+
 
 /*--#####################################################
     HEADER
@@ -156,5 +154,8 @@ body {
         font-size: 3vw;
     }
 
-
-
+/*
+.active {
+    color: #F55 !important;
+    opacity: 1 !important;
+}*/

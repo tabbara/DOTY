@@ -3,10 +3,10 @@ var app = angular.module("doty", ["ionic","ui.router"]);
 app.controller('DaysCtrl', function($scope, $http) {
 
     $scope.views = [
-        { title: 'Home', url: "home" },
-        { title: 'Explore', url: "explore" },
-        { title: 'Favorites', url: "favorites" },
-        { title: 'Settings', url: "settings" }
+        { title: 'Home', url: "home", icon: "ion-home" },
+        { title: 'Explore', url: "explore", icon: "ion-earth" },
+        { title: 'Favorites', url: "favorites", icon: "ion-ios7-heart" },
+        { title: 'Settings', url: "settings", icon: "ion-ios7-gear" }
     ];
 
     $http.get("http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=16-10-2014&limit=100")
