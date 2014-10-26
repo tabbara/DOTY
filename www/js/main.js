@@ -1,21 +1,61 @@
 var app = angular.module("doty", ["ionic","ui.router"]);
 
-app.controller('DaysCtrl', function($scope, $http) {
+app.controller('DaysCtrl', function($scope, $http, $stateParams, $location, $ionicPopup, $timeout ) {
 
     $scope.views = [
-        { title: 'Home', url: "home", icon: "ion-home" },
+        { title: 'Home', url: "/", icon: "ion-home" },
         { title: 'Calendar', url: "calendar", icon: "ion-ios7-calendar-outline" },
         { title: 'Explore', url: "explore", icon: "ion-earth" },
         { title: 'Favorites', url: "favorites", icon: "ion-ios7-heart" },
         { title: 'Settings', url: "settings", icon: "ion-ios7-gear" }
     ];
 
-//    $scope.dataLoaded = false;
+    $scope.setFavorite = function (dayid) {
+        var lookup = {};
+        for (var i = 0, len = $scope.days.length; i < len; i++) {
+            lookup[$scope.days[i].id] = i;
+        }
+        $scope.days[lookup[dayid]].liked = true;
+
+        var alertPopup = $ionicPopup.alert({
+             title: $scope.days[lookup[dayid]].title,
+             template: 'has been added to your favourites!',
+             okText: "close"
+        });
+
+        $timeout(function() {
+            alertPopup.close();
+        }, 2750);
+    };
+
     $http.get("http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=18-10-2014&limit=100")
         .then(function(res){
     $scope.days = res.data.days;
-//    $scope.dataLoaded = true;
+
+    $.each($scope.days, function (index, dayObj) {
+        dayObj.liked = false;
+        dayObj.title = dayObj.title.replace("&#8217;","'");
+        dayObj.titleID = dayObj.title.replace("'", "").toLowerCase().split(" ").join("");
+
+        dayObj.content = dayObj.content.replace(/\r\n/g,"<BR>").replace(/<a>/g, "").replace(/<\/?a[^>]*>/g, "");
+
     });
+
+    if ($location.path() != "/") {
+        $scope.dayID = [{id: $stateParams.dayID}];
+        var lookup = {};
+        for (var i = 0, len = $scope.days.length; i < len; i++) {
+            lookup[$scope.days[i].titleID] = $scope.days[i];
+        }
+
+        $scope.dayObj = [lookup[$scope.dayID[0].id.replace(/:/g,"")]];
+    }
+
+    });
+
+
+
+
 });
 
 //app.factory('countriesService', function($http, $scope) {
@@ -35,11 +75,12 @@ app.controller('DaysCtrl', function($scope, $http) {
 //});
 
 app.config( function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/home");
+    $urlRouterProvider.otherwise("/");
     $stateProvider
-    .state('home', {
-      url: "/home",
-      templateUrl: "views/home.html"
+    .state('/', {
+      url: "/",
+      templateUrl: "views/home.html",
+//      controller: "DaysCtrl"
     })
     .state('calendar', {
       url: "/calendar",
@@ -56,6 +97,11 @@ app.config( function($stateProvider, $urlRouterProvider) {
     .state('settings', {
       url: "/settings",
       templateUrl: "views/settings.html"
+    })
+    .state('daypage', {
+      url: "/:dayID",
+      templateUrl: "views/daypage.html",
+      controller: "DaysCtrl"
     })
 });
 

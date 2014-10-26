@@ -1,15 +1,33 @@
 <ion-view title="Today">
-<div ng-repeat="day in days" class="list card">
 
-    <div class="item item-image">
-        <img src={{day.image.large.url}}>
-    </div>
+    <ion-nav-bar class="bar-light">
 
-  <a class="item item-icon-left assertive" href="#">
-    <i class="icon ion-music-note"></i>
-      {{day.title}}
-  </a>
-</div>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+            <button class="button button-icon ion-ios7-search-strong"></button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+
+    <ion-content>
+        <div ng-repeat="day in days" class="list card">
+            <a href="#/:{{day.titleID}}">
+            <div class="item item-image">
+                <img src={{day.image.large.url}}>
+            </div>
+            </a>
+
+            <div class="item item-icon-left assertive">
+
+<i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})"></i>
+
+                <a href="#/:{{day.titleID}}">{{day.title}}</a>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
 
 <!--
@@ -22,3 +40,24 @@
     </div>
 
 http://stackoverflow.com/questions/20984183/best-way-to-preload-images-with-angular-js-->
+
+
+
+
+<!--
+                <ion-nav-bar class="bar-light">
+                    <ion-nav-buttons side="left">
+                        <button menu-toggle="left" class="button button-icon ion-navicon">
+                        </button>
+                    </ion-nav-buttons>
+
+                    <ion-nav-buttons side="right">
+                        <button class="button button-icon ion-ios7-search-strong" ng-click="newTask()">
+                        </button>
+                    </ion-nav-buttons>
+                </ion-nav-bar>-->
+
+<!--
+       <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
+            </button>-->

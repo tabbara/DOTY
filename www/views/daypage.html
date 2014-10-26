@@ -1,0 +1,55 @@
+<ion-view title="Days of the Year">
+
+    <ion-nav-bar class="bar-positive">
+
+<!--
+        <ion-nav-buttons side="left">
+            <button class="button button-icon ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+-->
+
+        <ion-nav-buttons side="left">
+            <a href="/"><button class="button button-icon ion-arrow-left-c"></button></a>
+        </ion-nav-buttons>
+
+<!--
+  <ion-nav-back-button class="button-clear">
+    <i class="ion-arrow-left-c"></i> Back
+  </ion-nav-back-button>
+-->
+
+        <ion-nav-buttons side="right">
+            <button class="button button-icon ion-share"></button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+
+    <ion-content>
+        <div class="list">
+            <img style="width: 100%;" src="{{dayObj[0].image.large.url}}"></img>
+            <h1 style="color: rgb(217, 55, 31);" class="item padding-left">{{dayObj[0].title}}</h1>
+            <p class="item item-text-wrap" ng-bind-html="dayObj[0].content"></h1>
+        </div>
+    </ion-content>
+
+</ion-view>
+
+
+
+
+<!--
+http://metalab.co/projects/brit/
+
+Color title red
+
+Work on justifying text nicely with padding
+
+Add Category and Attribution nicely styled
+
+Add Share / Favorite button
+
+Back icon instead of back text
+    <ion-nav-back-button>
+      Back
+    </ion-nav-back-button>
+-->
