@@ -1,6 +1,6 @@
 <ion-view title="Today">
 
-    <ion-nav-bar class="bar-light">
+    <ion-nav-bar class="bar-positive">
 
         <ion-nav-buttons side="left">
             <button class="button button-icon ion-navicon" menu-toggle="left"></button>
@@ -14,17 +14,17 @@
 
     <ion-content>
         <div ng-repeat="day in days" class="list card">
-            <a href="#/:{{day.titleID}}">
+            <a href="#/:{{day.id}}">
             <div class="item item-image">
-                <img src={{day.image.large.url}}>
+                <img ng-src="{{day.image.large.url}}">
             </div>
             </a>
 
             <div class="item item-icon-left assertive">
 
-<i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})"></i>
+            <i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})"></i>
 
-                <a href="#/:{{day.titleID}}">{{day.title}}</a>
+                <a href="#/:{{day.id}}">{{day.title}}</a>
             </div>
         </div>
     </ion-content>

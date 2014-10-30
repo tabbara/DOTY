@@ -15,46 +15,50 @@ app.controller('DaysCtrl', function($scope, $http, $stateParams, $location, $ion
         for (var i = 0, len = $scope.days.length; i < len; i++) {
             lookup[$scope.days[i].id] = i;
         }
-        $scope.days[lookup[dayid]].liked = true;
+        $scope.days[lookup[dayid]].liked = !$scope.days[lookup[dayid]].liked;
 
-        var alertPopup = $ionicPopup.alert({
-             title: $scope.days[lookup[dayid]].title,
-             template: 'has been added to your favourites!',
-             okText: "close"
-        });
+        if($scope.days[lookup[dayid]].liked){
+            var alertPopup = $ionicPopup.alert({
+                 title: $scope.days[lookup[dayid]].title,
+                 template: 'has been added to your favourites!',
+                 okText: "close"
+            });
 
-        $timeout(function() {
-            alertPopup.close();
-        }, 2750);
+            $timeout(function() {
+                alertPopup.close();
+            }, 2750);
+        }
     };
 
-    $http.get("http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=18-10-2014&limit=100")
-        .then(function(res){
-    $scope.days = res.data.days;
+//    $http.get("http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=18-10-2014&limit=100")
+//        .then(function(res){
+//    $scope.days = res.data.days;
+//
+//    $.each($scope.days, function (index, _dayObj) {
+//        _dayObj.liked = false;
+//        _dayObj.title = _dayObj.title.replace("&#8217;","'");
+//
+//        _dayObj.content = _dayObj.content.replace(/\r\n/g,"<BR>").replace(/<a>/g, "").replace(/<\/?a[^>]*>/g, "");
+//
+//    });
 
-    $.each($scope.days, function (index, dayObj) {
-        dayObj.liked = false;
-        dayObj.title = dayObj.title.replace("&#8217;","'");
-        dayObj.titleID = dayObj.title.replace("'", "").toLowerCase().split(" ").join("");
+//////// Set 'dayObj' to the selected day in the JSON-loaded list of days
+//      Old Style (faster, but doesn't work on reload). <a on-tap="setPage({{day}})">
+//        $scope.setPage = function (day) {
+//        $scope.dayObj = day;
+//    }
 
-        dayObj.content = dayObj.content.replace(/\r\n/g,"<BR>").replace(/<a>/g, "").replace(/<\/?a[^>]*>/g, "");
-
-    });
-
-    if ($location.path() != "/") {
-        $scope.dayID = [{id: $stateParams.dayID}];
-        var lookup = {};
-        for (var i = 0, len = $scope.days.length; i < len; i++) {
-            lookup[$scope.days[i].titleID] = $scope.days[i];
-        }
-
-        $scope.dayObj = [lookup[$scope.dayID[0].id.replace(/:/g,"")]];
-    }
-
-    });
-
-
-
+//    if ($location.path() != "/") {
+//        $scope.dayID = [{id: $stateParams.dayID}];
+//        var lookup = {};
+//        for (var i = 0, len = $scope.days.length; i < len; i++) {
+//            lookup[$scope.days[i].id] = $scope.days[i];
+//        }
+//        $scope.dayObj = lookup[$stateParams.dayID.replace(/:/g,"")];
+//    }
+//
+//    });
+////////
 
 });
 
@@ -74,13 +78,78 @@ app.controller('DaysCtrl', function($scope, $http, $stateParams, $location, $ion
 //    }
 //});
 
+app.factory('queryAPI', function($http) {
+    var fac = {};
+
+    fac.getDayToday = function() {
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+
+        if(dd<10) { dd='0'+dd; }
+        if(mm<10) { mm='0'+mm; }
+
+        today = dd+'-'+mm+'-'+yyyy;
+
+        return $http.get("http://app.daysoftheyear.com/api.php?date_start="
+        + today +"&date_end=" + today + "&limit=100")
+        .then(function(res) {
+            return res.data;
+        });
+    }
+
+    fac.getDayById = function(id) {
+
+        return $http.get("http://app.daysoftheyear.com/api.php?day_ids="
+        + id)
+        .then(function(res) {
+            return res.data;
+        });
+    }
+
+    // Clean Title
+    fac.cleanDayTitle = function(daysArray) {
+        $.each(daysArray, function (index, _dayObj) {
+            _dayObj.title = _dayObj.title.replace("&#8217;","'");
+        });
+        return daysArray;
+    }
+
+    // Clean Title and Content
+    fac.cleanDay = function(daysArray) {
+        $.each(daysArray, function (index, _dayObj) {
+            _dayObj.title = _dayObj.title.replace("&#8217;","'");
+            _dayObj.content = _dayObj.content
+            .replace(/\r\n/g,"<BR>")
+            .replace(/<a>/g, "").replace(/<\/?a[^>]*>/g, "");
+        });
+        return daysArray;
+    };
+
+    return fac;
+});
+
+app.controller('homeCtrl', function($scope, queryAPI) {
+    queryAPI.getDayToday().then(function(data) {
+        $scope.days = queryAPI.cleanDay(data.days);
+    });
+});
+
+app.controller('daypageCtrl', function($scope, queryAPI) {
+    queryAPI.getDayById(14097).then(function(data) {
+        $scope.dayObj = queryAPI.cleanDay(data.days)[0];
+    });
+});
+
 app.config( function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
     $stateProvider
     .state('/', {
       url: "/",
       templateUrl: "views/home.html",
-//      controller: "DaysCtrl"
+      controller: "homeCtrl"
     })
     .state('calendar', {
       url: "/calendar",
@@ -100,8 +169,8 @@ app.config( function($stateProvider, $urlRouterProvider) {
     })
     .state('daypage', {
       url: "/:dayID",
-      templateUrl: "views/daypage.html",
-      controller: "DaysCtrl"
+      templateUrl: "views/daypage.html"
+      ,controller: "daypageCtrl"
     })
 });
 

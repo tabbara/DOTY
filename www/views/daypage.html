@@ -25,10 +25,12 @@
     </ion-nav-bar>
 
     <ion-content>
+        <img style="width: 100%;" ng-src="{{dayObj.image.large.url}}"></img>
+        <h2 style="color: rgb(217, 55, 31);" class="padding-left">
+            {{dayObj.title}}
+        </h2>
         <div class="list">
-            <img style="width: 100%;" src="{{dayObj[0].image.large.url}}"></img>
-            <h1 style="color: rgb(217, 55, 31);" class="item padding-left">{{dayObj[0].title}}</h1>
-            <p class="item item-text-wrap" ng-bind-html="dayObj[0].content"></h1>
+            <p class="item item-text-wrap" ng-bind-html="dayObj.content"></h1>
         </div>
     </ion-content>
 

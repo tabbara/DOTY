@@ -61,6 +61,13 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
+
+	<gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
+		<param name="APP_ID" value="713796695376416" />
+		<param name="APP_NAME" value="dotyTest_ios" />
+	</gap:plugin>
+
 <!--    <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.1.0" />-->
 
     <!-- Third party plugins -->
@@ -95,6 +102,7 @@
     <gap:config-file platform="ios" parent="CFBundleShortVersionString">
     <string>100</string>
     </gap:config-file>
+
 
     <!--
         Define access to external domains.
