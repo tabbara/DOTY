@@ -169,8 +169,8 @@ app.config( function($stateProvider, $urlRouterProvider) {
     })
     .state('daypage', {
       url: "/:dayID",
-      templateUrl: "views/daypage.html"
-      ,controller: "daypageCtrl"
+      templateUrl: "views/daypage.html",
+      controller: "daypageCtrl"
     })
 });
 
