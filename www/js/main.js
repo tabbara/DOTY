@@ -1,12 +1,15 @@
-var app = angular.module("doty", ["ionic","ui.router"]);
+app.controller('DaysCtrl', function($scope, $http, $stateParams, $location, $ionicPopup, $timeout, fbAPI) {
 
-app.controller('DaysCtrl', function($scope, $http, $stateParams, $location, $ionicPopup, $timeout ) {
+    $scope.profile = {
+        "logged": false
+    }
 
     $scope.views = [
         { title: 'Home', url: "/", icon: "ion-home" },
         { title: 'Calendar', url: "calendar", icon: "ion-ios7-calendar-outline" },
         { title: 'Explore', url: "explore", icon: "ion-earth" },
         { title: 'Favorites', url: "favorites", icon: "ion-ios7-heart" },
+        { title: 'Profile', url: "profile", icon: "ion-person" },
         { title: 'Settings', url: "settings", icon: "ion-ios7-gear" }
     ];
 
@@ -29,6 +32,9 @@ app.controller('DaysCtrl', function($scope, $http, $stateParams, $location, $ion
             }, 2750);
         }
     };
+
+
+//        });
 
 //    $http.get("http://app.daysoftheyear.com/api.php?date_start=16-10-2014&date_end=18-10-2014&limit=100")
 //        .then(function(res){
@@ -62,21 +68,55 @@ app.controller('DaysCtrl', function($scope, $http, $stateParams, $location, $ion
 
 });
 
-//app.factory('countriesService', function($http, $scope) {
-//    return {
-//        getCountryData: function(done) {
-//            $scope.dataLoaded = false;
-//            $http.get('/resources/json/countries.json')
-//            .success(function(data) {
-//                done(data);
-//                $scope.dataLoaded = true;
-//             })
-//            .error(function(error) {
-//                alert('An error occured');
-//            });
-//        }
-//    }
-//});
+app.controller('profileCtrl', function($scope, fbAPI) {
+    var showLoginButton = false;
+
+    $scope.loginButton = function() {
+        showLoginButton = true;
+    }
+
+    $scope.logoutButton = function() {
+        fbAPI.logout(function() {
+            showLoginButton = false;
+            $scope.fbName = "";
+            $scope.fbImage = "";
+        });
+    }
+
+    $scope.loginButtonShow = function() {
+        return showLoginButton;
+    }
+
+$scope.facebookLogin = function() {
+    fbAPI.login(function (){
+        $scope.facebookGetInfo();
+        $scope.loginButton();
+    });
+};
+
+$scope.facebookGetInfo = function() {
+    var request = fbAPI.getInfo(),
+    response;
+
+    request.onreadystatechange = function () {
+
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                response = JSON.parse(request.responseText);
+                $scope.fbName = response.name;
+                $scope.fbImage = "http://graph.facebook.com/" +
+                    response.id + "/picture?type=large";
+                $scope.$apply();
+            } else {
+                console.log("error with login request");
+            }
+        }
+    }
+};
+
+$scope.facebookGetInfo();
+
+});
 
 app.factory('queryAPI', function($http) {
     var fac = {};
@@ -137,8 +177,11 @@ app.controller('homeCtrl', function($scope, queryAPI) {
     });
 });
 
-app.controller('daypageCtrl', function($scope, queryAPI) {
-    queryAPI.getDayById(14097).then(function(data) {
+app.controller('daypageCtrl', function($scope, queryAPI, $stateParams) {
+
+    var pageID = $stateParams.dayID.replace(/:/g,"");
+
+    queryAPI.getDayById(pageID).then(function(data) {
         $scope.dayObj = queryAPI.cleanDay(data.days)[0];
     });
 });
@@ -162,6 +205,11 @@ app.config( function($stateProvider, $urlRouterProvider) {
     .state('favorites', {
       url: "/favorites",
       templateUrl: "views/favorites.html",
+    })
+    .state('profile', {
+      url: "/profile",
+      templateUrl: "views/profile.html",
+      controller: "profileCtrl"
     })
     .state('settings', {
       url: "/settings",

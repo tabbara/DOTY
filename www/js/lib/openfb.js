@@ -210,6 +210,7 @@ var openFB = (function () {
      *  success: callback function when operation succeeds - Optional
      *  error:   callback function when operation fails - Optional
      */
+
     function api(obj) {
 
         var method = obj.method || 'GET',
@@ -221,20 +222,13 @@ var openFB = (function () {
 
         url = 'https://graph.facebook.com' + obj.path + '?' + toQueryString(params);
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    if (obj.success) obj.success(JSON.parse(xhr.responseText));
-                } else {
-                    var error = xhr.responseText ? JSON.parse(xhr.responseText).error : {message: 'An error has occurred'};
-                    if (obj.error) obj.error(error);
-                }
-            }
-        };
-
         xhr.open(method, url, true);
         xhr.send();
+
+        return (xhr);
     }
+
+
 
     /**
      * Helper function to de-authorize the app

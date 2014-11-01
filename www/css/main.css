@@ -158,6 +158,15 @@ body {
         font-size: 3vw;
     }
 
+    .circular-image {
+     -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+     -ms-border-radius: 50%;
+     -o-border-radius: 50%;
+     border-radius: 50%;
+    }
+
+
 /*
 .active {
     color: #F55 !important;
