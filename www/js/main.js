@@ -87,34 +87,34 @@ app.controller('profileCtrl', function($scope, fbAPI) {
         return showLoginButton;
     }
 
-$scope.facebookLogin = function() {
-    fbAPI.login(function (){
-        $scope.facebookGetInfo();
-        $scope.loginButton();
-    });
-};
+    $scope.facebookLogin = function() {
+        fbAPI.login(function (){
+            $scope.facebookGetInfo();
+            $scope.loginButton();
+        });
+    };
 
-$scope.facebookGetInfo = function() {
-    var request = fbAPI.getInfo(),
-    response;
+    $scope.facebookGetInfo = function() {
+        var request = fbAPI.getInfo(),
+        response;
 
-    request.onreadystatechange = function () {
+        request.onreadystatechange = function () {
 
-        if (request.readyState === 4) {
-            if (request.status === 200) {
-                response = JSON.parse(request.responseText);
-                $scope.fbName = response.name;
-                $scope.fbImage = "http://graph.facebook.com/" +
-                    response.id + "/picture?type=large";
-                $scope.$apply();
-            } else {
-                console.log("error with login request");
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    response = JSON.parse(request.responseText);
+                    $scope.fbName = response.name;
+                    $scope.fbImage = "http://graph.facebook.com/" +
+                        response.id + "/picture?type=large";
+                    $scope.$apply();
+                } else {
+                    console.log("error with login request");
+                }
             }
         }
-    }
-};
+    };
 
-$scope.facebookGetInfo();
+//    $scope.facebookGetInfo();
 
 });
 
@@ -133,7 +133,7 @@ app.factory('queryAPI', function($http) {
 
         today = dd+'-'+mm+'-'+yyyy;
 
-        return $http.get("http://app.daysoftheyear.com/api.php?date_start="
+        return $http.get("https://www.daysoftheyear.com/app/days/?date_start="
         + today +"&date_end=" + today + "&limit=100")
         .then(function(res) {
             return res.data;
@@ -142,7 +142,7 @@ app.factory('queryAPI', function($http) {
 
     fac.getDayById = function(id) {
 
-        return $http.get("http://app.daysoftheyear.com/api.php?day_ids="
+        return $http.get("https://www.daysoftheyear.com/app/days/?day_ids="
         + id)
         .then(function(res) {
             return res.data;

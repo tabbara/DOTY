@@ -1,5 +1,10 @@
 <ion-view title="Profile">
 
+<!--http://plnkr.co/edit/kVsRSw?p=preview
+
+Add visual form validation
+-->
+
     <ion-nav-bar class="bar-positive">
 
         <ion-nav-buttons side="left">
@@ -14,55 +19,80 @@
 
     <ion-content>
 
-        <div class="list list-inset">
+<div class="list">
+    <label class="item item-input">
+        <span class="input-label">Email</span>
+        <input type="email" placeholder="Email">
+    </label>
+    <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input type="password" placeholder="Password">
+    </label>
 
-            <div class="item item-image" style="border:none;">
-                <img class="circular-image" style="max-width: 35%; max-height: 35%;" ng-src="{{fbImage}}">
-<!--{{fbImage}} {{fbName}}-->
+    <label class="item item-input">
+        <span class="input-label">Date of Birth</span>
+        <input type="date" value="2014-01-01">
+  </label>
 
-            </div>
+    <label class="item item-input">
+        <span class="input-label">First Name</span>
+        <input type="text" placeholder="First Name">
+    </label>
+    <label class="item item-input">
+        <span class="input-label">Last Name</span>
+        <input type="text" placeholder="Last Name">
+    </label>
 
-            <h3>
-                <div class="padding-top" style="text-align:center;">
-                    {{fbName}}
-                </div>
-<!--                <i class="icon ion-checkmark-circled balanced"></i>      -->
-            </h3>
+        <li class="item item-checkbox">
+         <label class="checkbox">
+           <input type="checkbox" checked="true">
+         </label>
+         Notify me of fun upcoming days!
+        </li>
 
-        </div>
+<!--        <li><a ng-click="modal.show()">Terms and Conditions</a></li>    -->
 
-<!--        facebookLogin()-->
+</div>
 
-        <div class="item" >
-
-        <button ng-click="facebookLogin()" ng-hide="loginButtonShow()" class="button button-block button-positive">
-            <i class="icon ion-social-facebook"></i>
-            &nbsp;Login with Facebook
-        </button>
-
-       <button ng-click="logoutButton()" ng-show="loginButtonShow()" class="button button-block button-assertive">
-            <i class="icon ion-social-facebook"></i>
-            &nbsp;Logout
-        </button>
-
-        </div>
-
-
-
+<div class="padding-horizontal">
+    <button ng-click="facebookLogin()" class="button button-block button-positive">
+            Register
+    </button>
+</div>
 
 
 <!--
-        <div class="item">
-        <button class="button button-block button-positive" ng-click="facebookGetInfo()">
-            <i class="icon ion-social-facebook"></i>
-            &nbsp;Get Info
-        </button>
-        </div>
+<div class="list list-inset">
 
-        <br>
+    <div class="item item-image" style="border:none;">
+        <img class="circular-image" style="max-width: 35%; max-height: 35%;" ng-src="{{fbImage}}">
+
+    </div>
+
+    <h3>
+        <div class="padding-top" style="text-align:center;">
+            {{fbName}}
+        </div>
+    </h3>
+
+</div>
+
+<div class="item" >
+
+<button ng-click="facebookLogin()" ng-hide="loginButtonShow()" class="button button-block button-positive">
+    <i class="icon ion-social-facebook"></i>
+    &nbsp;Login with Facebook
+</button>
+
+<button ng-click="logoutButton()" ng-show="loginButtonShow()" class="button button-block button-assertive">
+    <i class="icon ion-social-facebook"></i>
+    &nbsp;Logout
+</button>
+
+</div>
 -->
 
-
+<!--
 
         <button class="btn btn-block" onclick="getInfo()">Get My Info</button>
         <p>Name: <span id="userName"></span></p>
@@ -79,6 +109,7 @@
 
         <p>Revoke App Permissions. After revoking permissions, you'll have to grant permissions again when logging in.</p>
         <button class="btn btn-block" onclick="revoke()">Revoke Permissions</button>
+-->
 
     </ion-content>
 </ion-view>

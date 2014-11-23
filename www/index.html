@@ -34,9 +34,6 @@
             <ion-side-menus>
             <!-- Center content -->
             <ion-side-menu-content>
-<!--
-
--->
 
 <!--
                 <div class="bar bar-subheader">
@@ -49,21 +46,21 @@
 
             </ion-side-menu-content>
 
-                <!-- Left menu -->
-                <ion-side-menu side="left">
-                    <ion-header-bar class="bar-light">
-                        <h1 class="title">Navigation</h1>
-                    </ion-header-bar>
-                    <ion-content>
+            <!-- Left menu -->
+            <ion-side-menu side="left">
+                <ion-header-bar class="bar-light">
+                    <h1 class="title">Navigation</h1>
+                </ion-header-bar>
+                <ion-content>
 
-                    <div class="list">
-                            <a ng-repeat="view in views" class="item item-icon-left menu-close" ui-sref="{{view.url}}" ui-sref-active="active">
-                            <i class="icon {{view.icon}}"></i>
-                                {{view.title}}
-                            </a>
-                    </div>
-                    </ion-content>
-                </ion-side-menu>
+                <div class="list">
+                        <a ng-repeat="view in views" class="item item-icon-left menu-close" ui-sref="{{view.url}}" ui-sref-active="active">
+                        <i class="icon {{view.icon}}"></i>
+                            {{view.title}}
+                        </a>
+                </div>
+                </ion-content>
+            </ion-side-menu>
 
             </ion-side-menus>
 

@@ -22,10 +22,15 @@
 
             <div class="item item-icon-left assertive">
 
-            <i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})"></i>
+            <a href="#/:{{day.id}}">
+            <i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})">
+            </i>
 
-                <a href="#/:{{day.id}}">{{day.title}}</a>
+            {{day.title}}
+
+            </a>
             </div>
+
         </div>
     </ion-content>
 </ion-view>
