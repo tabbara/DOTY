@@ -8,7 +8,7 @@ angular.module('dotyApp')
   }
 
   $timeout(function() {
-    signinFac.checkSignin();
+//    signinFac.checkSignin();
   }, 500);
 
   $scope.views = [

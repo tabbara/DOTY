@@ -18,7 +18,7 @@ angular.module("accountModule")
     signedIn = true;
   }
 
-  $ionicModal.fromTemplateUrl('../../modals/signinModal.html', {
+  $ionicModal.fromTemplateUrl('/modals/signinModal.html', {
     scope: $rootScope,
     animation: 'slide-in-up',
     backdropClickToClose: false,
