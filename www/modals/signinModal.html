@@ -6,10 +6,10 @@
 </ion-header-bar>
 -->
 
-  <ion-content>
+  <ion-content ng-controller="signinController as signinCtrl">
 
     <!--    <img src="/res/icon/ios/icon-72-2x.png">-->
-    <form name="signinForm" ng-controller="signinController as signinCtrl" ng-submit="signinForm.$valid && signinCtrl.signin()" novalidate>
+    <form name="signinForm" ng-submit="signinForm.$valid && signinCtrl.signin()" novalidate>
       <div class="list list-inset">
         <h2 class="text-center padding-bottom">Days of the Year</h2>
 
@@ -56,7 +56,7 @@
 
     <div class="text-center padding-top">Don't have an account yet?</div>
     <div class="text-center padding">
-      <button ng-click="signinModalClose();signupModalOpen()" class="button button-light">
+      <button ng-click="signinModalClose(); signupModalOpen()" class="button button-light">
         Create Account
       </button>
     </div>
