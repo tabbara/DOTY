@@ -7,9 +7,9 @@ angular.module('dotyApp')
     "logged": false
   }
 
-  $timeout(function() {
+//  $timeout(function() {
 //    signinFac.checkSignin();
-  }, 500);
+//  }, 500);
 
   $scope.views = [
     { title: 'Home', url: "/", icon: "ion-home" },

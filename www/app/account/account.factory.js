@@ -1,8 +1,77 @@
 angular.module("accountModule")
-.factory('signinFac', function($rootScope, $ionicModal) {
+.factory('signinFac', function($rootScope, $q, $http, $ionicModal) {
   var fac = {};
 
-  var signedIn = false; //
+  var signedIn = false;
+  localStorage["userData"] = JSON.stringify({
+    'user': 'app_test_user@doty.com',
+    'pw': 'app_test_pw_123'
+  })
+
+  fac.signin = function(userEmail, userPassword) {
+    var deferred = $q.defer();
+    $http({
+      method: 'GET',
+      url: 'https://www.daysoftheyear.com/app/user/?login&user_email='+userEmail+'&password='+userPassword
+//      ,
+//      withCredentials: true,
+//      headers: {
+//        'Access-Control-Allow-Origin' : 'daysoftheyear.com'
+//      }
+    }).
+    success(function(data, status) {
+      console.log("user login query success", status, data)
+      alert('success');
+      deferred.resolve(status);
+    }).
+    error(function(data, status) {
+      console.log("user login query failed", status, data)
+      alert(status + ' ' +JSON.stringify(data.result) + ' ' );
+      localStorage.removeItem('userData');
+      deferred.reject(status);
+    });
+
+    return deferred.promise;
+
+  }
+
+  fac.getUserData = function(userEmail) {
+    a = $http({
+      method: 'GET',
+      url: 'https://www.daysoftheyear.com/app/user/?get_user_data='+userEmail,
+      withCredentials: true,
+      headers: {
+        'Access-Control-Allow-Origin' : 'daysoftheyear.com'
+      }
+    }).
+    success(function(data, status) {
+      console.log("user data query success", status, data)
+      alert(JSON.stringify(data.result));
+    }).
+    error(function(data, status) {
+      console.log("user data query failed", status, data)
+    });
+  }
+
+  var getStorage = localStorage["userData"];
+  if(getStorage){
+    getStorage = JSON.parse(getStorage);
+    var userStored = getStorage.user;
+    var pwStored = getStorage.pw;
+
+    console.log('Trying login with: ', userStored, pwStored);
+
+    fac.signin(userStored, pwStored)
+    .then(function(status) {
+      console.log('delayed success');
+      fac.getUserData(userStored);
+    }, function(status) {
+      console.log('delayed error');
+    });
+
+  } else {
+
+  }
 
   fac.checkSignin = function() {
     if(signedIn) {
@@ -10,12 +79,8 @@ angular.module("accountModule")
       fac.signinModalClose();
     } else {
       console.log('NOT LOGGED IN!');
-      fac.signinModalOpen();
+      //      fac.signinModalOpen();
     }
-  }
-
-  fac.signin = function() {
-    signedIn = true;
   }
 
   $ionicModal.fromTemplateUrl('/modals/signinModal.html', {
