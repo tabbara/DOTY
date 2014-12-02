@@ -1,14 +1,49 @@
 angular.module("accountModule")
-.controller('signinController', function($scope, signinFac, $timeout) {
+.controller('signinController', function($rootScope,
+                                          $scope,
+                                          signinFac,
+                                          $timeout,
+                                          $ionicActionSheet) {
 
-  this.signinData = {};
+  $scope.signin = function(){ //FORM SUBMIT SIGNIN
+    var signinFormData = {
+      email: $scope.signinData.signinEmail,
+      pw: $scope.signinData.signinPassword
+    };
+    console.log("signing in email:",
+                signinFormData.email,
+                ' with pw: ',
+                signinFormData.pw);
 
-//  this.signinn = function() {
-//    console.log('log in attempt');
-//  };
+    signinFac.signin(signinFormData.email, signinFormData.pw)
+    .then(function(status) {
+      console.log(status);
 
-  $scope.signin = function(){
-    signinFac.signin();
+      $rootScope.userSession = {
+        signedIn: true
+      };
+
+      signinFac.signinModalClose();
+
+      signinFac.getUserData(signinFormData.email)
+      .then(function(userData){
+        // got user data;
+        $rootScope.userData = userData;
+        var loginSuccessSheet = $ionicActionSheet.show({
+          titleText: 'Hi ' + userData.firstname +"! You're now logged in",
+        });
+
+        $timeout(function() {
+          loginSuccessSheet();
+        }, 2500);
+
+      }, function(status){
+        console.log(status);
+      });
+    }, function(status) {
+      console.log(status);
+      alert("Please check your email and password were entered correctly and try again");
+    });
   }
 
   //Attach factory functions to scope to be called in DOM

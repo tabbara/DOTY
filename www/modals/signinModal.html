@@ -1,6 +1,6 @@
 <ion-modal-view title="Signin">
 
-<!--
+  <!--
 <ion-header-bar class="bar-positive">
 <h1 class="title">Welcome</h1>
 </ion-header-bar>
@@ -9,7 +9,7 @@
   <ion-content ng-controller="signinController as signinCtrl">
 
     <!--    <img src="/res/icon/ios/icon-72-2x.png">-->
-    <form name="signinForm" ng-submit="signinForm.$valid && signinCtrl.signin()" novalidate>
+    <form name="signinForm" ng-submit="signinForm.$valid && signin()" novalidate>
       <div class="list list-inset">
         <h2 class="text-center padding-bottom">Days of the Year</h2>
 
@@ -18,7 +18,7 @@
                          'invalid': signinForm.email.$invalid &&
                          !signinForm.email.$pristine}">
           <span class="input-label">Email</span>
-          <input ng-model="signinCtrl.signinData.signinEmail" name="email" type="email" placeholder="Email" required>
+          <input ng-model="signinData.signinEmail" name="email" type="email" placeholder="Email" required>
           <i class="icon valid-icon"
              ng-class="{'ion-android-checkmark positive':
                        signinForm.email.$valid,
@@ -32,7 +32,7 @@
                          'invalid': signinForm.password.$invalid &&
                          !signinForm.password.$pristine}">
           <span class="input-label">Password</span>
-          <input ng-model="signinCtrl.signinData.signinPassword" name="password" type="password" placeholder="Password" required>
+          <input ng-model="signinData.signinPassword" name="password" type="password" placeholder="Password" required>
 
           <i class="icon valid-icon"
              ng-class="{'ion-android-checkmark positive':
@@ -45,8 +45,7 @@
       </div>
 
       <div class="padding-horizontal">
-        <input type="submit" class="button button-block button-positive" value="Log In" />
-        <!--        ng-click="signinModalClose()"-->
+        <input type="submit" id="submit" class="button button-block button-positive" value="Log In" />
       </div>
     </form>
 

@@ -1,15 +1,15 @@
 angular.module('dotyApp')
-.controller('DaysCtrl', function($scope, $timeout, signinFac) {
+.controller('DaysCtrl', function($rootScope, $scope, $timeout, signinFac) {
 
 //, $http, $stateParams, $location, $ionicPopup, $timeout, signinController
+  $rootScope.userData = {};
+  $rootScope.userSession = {
+    signedIn: false
+  };
 
-  $scope.profile = {
-    "logged": false
-  }
-
-//  $timeout(function() {
-//    signinFac.checkSignin();
-//  }, 500);
+  $timeout(function() {
+    signinFac.checkSignin();
+  }, 500);
 
   $scope.views = [
     { title: 'Home', url: "/", icon: "ion-home" },
