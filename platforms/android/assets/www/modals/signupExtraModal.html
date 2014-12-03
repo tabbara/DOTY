@@ -1,0 +1,44 @@
+<ion-modal-view title="Signup">
+
+  <!--http://plnkr.co/edit/kVsRSw?p=preview
+
+Add visual form validation
+
+http://codepen.io/sevilayha/pen/xFcdI
+-->
+
+  <ion-content ng-controller="signinController as signinCtrl">
+
+    <div class="list list-inset">
+      <h2 class="text-center padding-bottom">Days of the Year</h2>
+
+      <h4 class="padding-bottom">Awesome! You are now logged in. Fill out the following details to complete your account registration.
+      </h4>
+
+      <label class="item item-input">
+        <span class="input-label">First Name</span>
+        <input type="text" placeholder="First Name">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Last Name</span>
+        <input type="text" placeholder="Last Name">
+      </label>
+
+    </div>
+
+    <div class="padding-horizontal">
+      <button ng-click="signupExtraModalClose()" class="button button-block button-positive">
+        Save
+      </button>
+    </div>
+
+    <div class="text-center padding-top">In a hurry?</div>
+    <div class="text-center padding">
+      <button ng-click="signupExtraModalClose();" class="button button-light">
+        Skip
+      </button>
+    </div>
+
+  </ion-content>
+</ion-modal-view>
+

@@ -1,3 +1,6 @@
 {
-    "sbruchmann.staticpreview.basepath": "D:/Git/DOTY/"
+    "sbruchmann.staticpreview.basepath": "D:/Git/DOTY/",
+    "jscodehints.detectedExclusions": [
+        "/home/abbara/dev/DOTY/www/app/app.ctrl.js"
+    ]
 }

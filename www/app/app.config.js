@@ -1,6 +1,6 @@
 angular.module("dotyApp")
-.config( function($stateProvider, $urlRouterProvider, $httpProvider) {
-  $httpProvider.defaults.withCredentials = true;
+.config( function($stateProvider, $urlRouterProvider) {
+//  $httpProvider.defaults.withCredentials = true;
   $urlRouterProvider.otherwise("/");
   $stateProvider
   .state('/', {

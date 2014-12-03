@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="dotyApp">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
+
+    <!--CSS-->
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+
+    <!--LIBRARIES    -->
+    <script type='text/javascript' src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/ionic.bundle.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.quickfit.js"></script>
+
+    <!--MODULES    -->
+    <script type="text/javascript" src="app/app.module.js"></script>
+    <script type="text/javascript" src="app/home/home.module.js"></script>
+    <script type="text/javascript" src="app/daypage/daypage.module.js"></script>
+    <script type="text/javascript" src="app/account/account.module.js"></script>
+
+    <script type="text/javascript" src="app/app.config.js"></script>
+
+    <!--CONTROLLERS-->
+    <script type="text/javascript" src="app/account/account.ctrl.js"></script>
+    <script type="text/javascript" src="app/home/home.ctrl.js"></script>
+    <script type="text/javascript" src="app/daypage/daypage.ctrl.js"></script>
+    <script type="text/javascript" src="app/account/account.ctrl.js"></script>
+    <script type="text/javascript" src="app/app.ctrl.js"></script>
+
+    <!--FACTORIES-->
+    <script type="text/javascript" src="app/app.factory.js"></script>
+    <script type="text/javascript" src="app/account/account.factory.js"></script>
+
+    <!--
+<script type="text/javascript" src="js/fbhandler.js"></script>
+<script type="text/javascript" src="js/lib/openfb.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+-->
+
+    <title>DOTY</title>
+  </head>
+  <body ng-controller="DaysCtrl" class="platform-android platform-cordova platform-webview">
+    <div>
+
+      <ion-side-menus>
+        <ion-side-menu-content>
+
+          <!--
+<div class="bar bar-subheader">
+<h2 class="title">Sub Header</h2>
+</div>
+-->
+          <ion-nav-view animation="slide-left-right">
+          </ion-nav-view>
+
+        </ion-side-menu-content>
+
+        <!-- Left menu -->
+        <ion-side-menu side="left">
+          <ion-header-bar class="bar-light">
+            <h1 class="title">Navigation</h1>
+          </ion-header-bar>
+          <ion-content>
+
+            <div class="list">
+              <a ng-repeat="view in views" class="item item-icon-left menu-close" ui-sref="{{view.url}}" ui-sref-active="active">
+                <i class="icon {{view.icon}}"></i>
+                {{view.title}}
+              </a>
+            </div>
+          </ion-content>
+        </ion-side-menu>
+
+      </ion-side-menus>
+    </div>
+
+    <script type="text/javascript" src="phonegap.js"></script>
+  </body>
+</html>
