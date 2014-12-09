@@ -17,15 +17,15 @@ Add visual form validation
 
   </ion-nav-bar>
 
-  <ion-content ng-controller="signinController">
+  <ion-content ng-controller="accountController">
 
     <div class="list card">
 
       <div class="item item-avatar">
         <img src="img/placeholderAvatar300x300.png">
         <div ng-if="userData.firstname">
-          <h1>{{userData.firstname}} {{userData.lastname}}</h1>
-          <h3>{{userData.dob | date:'longDate'}}</h3>
+          <h2>{{userData.firstname}} {{userData.lastname}}</h2>
+          <p>{{userData.dob | date:'longDate'}}</p>
         </div>
       </div>
 
@@ -38,14 +38,30 @@ Add visual form validation
             consists of tabs, icons aligned left, within the card-footer.
           </p>
         </div>
+      </div>
 
-        <div class="text-center padding-top">Want to log in with another account?</div>
-        <div class="text-center padding">
-          <button ng-click="logout();" class="button button-light">
-            Logout
-          </button>
+      <div ng-if="userData.email">
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item" href="#">
+            <i class="icon ion-ios7-gear"></i>
+            Account Settings
+          </a>
+          <a class="tab-item" ng-click="logout()">
+            <i class="icon ion-log-out"></i>
+            Log Out
+          </a>
         </div>
       </div>
+
+
+      <!--
+<div class="text-center padding-top">Want to log in with another account? Click below to logout.</div>
+<div class="text-center padding">
+<button ng-click="logout();" class="button button-light">
+Logout
+</button>
+</div>
+-->
 
     </div>
 

@@ -1,44 +1,58 @@
 <ion-modal-view title="Signup">
 
-  <!--http://plnkr.co/edit/kVsRSw?p=preview
+  <ion-content ng-controller="accountController as signupCtrl">
 
-Add visual form validation
+    <!--    <img src="/res/icon/ios/icon-72-2x.png">-->
+    <form name="signupExtraForm" ng-submit="signupExtraForm.$valid && signupExtra()" novalidate>
+      <div class="list list-inset">
+        <h2 class="text-center padding-bottom">Days of the Year</h2>
 
-http://codepen.io/sevilayha/pen/xFcdI
--->
+        <h4 class="padding-bottom">
+          Awesome! You are now logged in. Fill out the following details to complete your account registration.
+        </h4>
 
-  <ion-content ng-controller="signinController as signinCtrl">
+        <label class="item item-input"
+               ng-class="{'valid': signupExtraForm.firstname.$valid,
+                         'invalid': signupExtraForm.firstname.$invalid &&
+                         !signupExtraForm.firstname.$pristine}">
+          <span class="input-label">First Name</span>
+          <input ng-model="signupExtraData.signupExtrafirstname" name="firstname" type="text" placeholder="First Name" required>
+          <i class="icon valid-icon"
+             ng-class="{'ion-android-checkmark positive':
+                       signupExtraForm.firstname.$valid,
+                       'ion-alert assertive': signupExtraForm.firstname.$invalid &&
+                       !signupExtraForm.firstname.$pristine
+                       }"></i>
+        </label>
 
-    <div class="list list-inset">
-      <h2 class="text-center padding-bottom">Days of the Year</h2>
+        <label class="item item-input"
+               ng-class="{'valid': signupExtraForm.lastname.$valid,
+                         'invalid': signupExtraForm.lastname.$invalid &&
+                         !signupExtraForm.lastname.$pristine}">
+          <span class="input-label">Last Name</span>
+          <input ng-model="signupExtraData.signupExtralastname" name="lastname" type="text" placeholder="Last Name" required>
 
-      <h4 class="padding-bottom">Awesome! You are now logged in. Fill out the following details to complete your account registration.
-      </h4>
+          <i class="icon valid-icon"
+             ng-class="{'ion-android-checkmark positive':
+                       signupExtraForm.lastname.$valid,
+                       'ion-alert assertive': signupExtraForm.lastname.$invalid &&
+                       !signupExtraForm.lastname.$pristine
+                       }"></i>
+        </label>
 
-      <label class="item item-input">
-        <span class="input-label">First Name</span>
-        <input type="text" placeholder="First Name">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Last Name</span>
-        <input type="text" placeholder="Last Name">
-      </label>
+      </div>
 
-    </div>
+      <div class="padding-horizontal">
+        <input type="submit" id="submit" class="button button-block button-positive" value="Save"/>
+      </div>
+    </form>
 
-    <div class="padding-horizontal">
-      <button ng-click="signupExtraModalClose()" class="button button-block button-positive">
-        Save
-      </button>
-    </div>
-
-    <div class="text-center padding-top">In a hurry?</div>
+    <div class="text-center padding-top">In a hurry? Skip now and complete your account later!</div>
     <div class="text-center padding">
-      <button ng-click="signupExtraModalClose();" class="button button-light">
+      <button ng-click="signupExtraSkip();" class="button button-light">
         Skip
       </button>
     </div>
 
   </ion-content>
 </ion-modal-view>
-

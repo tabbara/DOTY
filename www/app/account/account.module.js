@@ -1,4 +1,1 @@
-var app = angular.module("accountModule", [
-//  'signinController',
-//  'accountmodalController',
-]);
+var app = angular.module("accountModule", []);

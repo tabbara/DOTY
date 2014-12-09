@@ -1,51 +1,71 @@
 angular.module("accountModule")
-.controller('signinController', function($rootScope,
-                                          $scope,
-                                          signinFac,
-                                          $timeout,
-                                          $ionicActionSheet) {
+.controller('accountController', function($rootScope,
+                                           $scope,
+                                           signinFac) {
 
-  $scope.signin = function() { //FORM SUBMIT SIGNIN
+  $scope.signin = function () { //FORM SUBMIT SIGNIN
     var signinFormData = {
       email: $scope.signinData.signinEmail,
       pw: $scope.signinData.signinPassword
     };
-    console.log("signing in email: " + signinFormData.email + ' with pw: ' + signinFormData.pw);
 
     signinFac.signin(signinFormData.email, signinFormData.pw)
     .then(function(status) {
       console.log(status);
-
-      $rootScope.userSession = {
-        signedIn: true
-      };
-
       signinFac.signinModalClose();
-
-      signinFac.getUserData(signinFormData.email)
-      .then(function(userData){
-        // got user data;
-        $rootScope.userData = userData;
-        var loginSuccessSheet = $ionicActionSheet.show({
-          titleText: 'Hi ' + userData.firstname +"! You're now logged in",
-        });
-
-        $timeout(function() {
-          loginSuccessSheet();
-        }, 2500);
-
-      }, function(status){
-        console.log(status);
-      });
     }, function(status) {
       console.log(status);
       alert("Please check your email and password were entered correctly and try again");
     });
-  }
+  };
+
+  $scope.signup = function () {
+    var signupFormData = {
+      email: $scope.signupData.signupEmail,
+      pw: $scope.signupData.signupPassword,
+      dob: $scope.signupData.signupDob,
+      newsletter: $scope.signupData.signupNewsletter
+    };
+    console.log(JSON.stringify(signupFormData));
+
+    signinFac.signup(signupFormData)
+    .then(function (status) {
+      console.log(status);
+      signinFac.signin(signupFormData.email, signupFormData.pw)
+      .then(function (status) {
+        console.log(status);
+        signinFac.updateProfile(signupFormData);
+      }, function (status) {
+        console.log(status);
+      });
+      $scope.signupModalClose();
+      $scope.signupExtraModalOpen();
+    }, function (status) {
+      console.log(status);
+      alert("something went wrong, please try registering again"); // could already be registered, need error code checking
+    });
+  };
+
+  $scope.signupExtra = function () {
+    var signupExtraFormData = {
+      firstname: $scope.signupExtraData.signupExtrafirstname,
+      lastname: $scope.signupExtraData.signupExtralastname
+    };
+
+    console.log("extra signup info: " + JSON.stringify(signupExtraFormData));
+
+    signinFac.signupExtra(signupExtraFormData);
+
+    $scope.signupExtraModalClose();
+  };
+
+  $scope.signupExtraSkip = function () {
+    $scope.signupExtraModalClose();
+  };
 
   $scope.logout = function() {
     signinFac.logout();
-  }
+  };
 
   //Attach factory functions to scope to be called in DOM
   $scope.signinModalOpen = function() {
@@ -71,9 +91,6 @@ angular.module("accountModule")
   $scope.signupExtraModalClose = function() {
     signinFac.signupExtraModalClose();
   };
-
-})
-.controller('accountmodalController', function($ionicModal) {
 
 });
 

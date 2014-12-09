@@ -1,8 +1,8 @@
 angular.module('dotyApp')
 .controller('DaysCtrl', function($rootScope, $scope, $timeout, signinFac) {
+//, $http, $stateParams, $location, $ionicPopup, $timeout
 
-//, $http, $stateParams, $location, $ionicPopup, $timeout, signinController
-  signinFac.userRemoveData();
+  signinFac.userRemoveData(); // not removal, just an init of a clean data object
 
   $rootScope.userSession = {
     signedIn: false

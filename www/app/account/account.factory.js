@@ -1,55 +1,131 @@
 angular.module("accountModule")
-.factory('signinFac', function($rootScope, $q, $http, $ionicModal) {
+.factory('signinFac', function($rootScope, $q, $http, $ionicModal, $timeout, $ionicActionSheet) {
   var fac = {};
-
-  //  localStorage["userData"] = JSON.stringify({
-  //    'user': 'app_test_user@doty.com',
-  //    'pw': 'app_test_pw_123'
-  //  })
 
   fac.signin = function(userEmail, userPassword) {
     var deferred = $q.defer();
+    console.log("signing in email: " + userEmail + ' with pw: ' + userPassword);
+
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/app/user/?login&user_email='+userEmail+'&password='+userPassword
+      url: 'https://www.daysoftheyear.com/app/user/?login&user_email=' + userEmail + '&password=' + userPassword
     }).
     success(function(data, status) {
       console.log("login query went through", status, data)
       if(data.meta.status === "success") {
-        deferred.resolve("succesful login");
+        $rootScope.userSession.signedIn = true;
+        fac.userSaveCredentials(userEmail, userPassword);
+
+        fac.getUserData(userEmail)
+        .then(function(userData) {
+          deferred.resolve("succesful login");
+          $rootScope.userData = userData;
+
+          //          var loginSuccessSheet = $ionicActionSheet.show({
+          //            titleText: 'Hi ' + userData.firstname +"! You're now logged in",
+          //          });
+          //
+          //          $timeout(function() {
+          //            loginSuccessSheet();
+          //          }, 2500);
+
+        }, function(status) {
+          deferred.resolve("succesful login");
+          console.log(status);
+        });
+
       } else {
-        localStorage.removeItem('userData'); // removed faulty saved credentials
+        $rootScope.userSession.signedIn = false;
+        fac.removeCredentials();
         deferred.reject("wrong email or password");
       }
     }).
     error(function(data, status) {
+      $rootScope.userSession.signedIn = false;
       deferred.reject("login query failed, server down?");
     });
 
     return deferred.promise;
   };
 
-  fac.getUserData = function(userEmail) {
+  fac.signup = function(signupFormData) {
     var deferred = $q.defer();
-    console.log("Trying https://www.daysoftheyear.com/app/user/?get_user_data="+userEmail);
+    console.log("signing up new user with email: " + signupFormData.email + ' with pw: ' + signupFormData.pw);
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/app/user/?get_user_data='+userEmail,
-      withCredentials: true
+      url: 'https://www.daysoftheyear.com/app/user/?register&user_email=' + signupFormData.email + '&password=' + signupFormData.pw
     }).
     success(function(data, status) {
-      console.log("user data query went through", status, data);
+      console.log("signup query went through", status, data)
       if(data.meta.status === "success") {
-        console.log("succesful user data query");
+        $rootScope.userData.id = data.result.id;
+        console.log($rootScope.userData.id);
+        deferred.resolve("succesful signup");
+      } else {
+        deferred.reject("signup failed, user likely already exists, need error codes");
+      }
+    }).
+    error(function(data, status) {
+      deferred.reject("signup query failed, server down?");
+    });
+
+    return deferred.promise;
+  };
+
+  fac.signupExtra = function(signupExtraFormData) {
+    fac.updateProfile(signupExtraFormData)
+    .then(function (status) {
+      console.log(status);
+      fac.getUserData($rootScope.userData.email)
+      .then(function (userData) {
+        $rootScope.userData = userData;
+      }, function (status) {
+        console.log(status);
+      });
+    }, function (status) {
+      console.log(status);
+    });
+  };
+
+  fac.getUserData = function(userEmail) {
+    var deferred = $q.defer();
+    console.log("grabbing user data for: " + userEmail);
+    var timeNonce = new Date().getTime();
+
+    $http({
+      method: 'GET',
+      url: 'https://www.daysoftheyear.com/app/user/?get_user_data='+userEmail + '&throwaway=' + timeNonce,
+      withCredentials: true,
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    }).
+    success(function(data, status, headers) {
+      console.log("user data query went through");
+      console.log(headers());
+      if(data.meta.status === "success") {
+
+        var logThis = {
+          firstname: data.result.name.firstname,
+          lastname: data.result.name.lastname,
+          id: data.result.id,
+          email: data.result.email,
+          dob: data.result.dob
+        };
+
+        console.log("succesful user data query" + JSON.stringify(logThis) + " and " + JSON.stringify(data) + " and status of " + status);
+
         deferred.resolve({
           firstname: data.result.name.firstname,
           lastname: data.result.name.lastname,
           id: data.result.id,
           email: data.result.email,
           dob: data.result.dob
+          // add permissions
         });
       } else {
+        fac.removeCredentials();
         deferred.reject("user data query error, login credentials wrong?");
       }
     }).
@@ -60,7 +136,64 @@ angular.module("accountModule")
     return deferred.promise;
   };
 
-  fac.userRemoveData = function() {
+  fac.logout = function() {
+    $http({
+      method: 'GET',
+      url: 'https://www.daysoftheyear.com/app/user/?logout'
+    }).then(function() {
+      fac.userRemoveData();
+      fac.removeCredentials();
+      fac.signinModalOpen();
+    });
+  };
+
+  fac.updateProfile = function (profileData) {
+    var deferred = $q.defer();
+
+    if (profileData) {
+      var logThis = "Updating profile of " + $rootScope.userData.email + " with data: ";
+      logThis = logThis + JSON.stringify(profileData);
+      console.log(logThis);
+
+      var updateUrl = 'https://www.daysoftheyear.com/app/user/?update&user_id=' + $rootScope.userData.id;
+
+      if (profileData.dob) {
+        //updateUrl = updateUrl + '&dob=' + profileData.dob; figure out date format
+        console.log(profileData.dob);
+      };
+
+      if (profileData.firstname) {
+        updateUrl = updateUrl + '&firstname=' + profileData.firstname;
+      };
+
+      if (profileData.lastname) {
+        updateUrl = updateUrl + '&lastname=' + profileData.lastname;
+      };
+
+      $http({
+        method: 'GET',
+        url: updateUrl,
+        withCredentials: true
+      }).
+      success(function(data, status) {
+        console.log("profile update query went through", status, data);
+        if(data.meta.status === "success") {
+          deferred.resolve("succesful profile update");
+        } else {
+          deferred.reject("profile update error, login credentials wrong?");
+        }
+      }).
+      error(function(data, status) {
+        deferred.reject("profile update query failed");
+      });
+    } else {
+      deferred.reject("no profiledata passed to update function");
+    };
+
+    return deferred.promise;
+  };
+
+  fac.userRemoveData = function () {
     $rootScope.userData = {
       firstname: "",
       lastname: "",
@@ -70,47 +203,46 @@ angular.module("accountModule")
     };
   };
 
-  fac.logout = function() {
-    $http({
-      method: 'GET',
-      url: 'https://www.daysoftheyear.com/app/user/?logout'
-    }).then(function() {
-      fac.userRemoveData();
-    });
+  fac.userSaveCredentials = function (userEmail, userPassword) {
+    console.log("saving login credentials: " + userEmail + " / " + userPassword);
+    localStorage["userData"] = JSON.stringify({
+      'user': userEmail,
+      'pw': userPassword
+    })
   };
 
-  //  var getStorage = localStorage["userData"];
-  //  if(getStorage){
-  //    getStorage = JSON.parse(getStorage);
-  //    var userStored = getStorage.user;
-  //    var pwStored = getStorage.pw;
-  //
-  //    console.log('Trying login with: ', userStored, pwStored);
-  //
-  //    fac.signin(userStored, pwStored)
-  //    .then(function(status) {
-  //    console.log(status);
-  //      fac.getUserData(userStored)
-  //      .then(function(userData){
-  //        $rootScope.userData = userData;
-  //      },function(status){
-  //        console.log(status);
-  //      });
-  //    }, function(status) {
-  //      // eror with signin
-  //    });
-  //
-  //  } else {
-  //
-  //  }
+  fac.removeCredentials = function () {
+    console.log("removing local login credentials");
+    localStorage.removeItem('userData');
+  };
 
   fac.checkSignin = function() {
     if($rootScope.userSession.signedIn) {
-      console.log('check signin: not logged in');
+      console.log('check signin: already logged in!');
       fac.signinModalClose();
     } else {
       console.log('check signin: not logged in!');
-      fac.signinModalOpen();
+      var getStorage = localStorage["userData"];
+      if(getStorage) {
+        console.log("check local credentials: credentials found");
+        getStorage = JSON.parse(getStorage);
+
+        var userStored = getStorage.user, pwStored = getStorage.pw;
+        console.log('Trying login with local creds- user: ' + userStored + ' pw: ' + pwStored);
+
+        fac.signin(userStored, pwStored)
+        .then(function(status) {
+          console.log(status);
+          fac.signinModalClose();
+        }, function(status) {
+          console.log(status);
+          fac.signinModalOpen();
+        });
+
+      } else {
+        console.log("check local credentials: no credentials found, show login form");
+        fac.signinModalOpen();
+      }
     }
   }
 
@@ -124,11 +256,11 @@ angular.module("accountModule")
   });
   fac.signinModalOpen = function() {
     fac.signinModal.show();
-    console.log('Opening In Modal');
+    console.log('Opening signin modal');
   };
   fac.signinModalClose = function() {
     fac.signinModal.hide();
-    console.log('Closing In Modal');
+    console.log('Closing signin modal');
   };
   //Cleanup the modal when we're done with it!
   $rootScope.$on('$destroy', function() {
@@ -146,11 +278,11 @@ angular.module("accountModule")
   });
   fac.signupModalOpen = function() {
     fac.signupModal.show();
-    console.log('Opening Up Modal');
+    console.log('Opening signup modal');
   };
   fac.signupModalClose = function() {
     fac.signupModal.hide();
-    console.log('Closing Up Modal');
+    console.log('Closing signup modal');
   };
   //Cleanup the modal when we're done with it!
   $rootScope.$on('$destroy', function() {
@@ -168,11 +300,11 @@ angular.module("accountModule")
   });
   fac.signupExtraModalOpen = function() {
     fac.signupExtraModal.show();
-    console.log('Opening UpExtra Modal');
+    console.log('Opening signup-extra modal');
   };
   fac.signupExtraModalClose = function() {
     fac.signupExtraModal.hide();
-    console.log('Closing UpExtra Modal');
+    console.log('Closing signup-extra modal');
   };
   //Cleanup the modal when we're done with it!
   $rootScope.$on('$destroy', function() {
