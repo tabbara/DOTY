@@ -4,15 +4,11 @@ angular.module("dotyApp")
 
   fac.getDayToday = function() {
 
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1;
-    var yyyy = today.getFullYear();
+    var todayDate = new Date();
+    var today = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()) / 1000;
 
-    if(dd<10) { dd='0'+dd; }
-    if(mm<10) { mm='0'+mm; }
-
-    today = dd+'-'+mm+'-'+yyyy;
+    console.log("grabbing: https://www.daysoftheyear.com/app/days/?date_start="
+                     + today +"&date_end=" + today + "&limit=100");
 
     return $http.get("https://www.daysoftheyear.com/app/days/?date_start="
                      + today +"&date_end=" + today + "&limit=100")
