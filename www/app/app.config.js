@@ -34,21 +34,3 @@ angular.module("dotyApp")
     controller: "daypageCtrl"
   })
 });
-
-var jsapp = {
-  setDayColors: function () {
-    var colors = ["#ea493b", "#7fccbd", "#81c256", "#f6d24c",
-                  "#9765b8", "#73a6db", "#73a6db", "#e6b294"];
-
-    $(".day-title").each( function(i) {
-      this.style.background = colors[i % 8];
-    });
-
-    $(".day-image-container").each( function(i) {
-      this.style["border-color"] = colors[i % 8];
-    });
-
-    $(window).trigger('resize');
-
-  }
-};
