@@ -80,7 +80,10 @@ angular.module("dotyApp")
       _dayObj.title = _dayObj.title.replace("&#038;","&");
       _dayObj.content = _dayObj.content
       .replace(/\r\n/g,"<BR>")
-      .replace(/<a>/g, "").replace(/<\/?a[^>]*>/g, "");
+      .replace(/<a>/g, "")
+      .replace(/<\/?a[^>]*>/g, "")
+      .replace(/<p>/g, "<h2 class='content-text'>")
+      .replace(/<\/p>/gi, "</h2>");
     });
 
     deferred.resolve(daysArray);

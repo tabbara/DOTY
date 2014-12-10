@@ -1,6 +1,6 @@
 <ion-view title="Days of the Year">
 
-  <ion-nav-bar class="bar-positive">
+  <ion-nav-bar class="bar-dark">
 
     <!--
 <ion-nav-buttons side="left">
@@ -19,15 +19,19 @@
   </ion-nav-bar>
 
   <ion-content>
-    <img style="width: 100%;" ng-src="{{dayObj.image.large.url}}"></img>
-  <h1 class="padding-left">
-<!--    style="color: rgb(217, 55, 31);"-->
-    {{dayObj.title}}
-  </h1>
-  <div class="list">
-    <p class="item item-text-wrap" ng-bind-html="dayObj.content"></p>
-  </div>
-</ion-content>
+    <div>
+      <img style="width: 100%;" ng-src="{{dayObj.image.large.url}}">
+      </img>
+    <h1 class="padding-left content-title">
+      {{dayObj.title | uppercase}}
+    </h1>
+
+    <hr class="content-line">
+
+    <p class="item-text-wrap" ng-bind-html="dayObj.content"></p>
+
+    </div>
+  </ion-content>
 
 </ion-view>
 
@@ -44,9 +48,4 @@ Work on justifying text nicely with padding
 Add Category and Attribution nicely styled
 
 Add Share / Favorite button
-
-Back icon instead of back text
-<ion-nav-back-button>
-Back
-</ion-nav-back-button>
 -->
