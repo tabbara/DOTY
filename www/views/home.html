@@ -29,14 +29,19 @@
         <div class="item-image">
           <img ng-src="{{day.image.large.url}}">
         </div>
+        <span class="card-overlay">
+<!--          <span class="card-overlay-content">-->
+            Testing Card Overlay
+<!--          </span>-->
+        </span>
       </a>
 
       <div class="card-title">
 
         <a href="#/:{{day.id}}">
-<!--
-          <i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})">
-          </i>
+          <!--
+<i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})">
+</i>
 -->
           <h2 class="stable">
             {{day.title}}

@@ -1,5 +1,5 @@
 * {
-/*  margin: 0;*/
+  /*  margin: 0;*/
   padding: 0;
 }
 
@@ -12,81 +12,25 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: 'Roboto', sans-serif !important;
-/*  'Raleway', */
+  font-family: 'Raleway', sans-serif !important;
+  /*  'Raleway', */
   -webkit-font-smoothing: antialiased;
 }
 
 
 body {
-/*  font-family: 'Roboto', sans-serif !important; */
-/*  -webkit-font-smoothing: antialiased;*/
-/*  padding: 0;*/
-/*  margin: 0;*/
-/*  background: #fbf1e8;*/
-/*  width: 100%;*/
+  /*  font-family: 'Roboto', sans-serif !important; */
+  /*  -webkit-font-smoothing: antialiased;*/
+  /*  padding: 0;*/
+  /*  margin: 0;*/
+  /*  background: #fbf1e8;*/
+  /*  width: 100%;*/
 }
 
 .bgcolor {
   background: #fbf1e8;
 }
 
-
-
-/*--#####################################################
-HEADER
-#######################################################*/
-
-.header {
-  background: white;
-  border: 1px solid #cac8bc;
-  padding: 0;
-  margin: 0;
-  height: 45px;
-  width: 100%;
-  position:fixed; top:0px; left:0px;
-  z-index: 1;
-}
-
-.headerdiv {
-  display: inline-block;
-  float: left;
-  width: 33.3333%;
-}
-
-.header .nav-button {
-  display: block;
-  margin-left: 10%;
-  text-align: left;
-  font-size: 1.4em;
-  line-height: 45px;
-  color: #ababaa;
-}
-
-.header .logo {
-  display: block;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  line-height: 45px;
-}
-
-.header .search-button {
-  display: block;
-  margin-right: 10%;
-  text-align: right;
-  font-size: 1.4em;
-  line-height: 45px;
-  color: #ababaa;
-}
-
-/*--#####################################################
-HEADER
-#######################################################*/
-
-#days-container {
-}
 
 #days-container ul {
   list-style: none;
@@ -191,35 +135,57 @@ HEADER
 /*-----------------------------*/
 
 
-/*----------CARDW RAPPER---------*/
-
-.custom-content {
-  background-color: #faf1e7;
-}
-
-.custom-bar{
+.custom-bar {
+  /*Custom Nav Bar with light-pink bottom border*/
   border-bottom-width: 2px;
   border-color: #ECD9D9 !important;
-/*  border-width: 2px;*/
   border-bottom-style: solid;
 }
 
-/*
-.bar { border-bottom-width: 20px; border-color: red; border-width: 20px; }
-.bar-header { border-bottom-width: 20px; border-color: red; border-width: 20px; }
-.naf-bar { border-bottom-width: 20px; border-color: red; border-width: 20px; }
-.bar-light { border-bottom-width: 20px; border-color: red; border-width: 20px; }
-*/
+.custom-content {
+  /*  Set app's background color*/
+  background-color: #faf1e7;
+}
 
 
+/*----------HOME---------*/
+
+/*Day Card Wrapper*/
 div.card-wrapper {
-  border: 0px #A8A8A8 solid;
+  border: 1px white solid;
   height: 100%;
   border-radius: 5px;
   padding: 0px;
-/*  box-shadow: 1px 1px 15px 2px #B5B5B5;*/
+  position: relative;
+  /*  box-shadow: 1px 1px 15px 2px #B5B5B5;*/
 }
 
+.card-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  color: white;
+  border: none;
+  display: block;
+  text-align: center;
+  margin: auto;
+  padding: 0px;
+  background: #7f7f7f;
+  background: rgba(0,0,0,0.5);
+}
+
+/*Day Card Overlay*/
+.card-overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 20px;
+  width: 150px;
+  margin-top: -10px;
+  margin-left: -75px;
+}
+
+/* Day Card Title*/
 .card-title h2 {
   padding: 10px;
   margin: 0px;
@@ -227,30 +193,35 @@ div.card-wrapper {
   text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
 }
 
+/*----------DAYPAGE---------*/
+
+/*Daypage Title*/
 .content-title {
   color: #dd4933;
   margin: 10px 5% 15px 5%;
   font-size: 22px;
   padding: 0;
   text-shadow: 0px 1px 0 #f7ddd9;
-/*  rgba(0,0,0,0.5)*/
+  /*  rgba(0,0,0,0.5)*/
 }
 
-
+/*Daypage Text*/
 .content-text {
   color: #3e3d3d;
   margin: 0 5% 15px 5%;
   font-size: 17px;
   padding: 0;
+  font-family: 'Roboto', sans-serif !important;
 }
 
+/*Linebreak*/
 hr.content-line {
-height: 1px;
-border: 0;
-color: #e0e0e0;
-background-color: #e0e0e0;
-width: 92%;
-margin-bottom: 14px;
+  height: 1px;
+  border: 0;
+  color: #e0e0e0;
+  background-color: #e0e0e0;
+  width: 92%;
+  margin-bottom: 14px;
 }
 
 /*-----------------------------*/

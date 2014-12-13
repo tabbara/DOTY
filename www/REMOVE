@@ -1,0 +1,47 @@
+/*--#####################################################
+HEADER
+#######################################################*/
+
+.header {
+  background: white;
+  border: 1px solid #cac8bc;
+  padding: 0;
+  margin: 0;
+  height: 45px;
+  width: 100%;
+  position:fixed; top:0px; left:0px;
+  z-index: 1;
+}
+
+.headerdiv {
+  display: inline-block;
+  float: left;
+  width: 33.3333%;
+}
+
+.header .nav-button {
+  display: block;
+  margin-left: 10%;
+  text-align: left;
+  font-size: 1.4em;
+  line-height: 45px;
+  color: #ababaa;
+}
+
+.header .logo {
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  line-height: 45px;
+}
+
+.header .search-button {
+  display: block;
+  margin-right: 10%;
+  text-align: right;
+  font-size: 1.4em;
+  line-height: 45px;
+  color: #ababaa;
+}

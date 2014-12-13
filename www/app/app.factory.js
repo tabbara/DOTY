@@ -19,7 +19,7 @@ angular.module("dotyApp")
 
     var todayDate = new Date();
     var today = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()) / 1000;
-    var todayB = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()+5) / 1000;
+    var todayB = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()+3) / 1000;
 
     console.log("grabbing: https://www.daysoftheyear.com/app/days/?date_start="
                 + today +"&date_end=" + today + "&limit=100");
@@ -99,6 +99,10 @@ angular.module("dotyApp")
     $timeout(function () {
       $(".card-title").each(function(i) {
         this.style.background = colors[i % 8];
+      });
+
+      $(".card-wrapper").each(function(i) {
+        this.style.borderColor = colors[i % 8];
       });
     }, 1);
 
