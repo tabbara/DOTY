@@ -1,3 +1,27 @@
+TO-DO
+
+PERFORMANCE
+  6.1 Large Objects and Server Calls.
+  So what does all of this teach us? The first is that we should think through our data model and attempt to limit the complexity of our objects. 
+  This is especially important for objects that are returned from the server.
+
+  It is very tempting to simply lob an entire database row over the fence, so to speak, with an eyeroll and an obligatory .toJson(). This can not be stressed enough: don't do that.
+
+  Instead use a custom serializer to only return the subset of keys that your Angular application absolutely must have.
+
+Avoid using filters if at all possible. They are run twice per digest cycle, once when anything changes, and another time to collect further changes. 
+  
+  Never bind anything (ng-show, ng-repeat, etc.) directly to a function. Never watch a function result directly. This function will run on every digest cycle, possibly slowing your application to a crawl.
+
+How frequently will this change? (the more frequent, the worse fit ng-if is).
+How heavy is the scope? (the heavyer, the better fit ng-if is).
+
+11 DOM Event Problems
+Angular provides many pre-rolled DOM event directives. ng-click, ng-mouseenter, ng-mouseleave,etc. All of these call scope.$apply() every time the event occurs. A much more efficient approach is to bind directly with addEventListener, and then use scope.$digest as necessary.
+
+
+Read more at https://www.airpair.com/angularjs/posts/angularjs-performance-large-applications#I6XyY3uhAra86z7H.99
+
 Loading Screens:
 http://learn.ionicframework.com/formulas/loading-screen-with-interceptors/
 

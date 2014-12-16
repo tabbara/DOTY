@@ -14,7 +14,8 @@ angular.module("dotyApp")
   })
   .state('explore', {
     url: "/explore",
-    templateUrl: "views/explore.html"
+    templateUrl: "views/explore.html",
+    controller: "exploreCtrl"
   })
   .state('favorites', {
     url: "/favorites",
@@ -32,5 +33,10 @@ angular.module("dotyApp")
     url: "/:dayID",
     templateUrl: "views/daypage.html",
     controller: "daypageCtrl"
+  })
+  .state('categorypage', {
+    url: "/explore/:categoryID",
+    templateUrl: "views/categorypage.html",
+    controller: 'categorypageCtrl'
   })
 });

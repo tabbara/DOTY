@@ -1,5 +1,5 @@
 angular.module('daypageModule')
-.controller('daypageCtrl', function($scope, queryAPI, $stateParams) {
+.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $ionicNavBarDelegate) {
 
   var pageID = $stateParams.dayID.replace(/:/g,"");
 
@@ -13,5 +13,8 @@ angular.module('daypageModule')
     console.log(status);
   });
 
+  $scope.goBack = function() {
+    $ionicNavBarDelegate.back();
+  };
 
 });

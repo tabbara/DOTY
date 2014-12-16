@@ -1,9 +1,9 @@
-<ion-view title="Today">
+<ion-view title="{{currentCategory.name}}">
 
   <ion-nav-bar class="custom-bar">
 
     <ion-nav-buttons side="left">
-      <button class="button button-icon ion-navicon" menu-toggle="left"></button>
+      <a ui-sref="explore"><button class="button button-icon ion-arrow-left-c"></button></a>
     </ion-nav-buttons>
 
     <ion-nav-buttons side="right">
@@ -14,45 +14,22 @@
 
   <ion-content class="custom-content">
 
-    <!--
-<div ng-repeat="day in days" class="card-wrapper card">
-<img ng-src="{{day.image.large.url}}">
-<div class="card-title">
-<h8 class="card-title-content"> {{day.title}} </h8>
-</div>
-</div>
--->
-
-
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
         <div class="item-image">
           <img ng-src="{{day.image.large.url}}">
         </div>
-<!--
-        <span class="card-overlay">
-          Testing Card Overlay
-        </span>
--->
       </a>
 
       <div class="card-title">
-
         <a href="#/:{{day.id}}">
-          <!--
-<i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})">
-</i>
--->
           <h2 class="stable">
             {{day.title}}
           </h2>
 
         </a>
       </div>
-
     </div>
 
   </ion-content>
 </ion-view>
-
-<!--http://stackoverflow.com/questions/20984183/best-way-to-preload-images-with-angular-js-->

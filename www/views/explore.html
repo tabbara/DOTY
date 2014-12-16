@@ -1,37 +1,29 @@
 <ion-view title="Explore">
 
-    <ion-nav-bar class="bar-positive">
+  <ion-nav-bar class="custom-bar">
 
-        <ion-nav-buttons side="left">
-            <button class="button button-icon ion-navicon" menu-toggle="left"></button>
-        </ion-nav-buttons>
+    <ion-nav-buttons side="left">
+      <button class="button button-icon ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
 
-        <ion-nav-buttons side="right">
-            <button class="button button-icon ion-ios7-search-strong"></button>
-        </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon ion-ios7-search-strong"></button>
+    </ion-nav-buttons>
 
-    </ion-nav-bar>
+  </ion-nav-bar>
 
-    <ion-content>
-        <h1>Explore</h1>
-    </ion-content>
+  <ion-content class="custom-content">
+    <div ng-repeat="category in categories">
+      <a href="#/explore/:{{category.slug}}" ng-click="setCategoryName('{{category.name}}')">
+        <!--      <a ui-sref="categorypage">-->
+        <!--        /{{category.slug}}">        -->
+
+        <div class="explore-category">
+          <h2 class="category-title">
+            {{category.name}}
+          </h2>
+        </div>
+      </a>
+    </div>
+  </ion-content>
 </ion-view>
-
-
-<!--
-                <ion-nav-bar class="bar-light">
-                    <ion-nav-buttons side="left">
-                        <button menu-toggle="left" class="button button-icon ion-navicon">
-                        </button>
-                    </ion-nav-buttons>
-
-                    <ion-nav-buttons side="right">
-                        <button class="button button-icon ion-ios7-search-strong" ng-click="newTask()">
-                        </button>
-                    </ion-nav-buttons>
-                </ion-nav-bar>-->
-
-<!--
-       <ion-nav-buttons side="left">
-            <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
-            </button>-->

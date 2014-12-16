@@ -224,4 +224,11 @@ hr.content-line {
   margin-bottom: 14px;
 }
 
-/*-----------------------------*/
+/*----------EXPLORE---------*/
+
+.category-title {
+  padding: 10px;
+  margin: 0px;
+  color: #e9f1f3;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+}

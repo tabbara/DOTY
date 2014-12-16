@@ -3,5 +3,7 @@ var app = angular.module("dotyApp", [
   "ui.router",
   "homeModule",
   "daypageModule",
-  "accountModule"
+  "accountModule",
+  "exploreModule",
+  "categorypageModule"
 ]);
