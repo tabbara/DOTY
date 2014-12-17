@@ -1,4 +1,1 @@
-var app = angular.module("homeModule", [
-//  'homeCtrl'
-
-]);
+var app = angular.module("homeModule", []);

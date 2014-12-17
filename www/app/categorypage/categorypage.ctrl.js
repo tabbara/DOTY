@@ -1,5 +1,5 @@
 angular.module('categorypageModule')
-.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, signinFac, $rootScope) {
+.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope) {
 
   var pageID = $stateParams.categoryID.replace(/:/g,"");
 

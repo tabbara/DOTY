@@ -137,6 +137,7 @@ body {
 
 .custom-bar {
   /*Custom Nav Bar with light-pink bottom border*/
+  border-top-width: 0px;
   border-bottom-width: 2px;
   border-color: #ECD9D9 !important;
   border-bottom-style: solid;

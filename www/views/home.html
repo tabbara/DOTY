@@ -7,7 +7,9 @@
     </ion-nav-buttons>
 
     <ion-nav-buttons side="right">
-      <button class="button button-icon ion-ios7-search-strong"></button>
+<!--      <a ui-sref="searchpage">      -->
+        <button ui-sref="searchpage" class="button button-icon ion-ios7-search-strong"></button>
+<!--      </a>                -->
     </ion-nav-buttons>
 
   </ion-nav-bar>
@@ -29,10 +31,10 @@
         <div class="item-image">
           <img ng-src="{{day.image.large.url}}">
         </div>
-<!--
-        <span class="card-overlay">
-          Testing Card Overlay
-        </span>
+        <!--
+<span class="card-overlay">
+Testing Card Overlay
+</span>
 -->
       </a>
 

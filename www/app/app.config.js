@@ -1,6 +1,6 @@
 angular.module("dotyApp")
 .config( function($stateProvider, $urlRouterProvider) {
-//  $httpProvider.defaults.withCredentials = true;
+  //  $httpProvider.defaults.withCredentials = true;
   $urlRouterProvider.otherwise("/");
   $stateProvider
   .state('/', {
@@ -28,6 +28,11 @@ angular.module("dotyApp")
   .state('settings', {
     url: "/settings",
     templateUrl: "views/settings.html"
+  })
+  .state('searchpage', {
+    url: "/search",
+    templateUrl: "views/searchpage.html",
+    controller: 'searchpageCtrl'
   })
   .state('daypage', {
     url: "/:dayID",

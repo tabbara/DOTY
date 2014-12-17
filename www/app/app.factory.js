@@ -21,7 +21,7 @@ angular.module("dotyApp")
     var today = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()) / 1000;
     var todayB = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()+3) / 1000;
 
-    console.log("grabbing: https://www.daysoftheyear.com/app/days/?date_start="
+    console.log("Grabbing [day-by-date]: https://www.daysoftheyear.com/app/days/?date_start="
                 + today +"&date_end=" + today + "&limit=100");
 
     $http({
@@ -73,7 +73,7 @@ angular.module("dotyApp")
       console.log('no tags passed to getDayByTag!');
     };
 
-    console.log('Grabbing: ' + url);
+    console.log('Grabbing [day-by-tag]: ' + url);
 
     $http({
       method: 'GET',
@@ -89,21 +89,27 @@ angular.module("dotyApp")
     return deferred.promise;
   };
 
-  //  // Clean Title
-  //  fac.cleanDayTitle = function(daysArray) {
-  //    var deferred = $q.defer();
-  //
-  //    $.each(daysArray, function (index, _dayObj) {
-  //      _dayObj.title = _dayObj.title.replace("&#038;","'");
-  //      _dayObj.title = _dayObj.title.replace("&#8217;","'");
-  //
-  //    });
-  //
-  //    deferred.resolve(daysArray);
-  //
-  //    return deferred.promise;
-  //  }
+  fac.getDayBySearch = function (query) {
+    var deferred = $q.defer();
 
+    var limit = 7; // Temporary. This function should grab days in the near future. Need to figure out if the API returns date sorted content.
+    var url = "https://www.daysoftheyear.com/api/days/?limit=" + limit + '&s=' + query;
+
+    console.log('Grabbing [day-by-search]: ' + url);
+
+    $http({
+      method: 'GET',
+      url: url
+    })
+    .success(function (data) {
+      deferred.resolve(data);
+    })
+    .error(function () {
+      deferred.reject('could not retrieve days by search query');
+    });
+
+    return deferred.promise;
+  };
 
   fac.getTags = function() {
     var deferred = $q.defer();
