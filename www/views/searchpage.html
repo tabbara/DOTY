@@ -25,17 +25,29 @@
 
         <input type="submit" id="submit" class="button button-clear button-dark" value="Go"/>
 
-<!--
-        <button class="button button-clear button-dark" ng-click="search()">
-          Go
-        </button>
+        <!--
+<button class="button button-clear button-dark" ng-click="search()">
+Go
+</button>
 -->
       </div>
     </form>
 
-    <h4 ng-show="!madeSearch.found && madeSearch.finished" class="text-center padding-top">
-      Your search returned zero results
-    </h4>
+    <!--
+<h4>{{madeSearch.found}}</h4>
+<h4>{{madeSearch.finished}}</h4>
+-->
+
+    <!--    <h4>a</h4>-->
+
+    <ul class="list">
+      <li class="item-clear" ng-show="!madeSearch.found && madeSearch.finished">
+        <h4 class="text-center padding-top">
+          Your search returned zero results
+        </h4>
+      </li>
+    </ul>
+
 
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
