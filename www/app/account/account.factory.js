@@ -5,20 +5,22 @@ angular.module("accountModule")
   fac.signin = function(userEmail, userPassword) {
     var deferred = $q.defer();
     console.log("signing in email: " + userEmail + ' with pw: ' + userPassword);
+//    console.log('https://www.daysoftheyear.com/api/1.0/users/?login&email=' + userEmail + '&password=' + userPassword);
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/app/user/?login&user_email=' + userEmail + '&password=' + userPassword
+      url: 'https://www.daysoftheyear.com/api/1.0/users/?login&email=' + userEmail + '&password=' + userPassword
     }).
-    success(function(data, status) {
+    success(function(data, status, headers) {
       console.log("login query went through", status, data)
-      if(data.meta.status === "success") {
+      console.log({'a': headers()});
+      if(data.status.code === 100) {
         $rootScope.userSession.signedIn = true;
         fac.userSaveCredentials(userEmail, userPassword);
 
         fac.getUserData(userEmail)
         .then(function(userData) {
-          deferred.resolve("succesful login");
+          deferred.resolve("succesful login & data retrieval");
           $rootScope.userData = userData;
 
           //          var loginSuccessSheet = $ionicActionSheet.show({
@@ -30,7 +32,7 @@ angular.module("accountModule")
           //          }, 2500);
 
         }, function(status) {
-          deferred.resolve("succesful login");
+          deferred.resolve("succesful login, automatic data retrieval failed");
           console.log(status);
         });
 
@@ -54,7 +56,7 @@ angular.module("accountModule")
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/app/user/?register&user_email=' + signupFormData.email + '&password=' + signupFormData.pw
+      url: 'https://www.daysoftheyear.com/api/1.0/users/?register&user_email=' + signupFormData.email + '&password=' + signupFormData.pw
     }).
     success(function(data, status) {
       console.log("signup query went through", status, data)
@@ -95,20 +97,24 @@ angular.module("accountModule")
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/app/user/?get_user_data='+userEmail + '&throwaway=' + timeNonce,
-      withCredentials: true,
-      headers: {
-        'Cache-Control': 'no-cache'
-      }
+      url: 'https://www.daysoftheyear.com/api/1.0/users/?get_user_data='+userEmail
+//      + '&throwaway=' + timeNonce
+//      ,
+//      withCredentials: true,
+//      headers: {
+//        'Cache-Control': 'no-cache'
+//      }
     }).
     success(function(data, status, headers) {
       console.log("user data query went through");
-      console.log(headers());
-      if(data.meta.status === "success") {
+      console.log({'a': headers()});
+      console.log(data);
+      console.log(status);
+      if(data.status.code === 100) {
 
         var logThis = {
-          firstname: data.result.name.firstname,
-          lastname: data.result.name.lastname,
+          firstname: data.result.name_first,
+          lastname: data.result.name_last,
           id: data.result.id,
           email: data.result.email,
           dob: data.result.dob
@@ -139,7 +145,7 @@ angular.module("accountModule")
   fac.logout = function() {
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/app/user/?logout'
+      url: 'https://www.daysoftheyear.com/api/1.0/users/?logout'
     }).then(function() {
       fac.userRemoveData();
       fac.removeCredentials();
@@ -155,7 +161,7 @@ angular.module("accountModule")
       logThis = logThis + JSON.stringify(profileData);
       console.log(logThis);
 
-      var updateUrl = 'https://www.daysoftheyear.com/app/user/?update&user_id=' + $rootScope.userData.id;
+      var updateUrl = 'https://www.daysoftheyear.com/api/1.0/users/?update&user_id=' + $rootScope.userData.id;
 
       if (profileData.dob) {
         //updateUrl = updateUrl + '&dob=' + profileData.dob; figure out date format
@@ -246,7 +252,7 @@ angular.module("accountModule")
     }
   }
 
-  $ionicModal.fromTemplateUrl('/modals/signinModal.html', {
+  $ionicModal.fromTemplateUrl('modals/signinModal.html', {
     scope: $rootScope,
     animation: 'slide-in-up',
     backdropClickToClose: false,
@@ -268,7 +274,7 @@ angular.module("accountModule")
     console.log('Destroying In Modal');
   });
 
-  $ionicModal.fromTemplateUrl('../../modals/signupModal.html', {
+  $ionicModal.fromTemplateUrl('modals/signupModal.html', {
     scope: $rootScope,
     animation: 'slide-in-up',
     backdropClickToClose: false,
@@ -290,7 +296,7 @@ angular.module("accountModule")
     console.log('Destroying Up Modal');
   });
 
-  $ionicModal.fromTemplateUrl('../../modals/signupExtraModal.html', {
+  $ionicModal.fromTemplateUrl('modals/signupExtraModal.html', {
     scope: $rootScope,
     animation: 'slide-in-up',
     backdropClickToClose: true,
