@@ -13,7 +13,8 @@ angular.module("accountModule")
     }).
     success(function(data, status, headers) {
       console.log("login query went through", status, data)
-      console.log({'a': headers()});
+//      console.log({'a': headers()});
+
       if(data.status.code === 100) {
         $rootScope.userSession.signedIn = true;
         fac.userSaveCredentials(userEmail, userPassword);
@@ -107,9 +108,7 @@ angular.module("accountModule")
     }).
     success(function(data, status, headers) {
       console.log("user data query went through");
-      console.log({'a': headers()});
-      console.log(data);
-      console.log(status);
+//      console.log({'a': headers()});
       if(data.status.code === 100) {
 
         var logThis = {
@@ -120,11 +119,12 @@ angular.module("accountModule")
           dob: data.result.dob
         };
 
-        console.log("succesful user data query" + JSON.stringify(logThis) + " and " + JSON.stringify(data) + " and status of " + status);
+        console.log("succesful user data query");
+//        + JSON.stringify(logThis) + " and " + JSON.stringify(data) + " and status of " + status);
 
         deferred.resolve({
-          firstname: data.result.name.firstname,
-          lastname: data.result.name.lastname,
+          firstname: data.result.name_first,
+          lastname: data.result.name_last,
           id: data.result.id,
           email: data.result.email,
           dob: data.result.dob

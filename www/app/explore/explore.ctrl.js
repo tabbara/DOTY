@@ -3,19 +3,24 @@ angular.module('exploreModule')
 
   queryAPI.getTags()
   .then(function(data) {
-    var tags = data;
-    $scope.categories = [];
+    if(data.status.code === 100)
+    {
+      var tags = data.result;
+      $scope.categories = [];
 
-    for (var tag in tags) {
-      obj = tags[tag];
-      if (obj.parent === "0") {
-        $scope.categories.push(obj);
+      for (var tag in tags) {
+        obj = tags[tag];
+        if (obj.parent === "0") {
+          $scope.categories.push(obj);
+        };
       };
-    };
 
-    $scope.categories = queryAPI.cleanCategory($scope.categories);
-    queryAPI.setCategoryColors();
+      $scope.categories = queryAPI.cleanCategory($scope.categories);
+      queryAPI.setCategoryColors();
 
+    } else {
+      console.log('Error retrieving Tags: ' + data.status.code);
+    }
   }, function (status) {
     $scope.categories = [];
     console.log(status);

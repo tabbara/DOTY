@@ -39,7 +39,7 @@ angular.module('searchpageModule')
             $scope.madeSearch.found = false;
             $scope.madeSearch.finished = true;
           } else {
-            queryAPI.cleanDay(data.days) // ERROR THERE IS NO data.days ANYMORE, CHECK API, RETURNS data.result NOW!
+            queryAPI.cleanDay(data.result) // ERROR THERE IS NO data.days ANYMORE, CHECK API, RETURNS data.result NOW!
             .then(function (daysObject) {
               $scope.days = daysObject;
               queryAPI.setDayColors();

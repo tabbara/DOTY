@@ -6,7 +6,7 @@ angular.module('categorypageModule')
   $scope.currentCategory = {'name': 'category'};
 
   if ($rootScope.currentCategory) {
-      $scope.currentCategory.name = $rootScope.currentCategory.name;
+    $scope.currentCategory.name = $rootScope.currentCategory.name;
   };
 
   console.log($scope.currentCategory);
@@ -15,11 +15,15 @@ angular.module('categorypageModule')
 
   queryAPI.getDayByTag(tagArray)
   .then(function(data) {
-    queryAPI.cleanDay(data.days)
-    .then(function (daysObject) {
-      $scope.days = daysObject;
-      queryAPI.setDayColors();
-    });
+    if(data.status.code === 100) {
+      queryAPI.cleanDay(data.result)
+      .then(function (daysObject) {
+        $scope.days = daysObject;
+        queryAPI.setDayColors();
+      });
+    } else {
+      console.log('Error retrieving DaysByTag: ' + data.status.code);
+    }
   }, function (status) {
     console.log(status);
   });
