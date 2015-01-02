@@ -6,10 +6,10 @@
       <button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
     </ion-nav-buttons>
 
-<!--
-    <ion-nav-buttons side="left">
-      <a ui-sref="/"><button class="button button-icon ion-arrow-left-c"></button></a>
-    </ion-nav-buttons>
+    <!--
+<ion-nav-buttons side="left">
+<a ui-sref="/"><button class="button button-icon ion-arrow-left-c"></button></a>
+</ion-nav-buttons>
 -->
 
     <ion-nav-buttons side="right">
@@ -25,6 +25,29 @@
     <h1 class="padding-left content-title">
       {{dayObj.title | uppercase}}
     </h1>
+
+    <!--
+<p class="item-text-wrap">
+<a ng-repeat="(key, value) in dayObj.tags"
+class="button button-small button-positive"
+href="#/explore/:{{key}}"
+ng-click="setCategoryName('{{value}}')">
+{{value}}
+</a>
+</p>
+-->
+
+    <!--    <div class="card">-->
+    <div class="item-borderless">
+      <!--                  item-text-wrap">-->
+      <i class="content-text"> {{dayObj.dates[0] | date:'mediumDate'}}</i>
+      <a href="#/explore/:government-legal"
+         class="badge badge-positive"
+         ng-click="setCategoryName('{{dayObj.tags['government-legal']}}')">
+        {{dayObj.tags["government-legal"]}}
+      </a>
+    </div>
+    <!--    </div>    -->
 
     <hr class="content-line">
 

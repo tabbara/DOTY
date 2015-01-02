@@ -20,6 +20,7 @@ angular.module("dotyApp")
   .state('favorites', {
     url: "/favorites",
     templateUrl: "views/favorites.html",
+    controller: "favoritesCtrl"
   })
   .state('profile', {
     url: "/profile",

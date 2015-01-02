@@ -10,7 +10,7 @@ angular.module('dotyApp')
 
   $timeout(function() {
     signinFac.checkSignin();
-  }, 500);
+  }, 250);
 
   $scope.views = [
     { title: 'Home', url: "/", icon: "ion-home" },

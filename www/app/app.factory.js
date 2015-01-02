@@ -39,19 +39,34 @@ angular.module("dotyApp")
     return deferred.promise;
   };
 
-  fac.getDayById = function(id) {
+  fac.getDayById = function(idArray) {
     var deferred = $q.defer();
 
-    $http({
-      method: 'GET',
-      url: "https://www.daysoftheyear.com/api/1.5/days/?ids=" + id
-    })
-    .success(function (data) {
-      deferred.resolve(data)
-    })
-    .error(function () {
-      deferred.reject('could not retrieve day-id data');
-    });
+    var url = "https://www.daysoftheyear.com/api/1.5/days?";
+
+    var idArrayLength = idArray.length;
+
+    if (idArrayLength) {
+      url = url + '&ids=' + idArray[0];
+      for(var i = 1; i < idArrayLength; i++) {
+        url = url + ',' + idArray[i];
+      };
+
+      console.log("grabbing [day-by-id]: " + url);
+
+      $http({
+        method: 'GET',
+        url: url
+      })
+      .success(function (data) {
+        deferred.resolve(data)
+      })
+      .error(function () {
+        deferred.reject('could not retrieve day-id data');
+      });
+    } else {
+      deferred.reject('no ids passed to getDayById!');
+    }
 
     return deferred.promise;
   };
@@ -69,22 +84,22 @@ angular.module("dotyApp")
       for(var i = 1; i < tagArrayLength; i++) {
         url = url + ',' + tagArray[i];
       };
-    } else {
-      console.log('no tags passed to getDayByTag!');
-    };
 
-    console.log('Grabbing [day-by-tag]: ' + url);
+      console.log('Grabbing [day-by-tag]: ' + url);
 
-    $http({
-      method: 'GET',
-      url: url
-    })
-    .success(function (data) {
-      deferred.resolve(data)
-    })
-    .error(function () {
-      deferred.reject('could not retrieve days by tag data');
-    });
+      $http({
+        method: 'GET',
+        url: url
+      })
+      .success(function (data) {
+        deferred.resolve(data)
+      })
+      .error(function () {
+        deferred.reject('could not retrieve days by tag data');
+      });
+    }  else {
+      deferred.reject('no tags passed to getDayByTag!');
+    }
 
     return deferred.promise;
   };
@@ -135,16 +150,29 @@ angular.module("dotyApp")
     var deferred = $q.defer();
 
     $.each(daysArray, function (index, _dayObj) {
-      _dayObj.title = _dayObj.title.replace("&#8217;","'");
-      _dayObj.title = _dayObj.title.replace("&#038;","&");
+      //      _dayObj.title = _dayObj.title.replace("&#8217;","'");
+      //      _dayObj.title = _dayObj.title.replace("&#038;","&");
+      $.each(_dayObj.tags, function (_tagIndex, _tagValue) {
+        _dayObj.tags[_tagIndex] = _tagValue.replace("&amp;","&");
+      });
+
+      $.each(_dayObj.dates, function (_dateIndex, _dateValue) {
+        _dayObj.dates[_dateIndex] = new Date(parseInt(_dateValue) * 1000);
+      });
+
+//      for (var d in $scope.days) {
+//        $scope.days[d].date = new Date(parseInt($scope.days[d].dates[0]) * 1000);
+//      }
+
       _dayObj.content = _dayObj.content
-      .replace(/\r\n/g,"<BR>")
       .replace(/<a>/g, "")
       .replace(/<\/?a[^>]*>/g, "")
       .replace(/<p>/g, "<h2 class='content-text'>")
       .replace(/<\/p>/gi, "</h2>");
+      //      .replace(/\r\n/g,"<BR>")
     });
 
+    console.log(daysArray);
     deferred.resolve(daysArray);
 
     return deferred.promise;

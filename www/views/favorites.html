@@ -7,14 +7,21 @@
     </ion-nav-buttons>
 
     <ion-nav-buttons side="right">
-      <a ui-sref="searchpage">
-        <button class="button button-icon ion-ios7-search-strong"></button>
-      </a>
+      <button ui-sref="searchpage" class="button button-icon ion-ios7-search-strong"></button>
     </ion-nav-buttons>
 
   </ion-nav-bar>
 
   <ion-content class="custom-content">
-    <h1>Favorites</h1>
+    <div class="list">
+
+      <a ng-repeat="day in days" class="item item-thumbnail-left" href="#/:{{day.id}}">
+        <img ng-src="{{day.image.thumbnail.url}}">
+        <h2>{{day.title}}</h2>
+        <p>{{day.date | date:'longDate'}}</p>
+      </a>
+
+    </div>
   </ion-content>
 </ion-view>
+

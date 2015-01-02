@@ -9,7 +9,7 @@ angular.module('categorypageModule')
     $scope.currentCategory.name = $rootScope.currentCategory.name;
   };
 
-  console.log($scope.currentCategory);
+//  console.log($scope.currentCategory);
 
   var tagArray = [pageID];
 

@@ -222,7 +222,13 @@ hr.content-line {
   color: #e0e0e0;
   background-color: #e0e0e0;
   width: 92%;
+  margin-top: 12px;
   margin-bottom: 14px;
+}
+
+.item-borderless {
+   border-top: none;
+   border-bottom: none;
 }
 
 /*----------EXPLORE---------*/

@@ -6,5 +6,6 @@ var app = angular.module("dotyApp", [
   "accountModule",
   "exploreModule",
   "categorypageModule",
-  "searchpageModule"
+  "searchpageModule",
+  "favoritesModule"
 ]);

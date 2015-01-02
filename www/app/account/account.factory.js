@@ -5,15 +5,15 @@ angular.module("accountModule")
   fac.signin = function(userEmail, userPassword) {
     var deferred = $q.defer();
     console.log("signing in email: " + userEmail + ' with pw: ' + userPassword);
-//    console.log('https://www.daysoftheyear.com/api/1.0/users/?login&email=' + userEmail + '&password=' + userPassword);
+    //    console.log('https://www.daysoftheyear.com/api/1.0/users/?login&email=' + userEmail + '&password=' + userPassword);
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.0/users/?login&email=' + userEmail + '&password=' + userPassword
+      url: 'https://www.daysoftheyear.com/api/1.5/users/?login&email=' + userEmail + '&password=' + userPassword
     }).
     success(function(data, status, headers) {
       console.log("login query went through", status, data)
-//      console.log({'a': headers()});
+      console.log({'a': headers()});
 
       if(data.status.code === 100) {
         $rootScope.userSession.signedIn = true;
@@ -57,7 +57,7 @@ angular.module("accountModule")
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.0/users/?register&user_email=' + signupFormData.email + '&password=' + signupFormData.pw
+      url: 'https://www.daysoftheyear.com/api/1.5/users/?register&user_email=' + signupFormData.email + '&password=' + signupFormData.pw
     }).
     success(function(data, status) {
       console.log("signup query went through", status, data)
@@ -98,17 +98,16 @@ angular.module("accountModule")
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.0/users/?get_user_data='+userEmail
-//      + '&throwaway=' + timeNonce
-//      ,
-//      withCredentials: true,
-//      headers: {
-//        'Cache-Control': 'no-cache'
-//      }
+      url: 'https://www.daysoftheyear.com/api/1.5/users/?get_user_data=' + userEmail + '&throwaway=' + timeNonce
+      //      ,
+      //      withCredentials: true,
+      //      headers: {
+      //        'Cache-Control': 'no-cache'
+      //      }
     }).
     success(function(data, status, headers) {
       console.log("user data query went through");
-//      console.log({'a': headers()});
+      //      console.log({'a': headers()});
       if(data.status.code === 100) {
 
         var logThis = {
@@ -119,17 +118,25 @@ angular.module("accountModule")
           dob: data.result.dob
         };
 
-        console.log("succesful user data query");
-//        + JSON.stringify(logThis) + " and " + JSON.stringify(data) + " and status of " + status);
+        if (data.result.bookmarks.hasOwnProperty("tags")) {
+          if (data.result.bookmarks.tags.length > 0) {
+            logThis.pc_tags = data.result.bookmarks.tags;
+          } else {
+            logThis.pc_tags = [];
+          }
+        }
 
-        deferred.resolve({
-          firstname: data.result.name_first,
-          lastname: data.result.name_last,
-          id: data.result.id,
-          email: data.result.email,
-          dob: data.result.dob
-          // add permissions
-        });
+        if (data.result.bookmarks.hasOwnProperty("days")) {
+          if (data.result.bookmarks.days.length > 0) {
+            logThis.pc_days = data.result.bookmarks.days;
+          } else {
+            logThis.pc_days = [];
+          }
+        }
+
+        console.log(logThis);
+        console.log("succesful user data query");
+        deferred.resolve(logThis);
       } else {
         fac.removeCredentials();
         deferred.reject("user data query error, login credentials wrong?");
@@ -145,7 +152,7 @@ angular.module("accountModule")
   fac.logout = function() {
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.0/users/?logout'
+      url: 'https://www.daysoftheyear.com/api/1.5/users/?logout'
     }).then(function() {
       fac.userRemoveData();
       fac.removeCredentials();
@@ -161,7 +168,7 @@ angular.module("accountModule")
       logThis = logThis + JSON.stringify(profileData);
       console.log(logThis);
 
-      var updateUrl = 'https://www.daysoftheyear.com/api/1.0/users/?update&user_id=' + $rootScope.userData.id;
+      var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?update&user_id=' + $rootScope.userData.id;
 
       if (profileData.dob) {
         //updateUrl = updateUrl + '&dob=' + profileData.dob; figure out date format
@@ -205,7 +212,9 @@ angular.module("accountModule")
       lastname: "",
       dob: 0,
       email: "",
-      id: 0
+      id: 0,
+      pc_days: [],
+      pc_tags: []
     };
   };
 
