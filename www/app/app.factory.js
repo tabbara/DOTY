@@ -152,17 +152,43 @@ angular.module("dotyApp")
     $.each(daysArray, function (index, _dayObj) {
       //      _dayObj.title = _dayObj.title.replace("&#8217;","'");
       //      _dayObj.title = _dayObj.title.replace("&#038;","&");
+      _dayObj.tag = {};
       $.each(_dayObj.tags, function (_tagIndex, _tagValue) {
-        _dayObj.tags[_tagIndex] = _tagValue.replace("&amp;","&");
+        _dayObj.tags[_tagIndex].name = _dayObj.tags[_tagIndex].name
+        .replace("&amp;","&");
+
+        if (_dayObj.tags[_tagIndex].level === 0) {
+          _dayObj.tag = {
+            name: _dayObj.tags[_tagIndex].name,
+            slug: _dayObj.tags[_tagIndex].slug
+          };
+        }
       });
+
+      var currentTime = new Date().getTime() / 1000;
+      var timeDiff = 0;
+      var timeIndex = -1;
 
       $.each(_dayObj.dates, function (_dateIndex, _dateValue) {
-        _dayObj.dates[_dateIndex] = new Date(parseInt(_dateValue) * 1000);
+        var dateDiff = Math.abs(parseInt(_dayObj.dates[_dateIndex]) - currentTime);
+        if (dateDiff < timeDiff || timeIndex === -1) {
+          timeDiff = dateDiff;
+          timeIndex = _dateIndex;
+        }
       });
 
-//      for (var d in $scope.days) {
-//        $scope.days[d].date = new Date(parseInt($scope.days[d].dates[0]) * 1000);
-//      }
+      _dayObj.date = new Date(parseInt(_dayObj.dates[timeIndex]) * 1000);
+
+      //      console.log('a', _dayObj.tags);
+      //      console.log('tag', _dayObj.tag);
+
+//      $.each(_dayObj.dates, function (_dateIndex, _dateValue) {
+//        _dayObj.dates[_dateIndex] = new Date(parseInt(_dateValue) * 1000);
+//      });
+
+      //      for (var d in $scope.days) {
+      //        $scope.days[d].date = new Date(parseInt($scope.days[d].dates[0]) * 1000);
+      //      }
 
       _dayObj.content = _dayObj.content
       .replace(/<a>/g, "")
@@ -172,6 +198,7 @@ angular.module("dotyApp")
       //      .replace(/\r\n/g,"<BR>")
     });
 
+    console.log("cleaned up these days");
     console.log(daysArray);
     deferred.resolve(daysArray);
 

@@ -40,11 +40,11 @@ ng-click="setCategoryName('{{value}}')">
     <!--    <div class="card">-->
     <div class="item-borderless">
       <!--                  item-text-wrap">-->
-      <i class="content-text"> {{dayObj.dates[0] | date:'mediumDate'}}</i>
-      <a href="#/explore/:government-legal"
+      <i class="content-text">{{dayObj.date | date:'mediumDate'}}</i>
+      <a href="#/explore/:{{dayObj.tag.slug}}"
          class="badge badge-positive"
-         ng-click="setCategoryName('{{dayObj.tags['government-legal']}}')">
-        {{dayObj.tags["government-legal"]}}
+         ng-click="setCategoryName(dayObj.tag.name)" ng-show="dayObj.tag.name">
+        {{dayObj.tag.name}}
       </a>
     </div>
     <!--    </div>    -->

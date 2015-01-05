@@ -9,7 +9,6 @@ angular.module('daypageModule')
       queryAPI.cleanDay(data.result)
       .then(function (daysObject) {
         $scope.dayObj = daysObject[0];
-        a = $scope.dayObj;
       });
     } else {
       console.log('Error retrieving DayByID: ' + data.status.code);
@@ -23,6 +22,7 @@ angular.module('daypageModule')
   };
 
   $scope.setCategoryName = function (categoryname) {
+    console.log(categoryname);
     console.log("setting cat name to: " + categoryname);
     $rootScope.currentCategory = {
       'name': categoryname
