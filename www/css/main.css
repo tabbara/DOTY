@@ -187,11 +187,38 @@ div.card-wrapper {
 }
 
 /* Day Card Title*/
-.card-title h2 {
-  padding: 10px;
+/*
+.card-title {
+  padding: 5px;
   margin: 0px;
   color: #e9f1f3;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+}
+*/
+
+.card-title h2 {
+  padding: 6px 10px 0px 10px;
+  margin: 0px;
+  color: #e9f1f3;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+}
+
+.card-title h4 {
+  padding: 0px 10px 6px 10px;
+  margin: 0px;
+  color: #e9f1f3;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+}
+
+.badge-overlay {
+    position:absolute;
+    z-index:1;
+/*
+    right:5px;
+    top:5px;
+*/
+    right:2%;
+    top:3%;
 }
 
 /*----------DAYPAGE---------*/

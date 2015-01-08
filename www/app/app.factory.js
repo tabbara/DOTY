@@ -1,5 +1,5 @@
 angular.module("dotyApp")
-.factory('queryAPI', function($http, $timeout, $q) {
+.factory('queryAPI', function($http, $timeout, $q, $rootScope) {
   var fac = {};
 
   fac.logout = function() {
@@ -19,7 +19,7 @@ angular.module("dotyApp")
 
     var todayDate = new Date();
     var today = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()) / 1000;
-    var todayB = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()+3) / 1000;
+    var todayB = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()) / 1000;
 
     console.log("Grabbing [day-by-date]: https://www.daysoftheyear.com/api/1.5/days/?date_start="
                 + today +"&date_end=" + today + "&limit=100");
@@ -179,23 +179,23 @@ angular.module("dotyApp")
 
       _dayObj.date = new Date(parseInt(_dayObj.dates[timeIndex]) * 1000);
 
-      //      console.log('a', _dayObj.tags);
-      //      console.log('tag', _dayObj.tag);
+      if ($rootScope.userData.pc_days.indexOf(_dayObj.id.toString()) !== -1) {
+        _dayObj.bookmarked = true;
+      } else {_dayObj.bookmarked = false;}
 
-//      $.each(_dayObj.dates, function (_dateIndex, _dateValue) {
-//        _dayObj.dates[_dateIndex] = new Date(parseInt(_dateValue) * 1000);
-//      });
-
-      //      for (var d in $scope.days) {
-      //        $scope.days[d].date = new Date(parseInt($scope.days[d].dates[0]) * 1000);
-      //      }
-
+      _dayObj.content = "<div class='content-text'>" + _dayObj.content + "</div>"
       _dayObj.content = _dayObj.content
-      .replace(/<a>/g, "")
-      .replace(/<\/?a[^>]*>/g, "")
-      .replace(/<p>/g, "<h2 class='content-text'>")
-      .replace(/<\/p>/gi, "</h2>");
-      //      .replace(/\r\n/g,"<BR>")
+      .replace(/<ul>/g, "<ul class='list list-inset'>")
+      .replace(/<li>/g, "<li class='item'>")
+      .replace(/<h3>/g, "<h4>")
+      .replace(/<\/h3>/gi, "</h4>")
+      .replace(/<h2>/g, "<h3>")
+      .replace(/<\/h2>/gi, "</h3>");
+//      .replace(/<a>/g, "")
+//      .replace(/<\/?a[^>]*>/g, "")
+//      .replace(/<p>/g, "<h2 class='content-text'>")
+//      .replace(/<\/p>/gi, "</h2>");
+//      console.log(_dayObj.content);
     });
 
     console.log("cleaned up these days");

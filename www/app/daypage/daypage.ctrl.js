@@ -1,5 +1,5 @@
 angular.module('daypageModule')
-.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $ionicNavBarDelegate, $rootScope) {
+.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $ionicNavBarDelegate, $rootScope, signinFac) {
 
   var pageID = $stateParams.dayID.replace(/:/g,"");
 
@@ -17,7 +17,7 @@ angular.module('daypageModule')
     console.log(status);
   });
 
-  $scope.goBack = function() {
+  $scope.goBack = function () {
     $ionicNavBarDelegate.back();
   };
 
@@ -29,4 +29,42 @@ angular.module('daypageModule')
     };
   };
 
+  $scope.bookmarkDay = function () {
+    if ($scope.dayObj) {
+      var profileData = {
+        'type': 'days'
+      };
+
+      if ($scope.dayObj.bookmarked) {
+        profileData.remove = [$scope.dayObj.id];
+        if (typeof $rootScope.userData.pc_days !== 'undefined') {
+          while ($rootScope.userData.pc_days.indexOf($scope.dayObj.id.toString()) !== -1) {
+            $rootScope.userData.pc_days.splice($rootScope.userData.pc_days.indexOf($scope.dayObj.id.toString()),1)
+          };
+          console.log('days bookmarks: ', $rootScope.userData.pc_days);
+        }
+      } else {
+        profileData.add = [$scope.dayObj.id];
+        if (typeof $rootScope.userData.pc_days !== 'undefined') {
+          if($rootScope.userData.pc_days.indexOf($scope.dayObj.id.toString()) === -1) {
+            $rootScope.userData.pc_days.push($scope.dayObj.id.toString());
+            console.log('days bookmarks: ', $rootScope.userData.pc_days);
+          }
+        }
+      }
+
+      $scope.dayObj.bookmarked = !$scope.dayObj.bookmarked;
+
+      signinFac.updateBookmarks(profileData)
+      .then(function (status) {
+        console.log(status);
+      }, function (status) {
+        console.log(status);
+        //        $scope.dayObj.bookmarked = !$scope.dayObj.bookmarked;
+      });
+    }
+    else {
+      console.log("Can't bookmark, no day loaded yet");
+    }
+  };
 });

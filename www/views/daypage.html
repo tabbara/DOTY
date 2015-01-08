@@ -13,7 +13,11 @@
 -->
 
     <ion-nav-buttons side="right">
-      <button class="button button-icon ion-share"></button>
+      <button class="button button-icon" ng-click="bookmarkDay()"
+              ng-class="dayObj.bookmarked ? 'ion-ios7-heart' : 'ion-ios7-heart-outline'">
+      </button>
+
+      <button class="button button-icon ion-more"></button>
     </ion-nav-buttons>
 
   </ion-nav-bar>

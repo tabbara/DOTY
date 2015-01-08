@@ -115,8 +115,13 @@ angular.module("accountModule")
           lastname: data.result.name_last,
           id: data.result.id,
           email: data.result.email,
-          dob: data.result.dob
+          dob: data.result.dob,
+          permissions: data.result.permissions
         };
+
+        if (logThis.permissions.hasOwnProperty('email_newsletter')) {
+          logThis.permissions.email_newsletter = logThis.permissions.email_newsletter == 'true';
+        }
 
         if (data.result.bookmarks.hasOwnProperty("tags")) {
           if (data.result.bookmarks.tags.length > 0) {
@@ -206,6 +211,49 @@ angular.module("accountModule")
     return deferred.promise;
   };
 
+  fac.updateBookmarks = function (bookmarkData) {
+    var deferred = $q.defer();
+
+    if (bookmarkData) {
+      var logThis = "Updating bookmarks of " + $rootScope.userData.email + " with data: ";
+      logThis = logThis + JSON.stringify(bookmarkData);
+      console.log(logThis);
+
+      var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?update&user_id=' + $rootScope.userData.id;
+
+      var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?bookmarks&user_id=' + $rootScope.userData.id +'&type=' + bookmarkData.type;
+
+      if (bookmarkData.add) {
+        updateUrl = updateUrl + '&add=' + bookmarkData.add.valueOf();
+      }
+
+      if (bookmarkData.remove) {
+        updateUrl = updateUrl + '&remove=' + bookmarkData.remove.valueOf();
+      }
+
+      $http({
+        method: 'GET',
+        url: updateUrl,
+        withCredentials: true
+      }).
+      success(function(data, status) {
+        console.log("bookmarks update query went through", status, data);
+        if(data.status.code === 100) {
+          deferred.resolve("succesful bookmarks update");
+        } else {
+          deferred.reject("profile bookmarks error, login credentials wrong?");
+        }
+      }).
+      error(function(data, status) {
+        deferred.reject("bookmarks update query failed");
+      });
+    } else {
+      deferred.reject("no bookmark data passed to update function");
+    };
+
+    return deferred.promise;
+  };
+
   fac.userRemoveData = function () {
     $rootScope.userData = {
       firstname: "",
@@ -214,7 +262,8 @@ angular.module("accountModule")
       email: "",
       id: 0,
       pc_days: [],
-      pc_tags: []
+      pc_tags: [],
+      permissions: {}
     };
   };
 

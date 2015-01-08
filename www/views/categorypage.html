@@ -20,6 +20,7 @@
       <a href="#/:{{day.id}}">
         <div class="item-image">
           <img ng-src="{{day.image.large.url}}">
+          <div class="badge badge-positive badge-overlay">{{day.tag.name}}</div>
         </div>
       </a>
 
@@ -28,9 +29,22 @@
           <h2 class="stable">
             {{day.title}}
           </h2>
+          <h4 class="stable">{{day.date | date:'mediumDate'}}</h4>
         </a>
       </div>
     </div>
 
   </ion-content>
 </ion-view>
+
+
+<!--
+      <div class="card-title">
+        <a href="#/:{{day.id}}">
+          <h2 class="stable">
+            {{day.title}}
+          </h2>
+          <h4 class="stable">{{day.date | date:'mediumDate'}}</h4>
+        </a>
+      </div>
+    </div>-->

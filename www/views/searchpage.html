@@ -40,14 +40,21 @@ Go
 
     <!--    <h4>a</h4>-->
 
-    <ul class="list">
-      <li class="item-clear" ng-show="!madeSearch.found && madeSearch.finished">
+    <ul class="list" ng-show="!madeSearch.found && madeSearch.finished">
+      <li class="item-clear">
         <h4 class="text-center padding-top">
           Your search returned zero results
         </h4>
       </li>
     </ul>
 
+    <ul class="list" ng-show="!madeSearch.started">
+      <li class="item-clear" >
+        <h4 class="text-center padding-top">
+          Enter a search query in the box above
+        </h4>
+      </li>
+    </ul>
 
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">

@@ -22,13 +22,15 @@ angular.module('searchpageModule')
 
   $scope.madeSearch = {
     'found': false,
-    'finished': false
+    'finished': false,
+    'started': false
   };
 
   $scope.search = function () {
     if($scope.data.searchQuery !== '') {
       $scope.madeSearch.found = false;
       $scope.madeSearch.finished = false;
+      $scope.madeSearch.started = true;
       //FORM SUBMIT SEARCH
       queryAPI.getDayBySearch($scope.data.searchQuery)
       .then(function (data) {
