@@ -150,8 +150,10 @@ angular.module("dotyApp")
     var deferred = $q.defer();
 
     $.each(daysArray, function (index, _dayObj) {
-      //      _dayObj.title = _dayObj.title.replace("&#8217;","'");
-      //      _dayObj.title = _dayObj.title.replace("&#038;","&");
+      _dayObj.title = _dayObj.title
+      .replace("&#8217;","'")
+      .replace("&#038;","&");
+
       _dayObj.tag = {};
       $.each(_dayObj.tags, function (_tagIndex, _tagValue) {
         _dayObj.tags[_tagIndex].name = _dayObj.tags[_tagIndex].name
@@ -191,11 +193,11 @@ angular.module("dotyApp")
       .replace(/<\/h3>/gi, "</h4>")
       .replace(/<h2>/g, "<h3>")
       .replace(/<\/h2>/gi, "</h3>");
-//      .replace(/<a>/g, "")
-//      .replace(/<\/?a[^>]*>/g, "")
-//      .replace(/<p>/g, "<h2 class='content-text'>")
-//      .replace(/<\/p>/gi, "</h2>");
-//      console.log(_dayObj.content);
+      //      .replace(/<a>/g, "")
+      //      .replace(/<\/?a[^>]*>/g, "")
+      //      .replace(/<p>/g, "<h2 class='content-text'>")
+      //      .replace(/<\/p>/gi, "</h2>");
+      //      console.log(_dayObj.content);
     });
 
     console.log("cleaned up these days");
