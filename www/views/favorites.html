@@ -15,10 +15,11 @@
   <ion-content class="custom-content">
     <div class="list">
 
-      <a ng-repeat="day in days" class="item item-thumbnail-left" href="#/:{{day.id}}">
-        <img ng-src="{{day.image.thumbnail.url}}">
+      <a ng-repeat="day in days" class="item item-thumbnail-left item-favorites" href="#/:{{day.id}}">
+        <img class="image-favorites" ng-src="{{day.image.thumbnail.url}}">
         <h2>{{day.title}}</h2>
         <p>{{day.date | date:'longDate'}}</p>
+<!--        <i class="badge badge-positive badge-overlay-favorites">Blablablabla</i>         -->
       </a>
 
     </div>

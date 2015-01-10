@@ -213,13 +213,29 @@ div.card-wrapper {
 .badge-overlay {
     position:absolute;
     z-index:1;
-/*
-    right:5px;
-    top:5px;
-*/
     right:2%;
     top:3%;
 }
+
+/*
+.badge-overlay-favorites {
+    position: relative !important;
+    z-index:1;
+    right:2% !important;
+    bottom:3% !important;
+}
+*/
+
+.item-favorites {
+  min-height: 0 !important;
+/*  padding-left: 146px !important;*/
+}
+
+/*
+.image-favorites {
+  min-width: 120px !important;
+}
+*/
 
 /*----------DAYPAGE---------*/
 
