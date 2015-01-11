@@ -7,7 +7,8 @@ angular.module('calendarModule')
   $scope.calendar = {
     month: currentDate.getMonth(),
     year: currentDate.getFullYear(),
-    monthName: monthNames[currentDate.getMonth()]
+    monthName: monthNames[currentDate.getMonth()],
+    date: new Date(currentDate.getFullYear(), currentDate.getMonth())
   };
 
   console.log($scope.calendar);
@@ -19,6 +20,9 @@ angular.module('calendarModule')
       $scope.calendar.month = 0;
     }
     $scope.calendar.monthName = monthNames[$scope.calendar.month];
+    $scope.calendar.date = new Date($scope.calendar.year, $scope.calendar.month);
+
+    $scope.buildCalendar();
   };
 
   $scope.previousMonth = function () {
@@ -28,46 +32,60 @@ angular.module('calendarModule')
       $scope.calendar.month = 11;
     }
     $scope.calendar.monthName = monthNames[$scope.calendar.month];
+    $scope.calendar.date = new Date($scope.calendar.year, $scope.calendar.month);
+
+    $scope.buildCalendar();
   };
+
+  $scope.buildCalendar = function () {
+
+    var dayStart = $scope.calendar.date.getDay(),
+        dayIterator = 0,
+        monthLength = new Date($scope.calendar.year, $scope.calendar.month+1,0).getDate(),
+        html = '';
+    //    dayStart = 0;
+
+
+    for (var w_row = 0; dayIterator-dayStart < monthLength; w_row++) {
+
+      html = html + "<div class='row calendar-row'>"
+
+      for (var w_col = 0; w_col < 7; w_col++) {
+
+        var logThis = 'R' + w_row +': '
+
+        if (dayIterator < dayStart) {
+          html = html + "<div class='col calendar-col'></div>"
+        } else {
+          if (dayIterator-dayStart > monthLength-1) {
+            html = html + "<div class='col calendar-col'></div>"
+          } else {
+            html = html + "<div class='col calendar-col'>" + (dayIterator-dayStart+1) + "</div>"
+          }
+        }
+
+        ++dayIterator;
+      }
+
+      html = html + "</div>"
+    }
+
+    $scope.calendar.html = html;
+  }
+
+  $scope.buildCalendar();
 
 });
 
 
-//  $scope.page = {};
-//  $scope.page.timestamp = parseInt($stateParams.dateID.replace(/:/g,""));
-//  $scope.page.date = new Date(parseInt($scope.page.timestamp) * 1000);
-//  $scope.page.previous = { timestamp: $scope.page.timestamp - 86400 };
-//  $scope.page.next = { timestamp: $scope.page.timestamp + 86400 }
-//
-//  var tempDate = new Date();
-//  var dateToday = Date.UTC(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate()) / 1000;
-//
-//  var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-//
-//  $scope.page.dateName = $scope.page.date.getDate() + " " + monthNames[$scope.page.date.getMonth()] + " " + $scope.page.date.getFullYear();
-//  console.log('page date is: ' + $scope.page.dateName);
-//
-//  if (dateToday.valueOf() === $scope.page.timestamp) { $scope.page.dateName = "Today"; }
-//  if (dateToday.valueOf() === $scope.page.timestamp + 86400) { $scope.page.dateName = "Yesterday" }
-//  if (dateToday.valueOf() === $scope.page.timestamp - 86400) { $scope.page.dateName = "Tomorrow" }
-//
-//  console.log(dateToday);
-//  console.log(dateToday.valueOf()+86400);
-//  console.log(dateToday.valueOf()-86400);
-//
-//  console.log($scope.page);
-//
-//  queryAPI.getDayByDate($scope.page.timestamp)
-//  .then(function(data) {
-//    if (data.status.code === 100) {
-//      queryAPI.cleanDay(data.result)
-//      .then(function (daysObject) {
-//        $scope.days = daysObject;
-//        queryAPI.setDayColors();
-//      });
-//    } else {
-//      console.log(data.status.code);
-//    }
-//  }, function (status) {
-//    console.log(status);
-//  });
+//<div class="calendar-box">
+//  <div class='row calendar-row'>
+//    <div class='col calendar-col'>.col</div>
+//    <div class='col calendar-col'>.col</div>
+//    <div class='col calendar-col'>.col</div>
+//    <div class='col calendar-col'>.col</div>
+//    <div class='col calendar-col'>.col</div>
+//    <div class='col calendar-col'>.col</div>
+//    <div class='col calendar-col'>.col</div>
+//  </div>
+//</div>

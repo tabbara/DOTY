@@ -27,53 +27,19 @@
       <div class="calendar-container">
 
         <div class="row weekday-row">
+          <div class="col weekday-col">sun</div>
           <div class="col weekday-col">mon</div>
           <div class="col weekday-col">tue</div>
           <div class="col weekday-col">wed</div>
           <div class="col weekday-col">thu</div>
           <div class="col weekday-col">fri</div>
           <div class="col weekday-col">sat</div>
-          <div class="col weekday-col">sun</div>
         </div>
 
         <div class="calendar-box">
-          <div class="row calendar-row">
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-          </div>
-          <div class="row calendar-row">
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col"></div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-          </div>
-          <div class="row calendar-row">
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col"></div>
-          </div>
-          <div class="row calendar-row">
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-            <div class="col calendar-col">.col</div>
-          </div>
+          <div ng-bind-html="calendar.html"></div>
         </div>
+
       </div>
     </div>
 
