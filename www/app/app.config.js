@@ -10,7 +10,8 @@ angular.module("dotyApp")
   })
   .state('calendar', {
     url: "/calendar",
-    templateUrl: "views/calendar.html"
+    templateUrl: "views/calendar.html",
+    controller: "calendarCtrl"
   })
   .state('explore', {
     url: "/explore",
@@ -44,5 +45,10 @@ angular.module("dotyApp")
     url: "/explore/:categoryID",
     templateUrl: "views/categorypage.html",
     controller: 'categorypageCtrl'
+  })
+  .state('datepage', {
+    url: "/date/:dateID",
+    templateUrl: "views/datepage.html",
+    controller: 'datepageCtrl'
   })
 });

@@ -1,10 +1,10 @@
 <ion-view title="Calendar">
 
-    <ion-nav-bar class="custom-bar">
+  <ion-nav-bar class="custom-bar">
 
-        <ion-nav-buttons side="left">
-            <button class="button button-icon ion-navicon" menu-toggle="left"></button>
-        </ion-nav-buttons>
+    <ion-nav-buttons side="left">
+      <button class="button button-icon ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
 
     <ion-nav-buttons side="right">
       <a ui-sref="searchpage">
@@ -12,9 +12,70 @@
       </a>
     </ion-nav-buttons>
 
-    </ion-nav-bar>
+  </ion-nav-bar>
 
   <ion-content class="custom-content">
-        <h1>Calendar</h1>
-    </ion-content>
+
+    <div class="calendar-wrap">
+      <div class="calendar-header">
+        <div class="row weekday-row">
+          <div class="col calendar-header-col-left"><i ng-click="previousMonth();" class="icon ion-arrow-left-b"></i></div>
+          <div class="col calendar-header-col-center col-50">{{calendar.monthName | uppercase}}<br><i class="dark">{{calendar.year}}</i></div>
+          <div class="col calendar-header-col-right"><i ng-click="nextMonth();" class="icon ion-arrow-right-b"></i></div>
+        </div>
+      </div>
+      <div class="calendar-container">
+
+        <div class="row weekday-row">
+          <div class="col weekday-col">mon</div>
+          <div class="col weekday-col">tue</div>
+          <div class="col weekday-col">wed</div>
+          <div class="col weekday-col">thu</div>
+          <div class="col weekday-col">fri</div>
+          <div class="col weekday-col">sat</div>
+          <div class="col weekday-col">sun</div>
+        </div>
+
+        <div class="calendar-box">
+          <div class="row calendar-row">
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+          </div>
+          <div class="row calendar-row">
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col"></div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+          </div>
+          <div class="row calendar-row">
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col"></div>
+          </div>
+          <div class="row calendar-row">
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+            <div class="col calendar-col">.col</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
 </ion-view>

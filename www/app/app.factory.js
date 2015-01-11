@@ -39,6 +39,30 @@ angular.module("dotyApp")
     return deferred.promise;
   };
 
+  fac.getDayByDate = function(startDate, endDate) {
+
+    var deferred = $q.defer();
+
+    endDate = endDate || startDate;
+
+    console.log("Grabbing [day-by-date]: https://www.daysoftheyear.com/api/1.5/days/?date_start="
+                + startDate +"&date_end=" + endDate + "&limit=100");
+
+    $http({
+      method: 'GET',
+      url: "https://www.daysoftheyear.com/api/1.5/days/?date_start="
+      + startDate +"&date_end=" + endDate + "&limit=100"
+    })
+    .success(function(data) {
+      deferred.resolve(data);
+    })
+    .error(function () {
+      deferred.reject('could not retrieve days (getDayToday)');
+    });
+
+    return deferred.promise;
+  };
+
   fac.getDayById = function(idArray) {
     var deferred = $q.defer();
 
