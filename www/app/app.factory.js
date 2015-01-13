@@ -128,11 +128,12 @@ angular.module("dotyApp")
     return deferred.promise;
   };
 
-  fac.getDayBySearch = function (query) {
+  fac.getDayBySearch = function (query, offset) {
     var deferred = $q.defer();
 
     var limit = 10; // Temporary. This function should grab days in the near future. Need to figure out if the API returns date sorted content.
-    var url = "https://www.daysoftheyear.com/api/1.5/days/?limit=" + limit + '&s=' + query;
+    var offset = offset || 0;
+    var url = "https://www.daysoftheyear.com/api/1.5/days/?limit=" + limit + '&s=' + query + '&offset=' + offset;
 
     console.log('Grabbing [day-by-search]: ' + url);
 
@@ -176,7 +177,8 @@ angular.module("dotyApp")
     $.each(daysArray, function (index, _dayObj) {
       _dayObj.title = _dayObj.title
       .replace("&#8217;","'")
-      .replace("&#038;","&");
+      .replace("&#038;","&")
+      .replace("&#x00e9;","é");
 
       _dayObj.tag = {};
       $.each(_dayObj.tags, function (_tagIndex, _tagValue) {

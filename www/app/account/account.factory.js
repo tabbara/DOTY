@@ -115,7 +115,7 @@ angular.module("accountModule")
           lastname: data.result.name_last,
           id: data.result.id,
           email: data.result.email,
-          dob: data.result.dob,
+          dob: data.result.dob, // still a string
           permissions: data.result.permissions
         };
 
@@ -258,7 +258,7 @@ angular.module("accountModule")
     $rootScope.userData = {
       firstname: "",
       lastname: "",
-      dob: 0,
+      dob: null,
       email: "",
       id: 0,
       pc_days: [],

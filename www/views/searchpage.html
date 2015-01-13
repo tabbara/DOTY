@@ -48,6 +48,14 @@ Go
       </li>
     </ul>
 
+    <ul class="list no-padding no-margin" ng-show="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
+      <li class="item-clear">
+        <h4 class="text-center padding-top">
+          Your search returned {{madeSearch.results}} results
+        </h4>
+      </li>
+    </ul>
+
     <ul class="list" ng-show="!madeSearch.started">
       <li class="item-clear" >
         <h4 class="text-center padding-top">
@@ -69,6 +77,12 @@ Go
             {{day.title}}
           </h2>
         </a>
+      </div>
+    </div>
+
+    <div class="row no-top-padding" ng-show="madeSearch.showing < madeSearch.results">
+      <div class="col no-top-padding">
+        <button ng-click="showMore();" class="no-top-margin button button-block button-positive">Show More</button>
       </div>
     </div>
 
