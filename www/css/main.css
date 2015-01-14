@@ -31,6 +31,17 @@ body {
   background: #fbf1e8;
 }
 
+/*SIDEMENU*/
+/*
+.sidemenu {
+  border-left: 8px solid #444 !important;
+}
+*/
+
+.sidemenu.active {
+  background: #CCDDFA !important;
+  border-left: 8px solid #4a87ee !important;
+}
 
 #days-container ul {
   list-style: none;
