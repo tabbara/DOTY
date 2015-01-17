@@ -165,7 +165,9 @@ angular.module("accountModule")
     }).then(function() {
       fac.userRemoveData();
       fac.removeCredentials();
-      fac.signinModalOpen();
+      $rootScope.userSession.signedIn = false;
+      $state.go('/');
+//      fac.signinModalOpen();
     });
   };
 

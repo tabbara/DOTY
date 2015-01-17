@@ -3,6 +3,12 @@ angular.module("accountModule")
                                            $scope,
                                            signinFac) {
 
+  if (!$scope.signupData) {
+    $scope.signupData = {
+      signupNewsletter: true
+    }
+  }
+
   $scope.signin = function () { //FORM SUBMIT SIGNIN
     var signinFormData = {
       email: $scope.signinData.signinEmail,
