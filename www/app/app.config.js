@@ -5,6 +5,11 @@ angular.module("dotyApp")
   $stateProvider
   .state('/', {
     url: "/",
+    templateUrl: "views/login.html",
+    controller: "loginCtrl"
+  })
+  .state('home', {
+    url: "/home",
     templateUrl: "views/home.html",
     controller: "homeCtrl"
   })

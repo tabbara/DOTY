@@ -1,19 +1,23 @@
 angular.module("accountModule")
-.factory('signinFac', function($rootScope, $q, $http, $ionicModal, $timeout, $ionicActionSheet) {
+.factory('signinFac', function($rootScope, $q, $http, $state, $ionicModal, $timeout, $ionicActionSheet) {
   var fac = {};
+
+  fac.showIntroductionBroadcast = function (show) {
+    $rootScope.$broadcast('showIntroductionHandle', show);
+  };
 
   fac.signin = function(userEmail, userPassword) {
     var deferred = $q.defer();
     console.log("signing in email: " + userEmail + ' with pw: ' + userPassword);
-    //    console.log('https://www.daysoftheyear.com/api/1.0/users/?login&email=' + userEmail + '&password=' + userPassword);
+    var timeNonce = new Date().getTime();
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.5/users/?login&email=' + userEmail + '&password=' + userPassword
+      url: 'https://www.daysoftheyear.com/api/1.5/users/?login&email=' + userEmail + '&password=' + userPassword + '&throwaway=' + timeNonce
     }).
     success(function(data, status, headers) {
       console.log("login query went through", status, data)
-      console.log({'a': headers()});
+//      console.log({'a': headers()});
 
       if(data.status.code === 100) {
         $rootScope.userSession.signedIn = true;
@@ -21,8 +25,8 @@ angular.module("accountModule")
 
         fac.getUserData(userEmail)
         .then(function(userData) {
-          deferred.resolve("succesful login & data retrieval");
           $rootScope.userData = userData;
+          deferred.resolve("succesful login & data retrieval");
 
           //          var loginSuccessSheet = $ionicActionSheet.show({
           //            titleText: 'Hi ' + userData.firstname +"! You're now logged in",
@@ -281,9 +285,10 @@ angular.module("accountModule")
   };
 
   fac.checkSignin = function() {
+    var deferred = $q.defer();
+
     if($rootScope.userSession.signedIn) {
-      console.log('check signin: already logged in!');
-      fac.signinModalClose();
+      deferred.resolve('check signin: already logged in!');
     } else {
       console.log('check signin: not logged in!');
       var getStorage = localStorage["userData"];
@@ -296,18 +301,17 @@ angular.module("accountModule")
 
         fac.signin(userStored, pwStored)
         .then(function(status) {
-          console.log(status);
-          fac.signinModalClose();
+          deferred.resolve(status);
         }, function(status) {
-          console.log(status);
-          fac.signinModalOpen();
+          deferred.reject(status);
         });
 
       } else {
-        console.log("check local credentials: no credentials found, show login form");
-        fac.signinModalOpen();
+        deferred.reject("check local credentials: no credentials found, show login form");
       }
     }
+
+    return deferred.promise;
   }
 
   $ionicModal.fromTemplateUrl('modals/signinModal.html', {

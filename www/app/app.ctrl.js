@@ -1,5 +1,5 @@
 angular.module('dotyApp')
-.controller('DaysCtrl', function($rootScope, $scope, $timeout, signinFac) {
+.controller('DaysCtrl', function($rootScope, $scope, signinFac) {
 //, $http, $stateParams, $location, $ionicPopup, $timeout
 
   signinFac.userRemoveData(); // not removal, just an init of a clean data object
@@ -8,12 +8,8 @@ angular.module('dotyApp')
     signedIn: false
   };
 
-  $timeout(function() {
-    signinFac.checkSignin();
-  }, 250);
-
   $scope.views = [
-    { title: 'Home', url: "/", icon: "ion-home" },
+    { title: 'Home', url: "home", icon: "ion-home" },
     { title: 'Calendar', url: "calendar", icon: "ion-ios7-calendar-outline" },
     { title: 'Explore', url: "explore", icon: "ion-earth" },
     { title: 'Favorites', url: "favorites", icon: "ion-ios7-heart" },

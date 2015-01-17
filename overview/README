@@ -1,5 +1,7 @@
 TO-DO
 
+http://www.betsmartmedia.com/what-i-learned-building-an-app-with-ionic-framework
+
 PERFORMANCE
   6.1 Large Objects and Server Calls.
   So what does all of this teach us? The first is that we should think through our data model and attempt to limit the complexity of our objects. 

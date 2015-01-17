@@ -1,5 +1,8 @@
 angular.module('homeModule')
-.controller('homeCtrl', function ($scope, queryAPI) {
+.controller('homeCtrl', function ($scope, queryAPI, $ionicSideMenuDelegate) {
+
+  $ionicSideMenuDelegate.canDragContent(true);
+
   queryAPI.getDayToday()
   .then(function(data) {
     if (data.status.code === 100) {

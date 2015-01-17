@@ -1,0 +1,75 @@
+<ion-view title="Intro" hide-nav-bar="!showIntroduction">
+
+  <ion-nav-bar class="custom-bar">
+    <ion-nav-buttons side="left">
+      <button class="button button-positive button-clear no-animation"
+              ng-click="startApp()" ng-show="!slideIndex">
+        Skip
+      </button>
+      <button class="button button-positive button-clear no-animation"
+              ng-click="previous()" ng-show="slideIndex > 0">
+        Previous
+      </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+      <button class="button button-positive button-clear no-animation"
+              ng-click="next()" ng-show="slideIndex != 2">
+        Next
+      </button>
+      <!--
+<button class="button button-positive button-clear no-animation"
+ng-click="startApp()" ng-show="slideIndex == 2">
+Done
+</button>
+-->
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="custom-content introduction">
+
+
+    <ion-slide-box on-slide-changed="slideChanged(index)" ng-if="showIntroduction">
+      <ion-slide>
+        <!--        <h3>Welcome to Days of the Year!</h3>-->
+        <div>
+          <img class="slider-logo" src="img/days-logo-250.jpg">
+        </div>
+        <div class="card">
+          <div class="item item-text-wrap">
+            <h2>Your account has been created!</h2>
+          </div>
+          <div class="item item-text-wrap">
+            <p>Let me show you how the app works in 15 seconds.</p> <p> Slide to the left to continue, or skip the introduction and jump straight in!</p>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <h3>Using DOTY</h3>
+
+        <div class="list">
+          <h5>Tutorial</h5>
+          <ol>
+            <i class="item">Step 1</i>
+            <i class="item">Step 2</i>
+            <i class="item">Step 3</i>
+          </ol>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <h3>We're done</h3>
+        <p>
+          Have fun!
+        </p>
+
+        <div class="text-center padding">
+          <button ng-click="startApp();" class="button button-positive">
+            Open App
+          </button>
+        </div>
+
+      </ion-slide>
+    </ion-slide-box>
+
+  </ion-content>
+</ion-view>

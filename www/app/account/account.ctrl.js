@@ -13,6 +13,7 @@ angular.module("accountModule")
     .then(function(status) {
       console.log(status);
       signinFac.signinModalClose();
+      signinFac.showIntroductionBroadcast(false);
     }, function(status) {
       console.log(status);
       alert("Please check your email and password were entered correctly and try again");
