@@ -17,7 +17,7 @@ angular.module("accountModule")
     }).
     success(function(data, status, headers) {
       console.log("login query went through", status, data)
-//      console.log({'a': headers()});
+      //      console.log({'a': headers()});
 
       if(data.status.code === 100) {
         $rootScope.userSession.signedIn = true;
@@ -65,16 +65,21 @@ angular.module("accountModule")
     }).
     success(function(data, status) {
       console.log("signup query went through", status, data)
-      if(data.meta.status === "success") {
+
+      if(data.status.code === 100) {
         $rootScope.userData.id = data.result.id;
-        console.log($rootScope.userData.id);
-        deferred.resolve("succesful signup");
+        deferred.resolve("succesful signup, new user id: " + data.result.id);
       } else {
-        deferred.reject("signup failed, user likely already exists, need error codes");
+        if(data.status.code === 302) {
+          deferred.reject(302, "signup failed (302) user already exists");
+        } else {
+          deferred.reject(-1, "signup failed, unknown status code");
+        }
       }
+
     }).
     error(function(data, status) {
-      deferred.reject("signup query failed, server down?");
+      deferred.reject(-1, "signup query failed, server down?");
     });
 
     return deferred.promise;
@@ -167,7 +172,7 @@ angular.module("accountModule")
       fac.removeCredentials();
       $rootScope.userSession.signedIn = false;
       $state.go('/');
-//      fac.signinModalOpen();
+      //      fac.signinModalOpen();
     });
   };
 
@@ -181,23 +186,24 @@ angular.module("accountModule")
 
       var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?update&user_id=' + $rootScope.userData.id;
 
-      if (profileData.dob) {
-        //updateUrl = updateUrl + '&dob=' + profileData.dob; figure out date format
-        console.log(profileData.dob);
+      if (profileData.hasOwnProperty('dob')) {
+        updateUrl = updateUrl + '&dob=' + profileData.dob; figure out date format
+//        console.log(profileData.dob);
       };
 
-      if (profileData.firstname) {
+      if (profileData.hasOwnProperty('firstname')) {
         updateUrl = updateUrl + '&firstname=' + profileData.firstname;
       };
 
-      if (profileData.lastname) {
+      if (profileData.hasOwnProperty('lastname')) {
         updateUrl = updateUrl + '&lastname=' + profileData.lastname;
       };
 
       $http({
         method: 'GET',
-        url: updateUrl,
-        withCredentials: true
+        url: updateUrl
+//        ,
+//        withCredentials: true
       }).
       success(function(data, status) {
         console.log("profile update query went through", status, data);
@@ -239,8 +245,9 @@ angular.module("accountModule")
 
       $http({
         method: 'GET',
-        url: updateUrl,
-        withCredentials: true
+        url: updateUrl
+//        ,
+//        withCredentials: true
       }).
       success(function(data, status) {
         console.log("bookmarks update query went through", status, data);

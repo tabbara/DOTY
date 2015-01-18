@@ -39,18 +39,27 @@ angular.module("accountModule")
     signinFac.signup(signupFormData)
     .then(function (status) {
       console.log(status);
+      $scope.signupModalClose();
+
       signinFac.signin(signupFormData.email, signupFormData.pw)
       .then(function (status) {
+        signinFac.showIntroductionBroadcast(true);
         console.log(status);
         signinFac.updateProfile(signupFormData);
       }, function (status) {
         console.log(status);
+        alert("Something went wrong logging you in, please try again.");
+        $scope.signinModalOpen();
       });
-      $scope.signupModalClose();
-      $scope.signupExtraModalOpen();
-    }, function (status) {
+
+//      $scope.signupExtraModalOpen();
+    }, function (code, status) {
       console.log(status);
-      alert("something went wrong, please try registering again"); // could already be registered, need error code checking
+      if (code === 302) {
+        alert("User already exists. Please check your email address and try again.");
+      } else {
+        alert("Something went wrong, please check your Internet connection and try again. Please reach out to info@daysoftheyear.com if the issue persists.");
+      }
     });
   };
 
