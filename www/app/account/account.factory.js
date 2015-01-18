@@ -133,7 +133,7 @@ angular.module("accountModule")
           } else {
             logThis.pc_tags = [];
           }
-        }
+        } else { logThis.pc_tags = []; }
 
         if (data.result.bookmarks.hasOwnProperty("days")) {
           if (data.result.bookmarks.days.length > 0) {
@@ -141,7 +141,7 @@ angular.module("accountModule")
           } else {
             logThis.pc_days = [];
           }
-        }
+        } else { logThis.pc_days = []; }
 
         console.log(logThis);
         console.log("succesful user data query");

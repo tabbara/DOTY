@@ -30,9 +30,10 @@ angular.module("accountModule")
     var signupFormData = {
       email: $scope.signupData.signupEmail,
       pw: $scope.signupData.signupPassword,
-      dob: $scope.signupData.signupDob,
+      dob: Math.round((new Date($scope.signupData.signupDob)).getTime()/1000),
       newsletter: $scope.signupData.signupNewsletter
     };
+
     console.log(JSON.stringify(signupFormData));
 
     signinFac.signup(signupFormData)

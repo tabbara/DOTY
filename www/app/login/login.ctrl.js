@@ -24,6 +24,7 @@ angular.module('loginModule')
   .then(function (status) {
     console.log(status);
     signinFac.signinModalClose();
+    $scope.startApp();
     //    $scope.showIntroduction = true;
   }, function (status) {
     console.log(status);
