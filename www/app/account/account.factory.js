@@ -187,27 +187,24 @@ angular.module("accountModule")
       var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?update&user_id=' + $rootScope.userData.id;
 
       if (profileData.hasOwnProperty('dob')) {
-        updateUrl = updateUrl + '&dob=' + profileData.dob; figure out date format
-//        console.log(profileData.dob);
+        updateUrl = updateUrl + '&dob=' + profileData.dob;
       };
 
       if (profileData.hasOwnProperty('firstname')) {
-        updateUrl = updateUrl + '&firstname=' + profileData.firstname;
+        updateUrl = updateUrl + '&name_first=' + profileData.firstname;
       };
 
       if (profileData.hasOwnProperty('lastname')) {
-        updateUrl = updateUrl + '&lastname=' + profileData.lastname;
+        updateUrl = updateUrl + '&name_last=' + profileData.lastname;
       };
 
       $http({
         method: 'GET',
         url: updateUrl
-//        ,
-//        withCredentials: true
       }).
       success(function(data, status) {
         console.log("profile update query went through", status, data);
-        if(data.meta.status === "success") {
+        if(data.status.code === 100) {
           deferred.resolve("succesful profile update");
         } else {
           deferred.reject("profile update error, login credentials wrong?");
@@ -223,6 +220,46 @@ angular.module("accountModule")
     return deferred.promise;
   };
 
+  fac.updatePermissions = function (permissionsData) {
+    var deferred = $q.defer();
+
+    if (permissionsData) {
+      var logThis = "Updating permissions of " + $rootScope.userData.email + " with data: ";
+      logThis = logThis + JSON.stringify(permissionsData);
+      console.log(logThis);
+
+      var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?permissions&user_id=' + $rootScope.userData.email;
+
+      if (permissionsData.hasOwnProperty('subscribed')) {
+        updateUrl = updateUrl + '&subscribed=' + permissionsData.subscribed;
+      };
+
+      if (permissionsData.hasOwnProperty('email_newsletter')) {
+        updateUrl = updateUrl + '&email_newsletter=' + permissionsData.email_newsletter;
+      };
+
+      $http({
+        method: 'GET',
+        url: updateUrl
+      }).
+      success(function(data, status) {
+        console.log("permissions update query went through", status, data);
+        if(data.status.code === 100) {
+          deferred.resolve("succesful permissions update");
+        } else {
+          deferred.reject("permissions update error, login credentials wrong?");
+        }
+      }).
+      error(function(data, status) {
+        deferred.reject("permissions update query failed");
+      });
+    } else {
+      deferred.reject("no permissionsdata passed to update function");
+    };
+
+    return deferred.promise;
+  };
+
   fac.updateBookmarks = function (bookmarkData) {
     var deferred = $q.defer();
 
@@ -230,8 +267,6 @@ angular.module("accountModule")
       var logThis = "Updating bookmarks of " + $rootScope.userData.email + " with data: ";
       logThis = logThis + JSON.stringify(bookmarkData);
       console.log(logThis);
-
-      var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?update&user_id=' + $rootScope.userData.id;
 
       var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?bookmarks&user_id=' + $rootScope.userData.id +'&type=' + bookmarkData.type;
 

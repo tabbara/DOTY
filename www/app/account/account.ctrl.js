@@ -31,7 +31,7 @@ angular.module("accountModule")
       email: $scope.signupData.signupEmail,
       pw: $scope.signupData.signupPassword,
       dob: Math.round((new Date($scope.signupData.signupDob)).getTime()/1000),
-      newsletter: $scope.signupData.signupNewsletter
+      email_newsletter: $scope.signupData.signupNewsletter
     };
 
     console.log(JSON.stringify(signupFormData));
@@ -46,6 +46,7 @@ angular.module("accountModule")
         signinFac.showIntroductionBroadcast(true);
         console.log(status);
         signinFac.updateProfile(signupFormData);
+        signinFac.updatePermissions(signupFormData);
       }, function (status) {
         console.log(status);
         alert("Something went wrong logging you in, please try again.");
