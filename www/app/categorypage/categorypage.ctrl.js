@@ -1,5 +1,5 @@
 angular.module('categorypageModule')
-.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope) {
+.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $ionicNavBarDelegate, $rootScope) {
 
   var pageID = $stateParams.categoryID.replace(/:/g,"");
 
@@ -12,6 +12,10 @@ angular.module('categorypageModule')
 //  console.log($scope.currentCategory);
 
   var tagArray = [pageID];
+
+  $scope.goBack = function () {
+    $ionicNavBarDelegate.back();
+  };
 
   queryAPI.getDayByTag(tagArray)
   .then(function(data) {
