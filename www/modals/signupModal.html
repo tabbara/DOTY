@@ -4,6 +4,10 @@
 Add visual form validation
 -->
 
+  <ion-header-bar class="bar bar-header bar-positive-light">
+    <h1 class="title">Create an account</h1>
+  </ion-header-bar>
+
   <ion-content ng-controller="accountController as signupCtrl">
 
     <!--    <img src="/res/icon/ios/icon-72-2x.png">-->
@@ -65,13 +69,13 @@ Add visual form validation
       </div>
 
       <div class="padding-horizontal">
-        <input type="submit" id="submit" class="button button-block button-positive" value="Register"/>
+        <input type="submit" id="submit" class="button button-block button-custom button-blue" value="Register"/>
       </div>
     </form>
 
     <div class="text-center padding-top">Already have an account?</div>
     <div class="text-center padding">
-      <button ng-click="signupModalClose(); signinModalOpen()" class="button button-light">
+      <button ng-click="signupModalClose(); signinModalOpen()" class="button button-custom">
         Log In
       </button>
     </div>

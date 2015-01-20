@@ -1,4 +1,4 @@
-<ion-modal-view title="Signin">
+<ion-modal-view title="Log In">
 
   <!--
 <ion-header-bar class="bar-positive">
@@ -6,10 +6,15 @@
 </ion-header-bar>
 -->
 
+  <ion-header-bar class="bar bar-header bar-positive-light">
+    <h1 class="title">Sign in</h1>
+<!--    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>-->
+  </ion-header-bar>
+
   <ion-content ng-controller="accountController as signinCtrl">
 
     <!--    <img src="/res/icon/ios/icon-72-2x.png">-->
-    <form name="signinForm" ng-submit="signinForm.$valid && signin()" novalidate>
+    <form name="signinForm" class="custom-form" ng-submit="signinForm.$valid && signin()" novalidate>
       <div class="list list-inset">
         <h2 class="text-center padding-bottom">Days of the Year</h2>
 
@@ -45,7 +50,7 @@
       </div>
 
       <div class="padding-horizontal">
-        <input type="submit" id="submit" class="button button-block button-positive" value="Log In"/>
+        <input type="submit" id="submit" class="button button-block button-custom button-blue" value="Log In"/>
       </div>
     </form>
 
@@ -55,7 +60,7 @@
 
     <div class="text-center padding-top">Don't have an account yet?</div>
     <div class="text-center padding">
-      <button ng-click="signinModalClose(); signupModalOpen()" class="button button-light">
+      <button ng-click="signinModalClose(); signupModalOpen()" class="button button-custom">
         Create Account
       </button>
     </div>
