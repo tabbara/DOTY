@@ -84,9 +84,18 @@ border-left: 8px solid #444 !important;
 
 .button-blue {
   color: #fff;
+  border: solid 0px;
   background-color: #3498db;
   border-left:solid 1px #6fbaec;
   box-shadow: inset 0px 1px 0px #73b0d8, 0px 3px 0px #2980b9;
+}
+
+.button {
+ line-height: 46px;
+}
+
+.button.icon-left:before, .button.icon-right:before, .button.icon-left:after, .button.icon-right:after {
+ line-height: 44px;
 }
 
 /*
