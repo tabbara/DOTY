@@ -40,29 +40,36 @@ Go
 
     <!--    <h4>a</h4>-->
 
-    <ul class="list" ng-show="!madeSearch.found && madeSearch.finished">
-      <li class="item-clear">
-        <h4 class="text-center padding-top">
-          Your search returned zero results
-        </h4>
-      </li>
-    </ul>
+    <div class="card" ng-show="!madeSearch.found && madeSearch.finished">
+      <h4 class="text-center">
+        You search returned no results
+      </h4>
+    </div>
 
-    <ul class="list no-padding no-margin" ng-show="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
-      <li class="item-clear">
-        <h4 class="text-center padding-top">
-          Your search returned {{madeSearch.results}} results
-        </h4>
-      </li>
-    </ul>
+<!--
+    <div class="card" ng-if="!days">
+      <h4 class="text-center">
+        You have no favorites
+      </h4>
+      <div class="item item-text-wrap">
+        <p>
+          To add Days to your favorites simply open any Day and press the <i class="icon ion-ios7-heart assertive"></i> button in the top right corner!
+        </p>
+      </div>
+    </div>
+-->
 
-    <ul class="list" ng-show="!madeSearch.started">
-      <li class="item-clear" >
-        <h4 class="text-center padding-top">
-          Enter a search query in the box above
-        </h4>
-      </li>
-    </ul>
+    <div class="card" ng-show="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
+      <h4 class="text-center">
+        Your search returned {{madeSearch.results}} results
+      </h4>
+    </div>
+
+    <div class="card" ng-show="!madeSearch.started">
+      <h4 class="text-center">
+        Enter a search query in the box above
+      </h4>
+    </div>
 
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
