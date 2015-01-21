@@ -61,7 +61,7 @@ angular.module("accountModule")
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.5/users/?register&user_email=' + signupFormData.email + '&password=' + signupFormData.pw
+      url: 'https://www.daysoftheyear.com/api/1.5/users/?register&email=' + signupFormData.email + '&password=' + signupFormData.pw
     }).
     success(function(data, status) {
       console.log("signup query went through", status, data)
