@@ -95,10 +95,10 @@ angular.module("dotyApp")
     return deferred.promise;
   };
 
-  fac.getDayByTag = function(tagArray) {
+  fac.getDayByTag = function(tagArray, limit) {
     var deferred = $q.defer();
 
-    var limit = 10; // Temporary. This function should grab days in the near future. Need to figure out if the API returns date sorted content.
+    var limit = limit || 10; // Temporary. This function should grab days in the near future. Need to figure out if the API returns date sorted content.
     var url = "https://www.daysoftheyear.com/api/1.5/days?limit=" + limit;
 
     var tagArrayLength = tagArray.length;
@@ -181,6 +181,7 @@ angular.module("dotyApp")
       .replace("&#x00e9;","é");
 
       _dayObj.tag = {};
+      _dayObj.tagArray = [];
       $.each(_dayObj.tags, function (_tagIndex, _tagValue) {
         _dayObj.tags[_tagIndex].name = _dayObj.tags[_tagIndex].name
         .replace("&amp;","&");
@@ -191,6 +192,8 @@ angular.module("dotyApp")
             slug: _dayObj.tags[_tagIndex].slug
           };
         }
+
+        _dayObj.tagArray.push(_dayObj.tags[_tagIndex].slug);
       });
 
       var currentTime = new Date().getTime() / 1000;

@@ -9,6 +9,23 @@ angular.module('daypageModule')
       queryAPI.cleanDay(data.result)
       .then(function (daysObject) {
         $scope.dayObj = daysObject[0];
+
+        if ($scope.dayObj.tagArray.length > 0) {
+          queryAPI.getDayByTag($scope.dayObj.tagArray, 3)
+          .then(function(data) {
+            if(data.status.code === 100) {
+              queryAPI.cleanDay(data.result)
+              .then(function (daysObject) {
+                $scope.relatedDays = daysObject;
+              });
+            } else {
+              console.log('Error retrieving DaysByTag: ' + data.status.code);
+            }
+          }, function (status) {
+            console.log(status);
+          });
+        }
+
       });
     } else {
       console.log('Error retrieving DayByID: ' + data.status.code);

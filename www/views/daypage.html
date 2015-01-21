@@ -58,6 +58,30 @@ ng-click="setCategoryName('{{value}}')">
     <p class="item-text-wrap" ng-bind-html="dayObj.content"></p>
 
     </div>
+
+  <div ng-if="relatedDays">
+    <div class="item">
+      <h2 class="text-center">
+        Related upcoming days
+      </h2>
+    </div>
+
+    <div class="list">
+
+      <div ng-repeat="relatedday in relatedDays">
+        <a class="item item-thumbnail-left item-favorites" href="#/:{{relatedday.id}}">
+          <img class="image-favorites" ng-src="{{relatedday.image.thumbnail.url}}">
+          <h2>{{relatedday.title}}</h2>
+          <p>{{relatedday.date | date:'longDate'}}</p>
+          <!--        <i class="badge badge-positive badge-overlay-favorites">Blablablabla</i>         -->
+        </a>
+      </div>
+
+    </div>
+
+    <br>
+  </div>
+
   </ion-content>
 
 </ion-view>
