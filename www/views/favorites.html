@@ -15,12 +15,31 @@
   <ion-content class="custom-content">
     <div class="list">
 
-      <a ng-repeat="day in days" class="item item-thumbnail-left item-favorites" href="#/:{{day.id}}">
-        <img class="image-favorites" ng-src="{{day.image.thumbnail.url}}">
-        <h2>{{day.title}}</h2>
-        <p>{{day.date | date:'longDate'}}</p>
-<!--        <i class="badge badge-positive badge-overlay-favorites">Blablablabla</i>         -->
-      </a>
+      <div class="card" ng-if="!days">
+        <h4 class="text-center">
+          You have no favorites
+        </h4>
+        <div class="item item-text-wrap">
+          <p>
+            To add Days to your favorites simply open any Day and press the <i class="icon ion-ios7-heart assertive"></i> button in the top right corner!
+          </p>
+        </div>
+      </div>
+
+      <div class="card" ng-if="days">
+        <h4 class="text-center">
+          You have {{days.length}} favorite(s)
+        </h4>
+      </div>
+
+      <div ng-repeat="day in days">
+        <a class="item item-thumbnail-left item-favorites" href="#/:{{day.id}}">
+          <img class="image-favorites" ng-src="{{day.image.thumbnail.url}}">
+          <h2>{{day.title}}</h2>
+          <p>{{day.date | date:'longDate'}}</p>
+          <!--        <i class="badge badge-positive badge-overlay-favorites">Blablablabla</i>         -->
+        </a>
+      </div>
 
     </div>
   </ion-content>
