@@ -56,7 +56,7 @@ border-left: 8px solid #444 !important;
 
 .bar-positive-light {
   background-color: #3498db;
-/*  background-color: #73a6db;*/
+  /*  background-color: #73a6db;*/
   border-color: #f0f6ff;
   color: #fff;
 }
@@ -72,12 +72,12 @@ border-left: 8px solid #444 !important;
 
 .button-custom {
   background-color: #DBE3E8;
-/*    #bdc3c7;*/
+  /*    #bdc3c7;*/
   text-decoration:none;
   color:#333;
   border: solid 0px;
   border-left:solid 1px #D4DCE2;
-/*  #d3d8db;*/
+  /*  #d3d8db;*/
   border-radius: 5px;
   box-shadow: inset 0px 1px 0px #D4D8DA, 0px 3px 0px 0px #A4AFB0;
 }
@@ -91,16 +91,16 @@ border-left: 8px solid #444 !important;
 }
 
 .button {
- line-height: 46px;
+  line-height: 46px;
 }
 
 .button.icon-left:before, .button.icon-right:before, .button.icon-left:after, .button.icon-right:after {
- line-height: 44px;
+  line-height: 44px;
 }
 
 /*
 .button-small {
-  box-shadow: inset 0px 1px 0px #ddd, 0px 2px 0px #c4cadb;
+box-shadow: inset 0px 1px 0px #ddd, 0px 2px 0px #c4cadb;
 }
 */
 
@@ -542,6 +542,18 @@ hr.content-line {
 .item-borderless {
   border-top: none;
   border-bottom: none;
+}
+
+ion-popover-view.fit {
+  height: auto !important;
+}
+
+ion-popover-view.fit ion-content {
+  position: relative !important;
+}
+
+.platform-android ion-popover-view.fit {
+  margin-top: 10px !important;
 }
 
 /*----------SEARCH---------*/
