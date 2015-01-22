@@ -1,5 +1,5 @@
 angular.module('daypageModule')
-.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $ionicNavBarDelegate, $rootScope, signinFac) {
+.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $ionicNavBarDelegate, $rootScope, signinFac, $ionicPopover) {
 
   var pageID = $stateParams.dayID.replace(/:/g,"");
 
@@ -84,4 +84,24 @@ angular.module('daypageModule')
       console.log("Can't bookmark, no day loaded yet");
     }
   };
+
+  $ionicPopover.fromTemplateUrl('modals/showMore.html', {
+    scope: $scope,
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
+
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+    console.log('Opening showMore popover');
+  };
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+    console.log('Closing showMore popover');
+  };
+  //Cleanup the popover when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.popover.remove();
+    console.log('Destroying showMore popover');
+  });
 });
