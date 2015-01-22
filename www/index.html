@@ -19,6 +19,16 @@
     <script type="text/javascript" src="js/lib/ionic.bundle.js"></script>
     <script type="text/javascript" src="js/lib/jquery.quickfit.js"></script>
 
+    <script type="text/javascript">
+      if (jQuery) {
+        var originalFn = $.fn.data;
+        $.fn.data = function() {
+          if (arguments[0] !== '$binding')
+            return originalFn.apply(this, arguments);
+        }
+      }
+    </script>
+
     <!--MODULES    -->
     <script type="text/javascript" src="app/app.module.js"></script>
     <script type="text/javascript" src="app/home/home.module.js"></script>

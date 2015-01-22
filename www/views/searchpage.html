@@ -40,7 +40,7 @@ Go
 
     <!--    <h4>a</h4>-->
 
-    <div class="card" ng-show="!madeSearch.found && madeSearch.finished">
+    <div class="card" ng-if="!madeSearch.found && madeSearch.finished">
       <h4 class="text-center">
         You search returned no results
       </h4>
@@ -59,13 +59,13 @@ Go
     </div>
 -->
 
-    <div class="card" ng-show="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
+    <div class="card" ng-if="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
       <h4 class="text-center">
         Your search returned {{madeSearch.results}} results
       </h4>
     </div>
 
-    <div class="card" ng-show="!madeSearch.started">
+    <div class="card" ng-if="!madeSearch.started">
       <h4 class="text-center">
         Enter a search query in the box above
       </h4>
@@ -89,7 +89,7 @@ Go
       </div>
     </div>
 
-    <div class="row no-top-padding" ng-show="madeSearch.showing < madeSearch.results">
+    <div class="row no-top-padding" ng-if="madeSearch.showing < madeSearch.results">
       <div class="col no-top-padding">
         <button ng-click="showMore();" class="no-top-margin button button-block buttom-custom button-blue">Show More</button>
       </div>

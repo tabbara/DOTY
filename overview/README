@@ -9,6 +9,11 @@ Slidebox Styling: http://tympanus.net/codrops/2014/01/21/dot-navigation-styles/
 http://www.betsmartmedia.com/what-i-learned-building-an-app-with-ionic-framework
 
 PERFORMANCE
+
+Search for animate.css and Crosswalk: http://forum.ionicframework.com/t/animations-lag-on-android-smooth-on-ios/10326/30
+
+Angular 1.3 Trick: http://ng-perf.com/2014/10/24/simple-trick-to-speed-up-your-angularjs-app-load-time/
+
   6.1 Large Objects and Server Calls.
   So what does all of this teach us? The first is that we should think through our data model and attempt to limit the complexity of our objects. 
   This is especially important for objects that are returned from the server.

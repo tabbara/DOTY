@@ -47,7 +47,7 @@ ng-click="setCategoryName('{{value}}')">
       <i class="content-text">{{dayObj.date | date:'mediumDate'}}</i>
       <a href="#/explore/:{{dayObj.tag.slug}}"
          class="badge badge-positive"
-         ng-click="setCategoryName(dayObj.tag.name)" ng-show="dayObj.tag.name">
+         ng-click="setCategoryName(dayObj.tag.name)" ng-if="dayObj.tag.name">
         {{dayObj.tag.name}}
       </a>
     </div>
@@ -62,7 +62,8 @@ ng-click="setCategoryName('{{value}}')">
   <div ng-if="relatedDays">
     <div class="item">
       <h2 class="text-center">
-        Related upcoming days
+<!--        Related upcoming days-->
+        You might also enjoy
       </h2>
     </div>
 
