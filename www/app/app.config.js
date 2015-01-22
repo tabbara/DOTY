@@ -1,3 +1,11 @@
+if (jQuery) {
+  var originalFn = $.fn.data;
+  $.fn.data = function() {
+    if (arguments[0] !== '$binding')
+      return originalFn.apply(this, arguments);
+  }
+}
+
 angular.module("dotyApp")
 .config( function($stateProvider, $urlRouterProvider) {
   //  $httpProvider.defaults.withCredentials = true;
