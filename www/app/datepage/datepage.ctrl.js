@@ -1,5 +1,8 @@
 angular.module('datepageModule')
-.controller('datepageCtrl', function ($scope, queryAPI, $stateParams) {
+.controller('datepageCtrl', function ($scope, queryAPI, $stateParams, $ionicSideMenuDelegate) {
+
+  $ionicSideMenuDelegate.canDragContent(true);
+  // not working atm
 
   $scope.page = {};
   $scope.page.timestamp = parseInt($stateParams.dateID.replace(/:/g,""));
