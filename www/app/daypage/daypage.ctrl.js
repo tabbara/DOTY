@@ -1,5 +1,5 @@
 angular.module('daypageModule')
-.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $ionicNavBarDelegate, $rootScope, signinFac, $ionicPopover) {
+.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $rootScope, signinFac, $ionicPopover) {
 
   var pageID = $stateParams.dayID.replace(/:/g,"");
 
@@ -11,9 +11,24 @@ angular.module('daypageModule')
         $scope.dayObj = daysObject[0];
 
         if ($scope.dayObj.tagArray.length > 0) {
-          queryAPI.getDayByTag($scope.dayObj.tagArray, 3)
+          queryAPI.getDayByTag($scope.dayObj.tagArray, 5)
           .then(function(data) {
             if(data.status.code === 100) {
+              var responseLength = data.result.length;
+              var removeEntry = -1;
+              if (responseLength) {
+                for (var i=0; i<responseLength;i++) {
+                  if ($scope.dayObj.id === data.result[i].id) {
+                    removeEntry = i;
+                  }
+                }
+
+                if (removeEntry !== -1) {
+                  data.result.splice(removeEntry, 1);
+                } else {
+                  data.result.splice(data.result.length - 1, 1);
+                }
+              }
               queryAPI.cleanDay(data.result)
               .then(function (daysObject) {
                 $scope.relatedDays = daysObject;
@@ -34,9 +49,11 @@ angular.module('daypageModule')
     console.log(status);
   });
 
-  $scope.goBack = function () {
-    $ionicNavBarDelegate.back();
-  };
+  //  $scope.goBack = function () {
+  //    $ionicHistory.goBack();
+  //  };
+
+  //  $ionicNavBarDelegate.showBackButton(true);
 
   $scope.setCategoryName = function (categoryname) {
     console.log(categoryname);
