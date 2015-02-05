@@ -1,7 +1,23 @@
 angular.module('homeModule')
-.controller('homeCtrl', function ($scope, queryAPI, $ionicSideMenuDelegate, $stateParams) {
+.controller('homeCtrl', function ($scope, queryAPI, $ionicSideMenuDelegate, $ionicNavBarDelegate, $ionicHistory, $stateParams) {
 
   $ionicSideMenuDelegate.canDragContent(true);
+  $ionicHistory.clearHistory();
+
+
+
+  function onAlways () {
+    console.log('finished loading images');
+  }
+
+  function onProgress (imgLoad, image) {
+    console.log('loaded: ' + image.img.src);
+    var $imageEl = $(image.img).parent();
+    $imageEl.removeClass('image-loading');
+    if ( !image.isLoaded ) {
+      $imageEl.addClass('is-broken');
+    }
+  }
 
   var tempDate = new Date();
   var tempToday = Math.round(Date.UTC(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate()) / 1000);
@@ -22,6 +38,14 @@ angular.module('homeModule')
       .then(function (daysObject) {
         $scope.days = daysObject;
         queryAPI.setDayColors();
+
+        setTimeout( function () {
+          var imagesWrapper = $('#content-wrapper');
+          imagesWrapper.imagesLoaded()
+          .progress( onProgress )
+          .always( onAlways );
+        }, 0, false);
+
       });
     } else {
       console.log(data.status.code);

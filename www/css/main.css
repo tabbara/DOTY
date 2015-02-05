@@ -12,14 +12,14 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: 'Raleway', sans-serif !important;
+/*  font-family: 'Raleway', sans-serif !important;*/
   /*  'Raleway', */
-  -webkit-font-smoothing: antialiased;
+/*  -webkit-font-smoothing: antialiased;*/
 }
 
 
 body {
-  /*  font-family: 'Roboto', sans-serif !important; */
+    font-family: sans-serif !important;
   /*  -webkit-font-smoothing: antialiased;*/
   /*  padding: 0;*/
   /*  margin: 0;*/
@@ -29,6 +29,40 @@ body {
 
 .bgcolor {
   background: #fbf1e8;
+}
+
+.custom-back-button {
+  color: #444 !important;
+}
+
+.image-loading {
+  background-color: black;
+  background-image: url('../img/loading.gif');
+}
+
+.image-broken {
+  background-color: #be3730;
+  background-image: url('../img/broken.gif');
+}
+
+.image-loading img,
+.image-broken img {
+  opacity: 0;
+  width: 400px;
+  height: 200px;
+}
+
+.dayimage-container {
+  background-color: black;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.dayimage-container img {
+  -webkit-transition: opacity 0.4s;
+     -moz-transition: opacity 0.4s;
+      -ms-transition: opacity 0.4s;
+          transition: opacity 0.4s;
 }
 
 /*SIDEMENU*/

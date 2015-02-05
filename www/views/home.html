@@ -2,9 +2,14 @@
 
   <ion-nav-bar class="custom-bar">
 
+    <!--      enable-menu-with-back-views="false"-->
+    <!--                    menu-toggle="left"-->
+
     <ion-nav-buttons side="left">
       <button class="button button-icon ion-navicon" menu-toggle="left"></button>
     </ion-nav-buttons>
+
+    <!--    <ion-nav-back-button></ion-nav-back-button>-->
 
     <ion-nav-buttons side="right">
       <button ui-sref="searchpage" class="button button-icon ion-ios7-search-strong"></button>
@@ -12,7 +17,7 @@
 
   </ion-nav-bar>
 
-  <ion-content class="custom-content">
+  <ion-content has-bouncing="true" class="custom-content" id="content-wrapper">
 
     <!--
 <div ng-repeat="day in days" class="card-wrapper card">
@@ -25,7 +30,9 @@
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
         <div class="item-image">
-          <img ng-src="{{day.image.large.url}}">
+          <div class="image-loading dayimage-container">
+            <img ng-src="{{day.image.large.url}}" class="day-image">
+          </div>
           <i class="badge badge-positive badge-overlay">{{day.tag.name}}</i>
         </div>
         <!--
