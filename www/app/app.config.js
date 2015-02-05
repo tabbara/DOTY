@@ -1,14 +1,17 @@
-if (jQuery) {
-  var originalFn = $.fn.data;
-  $.fn.data = function() {
-    if (arguments[0] !== '$binding')
-      return originalFn.apply(this, arguments);
-  }
-}
+//if (jQuery) {
+//  var originalFn = $.fn.data;
+//  $.fn.data = function() {
+//    if (arguments[0] !== '$binding')
+//      return originalFn.apply(this, arguments);
+//  }
+//}
 
 angular.module("dotyApp")
-.config( function($stateProvider, $urlRouterProvider) {
-  //  $httpProvider.defaults.withCredentials = true;
+.config( function($stateProvider, $urlRouterProvider, $compileProvider) {
+
+  // TURN THIS TO FALSE FOR PRODUCTION!
+  //  $compileProvider.debugInfoEnabled(false)
+
   $urlRouterProvider.otherwise("/");
   $stateProvider
   .state('/', {
