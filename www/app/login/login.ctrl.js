@@ -1,10 +1,15 @@
 angular.module('loginModule')
-.controller('loginCtrl', function ($scope, $state, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $timeout, signinFac) {
+.controller('loginCtrl', function ($scope, $state, $ionicHistory, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $timeout, signinFac) {
 
   $ionicSideMenuDelegate.canDragContent(false);
 
   $scope.startApp = function() {
     $state.go('home');
+
+    $ionicHistory.nextViewOptions({
+      disableAnimate: true,
+      disableBack: true
+    });
   };
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
