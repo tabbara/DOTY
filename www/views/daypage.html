@@ -2,9 +2,17 @@
 
   <ion-nav-bar class="bar-dark">
 
-    <ion-nav-buttons side="left">
-      <button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
-    </ion-nav-buttons>
+    <!--
+<ion-nav-buttons side="left">
+<button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
+</ion-nav-buttons>
+-->
+
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+
+    <!--    class="button button-icon ion-arrow-left-c"-->
 
     <!--
 <ion-nav-buttons side="left">
@@ -22,7 +30,7 @@
 
   </ion-nav-bar>
 
-  <ion-content>
+  <ion-content has-bouncing="true">
     <div>
       <img style="width: 100%;" ng-src="{{dayObj.image.large.url}}">
       </img>
@@ -62,7 +70,7 @@ ng-click="setCategoryName('{{value}}')">
   <div ng-if="relatedDays">
     <div class="item">
       <h2 class="text-center">
-<!--        Related upcoming days-->
+        <!--        Related upcoming days-->
         You might also enjoy
       </h2>
     </div>

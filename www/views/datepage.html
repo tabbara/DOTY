@@ -2,9 +2,9 @@
 
   <ion-nav-bar class="custom-bar">
 
-    <ion-nav-buttons side="left">
-      <button class="button button-icon ion-navicon" menu-toggle="left"></button>
-    </ion-nav-buttons>
+    <ion-nav-back-button class="button-clear custom-back-button">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
 
     <ion-nav-buttons side="right">
       <button ui-sref="searchpage" class="button button-icon ion-ios7-search-strong"></button>
@@ -12,7 +12,7 @@
 
   </ion-nav-bar>
 
-  <ion-content class="custom-content">
+  <ion-content has-bouncing="true" class="custom-content">
 
     <!--
 <div ng-repeat="day in days" class="card-wrapper card">

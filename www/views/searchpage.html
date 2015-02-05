@@ -1,9 +1,15 @@
 <ion-view title="Search">
 
   <ion-nav-bar class="custom-bar">
+<!--
     <ion-nav-buttons side="left">
       <button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
     </ion-nav-buttons>
+-->
+
+    <ion-nav-back-button class="button-clear custom-back-button">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
 
     <!--
 <ion-nav-buttons side="right">
@@ -13,7 +19,7 @@
 
   </ion-nav-bar>
 
-  <ion-content class="custom-content">
+  <ion-content has-bouncing="true" class="custom-content">
 
     <form name="searchForm" ng-submit="search()">
       <!--      !searchForm.$pristine && -->
@@ -46,17 +52,17 @@ Go
       </h4>
     </div>
 
-<!--
-    <div class="card" ng-if="!days">
-      <h4 class="text-center">
-        You have no favorites
-      </h4>
-      <div class="item item-text-wrap">
-        <p>
-          To add Days to your favorites simply open any Day and press the <i class="icon ion-ios7-heart assertive"></i> button in the top right corner!
-        </p>
-      </div>
-    </div>
+    <!--
+<div class="card" ng-if="!days">
+<h4 class="text-center">
+You have no favorites
+</h4>
+<div class="item item-text-wrap">
+<p>
+To add Days to your favorites simply open any Day and press the <i class="icon ion-ios7-heart assertive"></i> button in the top right corner!
+</p>
+</div>
+</div>
 -->
 
     <div class="card" ng-if="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
