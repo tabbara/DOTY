@@ -1,5 +1,5 @@
 angular.module('categorypageModule')
-.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $ionicNavBarDelegate, $rootScope) {
+.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope, $ionicLoading) {
 
   var pageID = $stateParams.categoryID.replace(/:/g,"");
 
@@ -9,26 +9,54 @@ angular.module('categorypageModule')
     $scope.currentCategory.name = $rootScope.currentCategory.name;
   };
 
-//  console.log($scope.currentCategory);
-
   var tagArray = [pageID];
 
-  $scope.goBack = function () {
-    $ionicNavBarDelegate.back();
-  };
+  function onAlways () {
+    console.log('finished loading images');
+  }
+
+  function onProgress (imgLoad, image) {
+    console.log('loaded: ' + image.img.src);
+    var $imageEl = $(image.img).parent();
+    $imageEl.removeClass('image-loading');
+    $imageEl.children(".spinner-animation").remove();
+  }
+
+  $scope.pageLoading = {
+    status: true,
+    loading: $ionicLoading.show({
+      template: '<div class="spinner-animation"></div>',
+      noBackdrop: true
+    })
+  }
 
   queryAPI.getDayByTag(tagArray)
   .then(function(data) {
     if(data.status.code === 100) {
       queryAPI.cleanDay(data.result)
       .then(function (daysObject) {
+        $scope.pageLoading.status = false;
+        $ionicLoading.hide();
+
         $scope.days = daysObject;
         queryAPI.setDayColors();
+
+        setTimeout( function () {
+          var imagesWrapper = $('#content-wrapper');
+          imagesWrapper.imagesLoaded()
+          .progress( onProgress )
+          .always( onAlways );
+        }, 0, false);
+
       });
     } else {
+      $scope.pageLoading.status = false;
+      $ionicLoading.hide();
       console.log('Error retrieving DaysByTag: ' + data.status.code);
     }
   }, function (status) {
+    $scope.pageLoading.status = false;
+    $ionicLoading.hide();
     console.log(status);
   });
 

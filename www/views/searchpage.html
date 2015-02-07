@@ -19,7 +19,7 @@
 
   </ion-nav-bar>
 
-  <ion-content has-bouncing="true" class="custom-content">
+  <ion-content has-bouncing="true" class="custom-content" id="content-wrapper">
 
     <form name="searchForm" ng-submit="search()">
       <!--      !searchForm.$pristine && -->
@@ -79,10 +79,11 @@ To add Days to your favorites simply open any Day and press the <i class="icon i
 
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
-        <div class="item-image">
-          <img ng-src="{{day.image.large.url}}">
-          <div class="badge badge-positive badge-overlay">{{day.tag.name}}</div>
-        </div>
+          <div class="image-loading dayimage-container">
+            <div class="spinner-animation"></div>
+            <img ng-src="{{day.image.large.url}}" class="day-image">
+          </div>
+          <i class="badge badge-positive badge-overlay">{{day.tag.name}}</i>
       </a>
 
       <div class="card-title">

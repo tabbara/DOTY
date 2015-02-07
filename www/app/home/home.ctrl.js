@@ -4,8 +4,6 @@ angular.module('homeModule')
   $ionicSideMenuDelegate.canDragContent(true);
   $ionicHistory.clearHistory();
 
-
-
   function onAlways () {
     console.log('finished loading images');
   }
@@ -14,9 +12,7 @@ angular.module('homeModule')
     console.log('loaded: ' + image.img.src);
     var $imageEl = $(image.img).parent();
     $imageEl.removeClass('image-loading');
-    if ( !image.isLoaded ) {
-      $imageEl.addClass('is-broken');
-    }
+    $imageEl.children(".spinner-animation").remove();
   }
 
   var tempDate = new Date();
@@ -34,7 +30,7 @@ angular.module('homeModule')
   $scope.pageLoading = {
     status: true,
     loading: $ionicLoading.show({
-      template: '<i class="icon ion-loading-c"></i>\n<br/>\nLoading...',
+      template: '<div class="spinner-animation"></div>',
       noBackdrop: true
     })
   }
@@ -45,7 +41,7 @@ angular.module('homeModule')
       queryAPI.cleanDay(data.result)
       .then(function (daysObject) {
         $scope.pageLoading.status = false;
-        $scope.pageLoading.loading.hide();
+        $ionicLoading.hide();
         $scope.days = daysObject;
         queryAPI.setDayColors();
 
@@ -59,12 +55,12 @@ angular.module('homeModule')
       });
     } else {
       $scope.pageLoading.status = false;
-      $scope.pageLoading.loading.hide();
+      $ionicLoading.hide();
       console.log(data.status.code);
     }
   }, function (status) {
     $scope.pageLoading.status = false;
-    $scope.pageLoading.loading.hide();
+    $ionicLoading.hide();
     console.log(status);
   });
 });

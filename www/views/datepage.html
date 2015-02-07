@@ -12,7 +12,7 @@
 
   </ion-nav-bar>
 
-  <ion-content has-bouncing="true" class="custom-content">
+  <ion-content has-bouncing="true" class="custom-content" id="content-wrapper">
 
     <!--
 <div ng-repeat="day in days" class="card-wrapper card">
@@ -24,15 +24,11 @@
 -->
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
-        <div class="item-image">
-          <img ng-src="{{day.image.large.url}}">
-          <i class="badge badge-positive badge-overlay">{{day.tag.name}}</i>
+        <div class="image-loading dayimage-container">
+          <div class="spinner-animation"></div>
+          <img ng-src="{{day.image.large.url}}" class="day-image">
         </div>
-        <!--
-<span class="card-overlay">
-Testing Card Overlay
-</span>
--->
+        <i class="badge badge-positive badge-overlay">{{day.tag.name}}</i>
       </a>
 
       <div class="card-title">
@@ -52,13 +48,14 @@ Testing Card Overlay
       </div>
     </div>
 
-    <div class="row no-top-padding">
+    <div ng-if="!pageLoading.status" class="row no-top-padding">
       <div class="col no-top-padding">
         <a href="#/date/:{{page.previous.timestamp}}" class="no-top-margin button button-block button-custom button-blue icon-left ion-ios7-arrow-back">Previous Day</a>
       </div>
 
       <div class="col no-top-padding">
-        <a href="#/date/:{{page.next.timestamp}}" class="no-top-margin button button-block button-custom button-blue icon-right ion-ios7-arrow-forward">Next Day</a>  </div>
+        <a href="#/date/:{{page.next.timestamp}}" class="no-top-margin button button-block button-custom button-blue icon-right ion-ios7-arrow-forward">Next Day</a>
+      </div>
     </div>
 
   </ion-content>

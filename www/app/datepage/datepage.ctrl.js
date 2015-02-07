@@ -1,8 +1,27 @@
 angular.module('datepageModule')
-.controller('datepageCtrl', function ($scope, queryAPI, $stateParams, $ionicSideMenuDelegate) {
+.controller('datepageCtrl', function ($scope, queryAPI, $stateParams, $ionicSideMenuDelegate, $ionicLoading) {
 
-  $ionicSideMenuDelegate.canDragContent(true);
+  //  $ionicSideMenuDelegate.canDragContent(true);
   // not working atm
+
+  function onAlways () {
+    console.log('finished loading images');
+  }
+
+  function onProgress (imgLoad, image) {
+    console.log('loaded: ' + image.img.src);
+    var $imageEl = $(image.img).parent();
+    $imageEl.removeClass('image-loading');
+    $imageEl.children(".spinner-animation").remove();
+  }
+
+  $scope.pageLoading = {
+    status: true,
+    loading: $ionicLoading.show({
+      template: '<div class="spinner-animation"></div>',
+      noBackdrop: true
+    })
+  }
 
   $scope.page = {};
   $scope.page.timestamp = parseInt($stateParams.dateID.replace(/:/g,""));
@@ -33,13 +52,28 @@ angular.module('datepageModule')
     if (data.status.code === 100) {
       queryAPI.cleanDay(data.result)
       .then(function (daysObject) {
+        $scope.pageLoading.status = false;
+        $ionicLoading.hide();
+
         $scope.days = daysObject;
         queryAPI.setDayColors();
+
+        setTimeout( function () {
+          var imagesWrapper = $('#content-wrapper');
+          imagesWrapper.imagesLoaded()
+          .progress( onProgress )
+          .always( onAlways );
+        }, 0, false);
+
       });
     } else {
+      $scope.pageLoading.status = false;
+      $ionicLoading.hide();
       console.log(data.status.code);
     }
   }, function (status) {
+    $scope.pageLoading.status = false;
+    $ionicLoading.hide();
     console.log(status);
   });
 

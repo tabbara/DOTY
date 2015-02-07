@@ -1,18 +1,16 @@
 angular.module('searchpageModule')
-.controller('searchpageCtrl', function ($scope, queryAPI, $rootScope, $ionicNavBarDelegate) {
+.controller('searchpageCtrl', function ($scope, queryAPI, $rootScope) {
 
-  //  var tagArray = [pageID];
-  //
-  //  queryAPI.getDayByTag(tagArray)
-  //  .then(function(data) {
-  //    queryAPI.cleanDay(data.days)
-  //    .then(function (daysObject) {
-  //      $scope.days = daysObject;
-  //      queryAPI.setDayColors();
-  //    });
-  //  }, function (status) {
-  //    console.log(status);
-  //  });
+  function onAlways () {
+    console.log('finished loading images');
+  }
+
+  function onProgress (imgLoad, image) {
+    console.log('loaded: ' + image.img.src);
+    var $imageEl = $(image.img).parent();
+    $imageEl.removeClass('image-loading');
+    $imageEl.children(".spinner-animation").remove();
+  }
 
   $scope.data = {
     'searchQuery': ''
@@ -56,6 +54,14 @@ angular.module('searchpageModule')
             .then(function (daysObject) {
               $scope.days = daysObject;
               queryAPI.setDayColors();
+
+              setTimeout( function () {
+                var imagesWrapper = $('#content-wrapper');
+                imagesWrapper.imagesLoaded()
+                .progress( onProgress )
+                .always( onAlways );
+              }, 0, false);
+
               $scope.madeSearch.found = true;
               $scope.madeSearch.finished = true;
             });
@@ -99,6 +105,14 @@ angular.module('searchpageModule')
             .then(function (daysObject) {
               $scope.days = $scope.days.concat(daysObject);
               queryAPI.setDayColors();
+
+              setTimeout( function () {
+                var imagesWrapper = $('#content-wrapper');
+                imagesWrapper.imagesLoaded()
+                .progress( onProgress )
+                .always( onAlways );
+              }, 0, false);
+
             });
           }
         } else {
@@ -118,10 +132,5 @@ angular.module('searchpageModule')
       });
     };
   }
-
-  $scope.goBack = function() {
-    console.log('back');
-    $ionicNavBarDelegate.back();
-  };
 
 });
