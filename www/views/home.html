@@ -59,7 +59,7 @@ Testing Card Overlay
       </div>
     </div>
 
-    <div class="row no-top-padding">
+    <div ng-if="!pageLoading" class="row no-top-padding">
       <div class="col no-top-padding">
         <a href="#/date/:{{page.previous.timestamp}}" class="no-top-margin button button-block button-custom button-blue icon-left ion-ios7-arrow-back">Previous Day</a>
       </div>

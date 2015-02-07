@@ -1,5 +1,5 @@
 angular.module('homeModule')
-.controller('homeCtrl', function ($scope, queryAPI, $ionicSideMenuDelegate, $ionicNavBarDelegate, $ionicHistory, $stateParams) {
+.controller('homeCtrl', function ($scope, queryAPI, $ionicSideMenuDelegate, $ionicNavBarDelegate, $ionicHistory, $stateParams, $ionicLoading) {
 
   $ionicSideMenuDelegate.canDragContent(true);
   $ionicHistory.clearHistory();
@@ -31,11 +31,21 @@ angular.module('homeModule')
 
   var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+  $scope.pageLoading = {
+    status: true,
+    loading: $ionicLoading.show({
+      template: '<i class="icon ion-loading-c"></i>\n<br/>\nLoading...',
+      noBackdrop: true
+    })
+  }
+
   queryAPI.getDayToday()
   .then(function(data) {
     if (data.status.code === 100) {
       queryAPI.cleanDay(data.result)
       .then(function (daysObject) {
+        $scope.pageLoading.status = false;
+        $scope.pageLoading.loading.hide();
         $scope.days = daysObject;
         queryAPI.setDayColors();
 
@@ -48,9 +58,13 @@ angular.module('homeModule')
 
       });
     } else {
+      $scope.pageLoading.status = false;
+      $scope.pageLoading.loading.hide();
       console.log(data.status.code);
     }
   }, function (status) {
+    $scope.pageLoading.status = false;
+    $scope.pageLoading.loading.hide();
     console.log(status);
   });
 });
