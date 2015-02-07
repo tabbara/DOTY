@@ -56,7 +56,7 @@ angular.module('searchpageModule')
               queryAPI.setDayColors();
 
               setTimeout( function () {
-                var imagesWrapper = $('#content-wrapper');
+                var imagesWrapper = $('#searchpage-wrapper');
                 imagesWrapper.imagesLoaded()
                 .progress( onProgress )
                 .always( onAlways );
@@ -107,7 +107,7 @@ angular.module('searchpageModule')
               queryAPI.setDayColors();
 
               setTimeout( function () {
-                var imagesWrapper = $('#content-wrapper');
+                var imagesWrapper = $('#searchpage-wrapper');
                 imagesWrapper.imagesLoaded()
                 .progress( onProgress )
                 .always( onAlways );

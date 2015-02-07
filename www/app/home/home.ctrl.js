@@ -31,7 +31,7 @@ angular.module('homeModule')
     status: true,
     loading: $ionicLoading.show({
       template: '<div class="spinner-animation"></div>',
-      noBackdrop: true
+      noBackdrop: false
     })
   }
 
@@ -64,16 +64,3 @@ angular.module('homeModule')
     console.log(status);
   });
 });
-
-//$scope.page.dateName = $scope.page.date.getDate() + " " + monthNames[$scope.page.date.getMonth()] + " " + $scope.page.date.getFullYear();
-//console.log('page date is: ' + $scope.page.dateName);
-//
-//if (dateToday.valueOf() === $scope.page.timestamp) { $scope.page.dateName = "Today"; }
-//if (dateToday.valueOf() === $scope.page.timestamp + 86400) { $scope.page.dateName = "Yesterday" }
-//if (dateToday.valueOf() === $scope.page.timestamp - 86400) { $scope.page.dateName = "Tomorrow" }
-//
-//console.log(dateToday);
-//console.log(dateToday.valueOf()+86400);
-//console.log(dateToday.valueOf()-86400);
-//
-//console.log($scope.page);

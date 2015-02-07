@@ -26,7 +26,7 @@
 
   </ion-nav-bar>
 
-  <ion-content has-bouncing="true" class="custom-content" id="content-wrapper">
+  <ion-content has-bouncing="true" class="custom-content" id="categorypage-wrapper">
 
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
@@ -37,10 +37,10 @@
           <i class="badge badge-positive badge-overlay">{{day.tag.name}}</i>
       </a>
 
-      <div class="card-title">
+      <div class="card-title" >
         <a href="#/:{{day.id}}">
-          <h2 class="stable">
-            {{day.title}}
+          <h2 class="stable" ng-bind-html="day.title">
+<!--            {{day.title}}-->
           </h2>
           <h4 class="stable">{{day.date | date:'mediumDate'}}</h4>
         </a>

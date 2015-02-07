@@ -59,7 +59,7 @@ angular.module('datepageModule')
         queryAPI.setDayColors();
 
         setTimeout( function () {
-          var imagesWrapper = $('#content-wrapper');
+          var imagesWrapper = $('#datepage-wrapper');
           imagesWrapper.imagesLoaded()
           .progress( onProgress )
           .always( onAlways );

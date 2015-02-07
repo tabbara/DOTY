@@ -35,43 +35,41 @@ body {
   color: #444 !important;
 }
 
-/*
-.image-loading {
-background-color: black;
-background-image: url('../img/loading.gif');
-}
-
-.image-broken {
-background-color: #be3730;
-background-image: url('../img/broken.gif');
-}
-*/
-
-/*, .image-broken img */
 .image-loading img {
   opacity: 0;
-/*
-  width: 400px;
-  height: 200px;
-*/
+}
+
+.loading {
+  padding: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.loading-container {
+  -webkit-transition: 0.1s opacity linear !important;
+  transition: 0.1s opacity linear !important;
 }
 
 /*ANIMATION*/
 .spinner-animation {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   background-color: #fff;
 
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-/*  69px;*/
+  /*  69px;*/
   right: 0;
   margin: auto auto;
 
   -webkit-animation: rotateplane 1.2s infinite ease-in-out;
   animation: rotateplane 1.2s infinite ease-in-out;
+}
+
+.spinner-animation-page {
+  background-color: #4facff;
 }
 
 @-webkit-keyframes rotateplane {
@@ -248,16 +246,16 @@ margin: 0px 0px;
   max-height: 100%;
   width: 100%;
 
-/*
+  /*
   -webkit-transition:width 10s ease-in-out, height 10s ease-in-out;
   transition:width 10s ease-in-out, height 10s ease-in-out;
-*/
+  */
 
 
-/*
+  /*
   -webkit-transition:width 1300ms ease-in-out, height 2300ms ease-in-out;
   transition:width 1300ms ease-in-out, height 1300ms ease-in-out;
-*/
+  */
 }
 
 

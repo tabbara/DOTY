@@ -184,7 +184,9 @@ angular.module("dotyApp")
       _dayObj.tagArray = [];
       $.each(_dayObj.tags, function (_tagIndex, _tagValue) {
         _dayObj.tags[_tagIndex].name = _dayObj.tags[_tagIndex].name
-        .replace("&amp;","&");
+        .replace("&amp;","&")
+        .replace("&#8220;",'"')
+        .replace("&#8221;",'"');
 
         if (_dayObj.tags[_tagIndex].level === 0) {
           _dayObj.tag = {

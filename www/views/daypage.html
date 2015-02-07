@@ -34,8 +34,8 @@
     <div>
       <img style="width: 100%;" ng-src="{{dayObj.image.large.url}}">
       </img>
-    <h1 class="padding-left content-title">
-      {{dayObj.title | uppercase}}
+    <h1 class="padding-left content-title" ng-bind-html="dayObj.title">
+<!--      {{dayObj.title | uppercase}}-->
     </h1>
 
     <!--

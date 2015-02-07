@@ -11,8 +11,9 @@ angular.module('categorypageModule')
 
   var tagArray = [pageID];
 
-  function onAlways () {
-    console.log('finished loading images');
+  function onAlways (imgLoad) {
+    console.log('finished loading images', imgLoad);
+
   }
 
   function onProgress (imgLoad, image) {
@@ -26,7 +27,7 @@ angular.module('categorypageModule')
     status: true,
     loading: $ionicLoading.show({
       template: '<div class="spinner-animation"></div>',
-      noBackdrop: true
+      noBackdrop: false
     })
   }
 
@@ -42,7 +43,7 @@ angular.module('categorypageModule')
         queryAPI.setDayColors();
 
         setTimeout( function () {
-          var imagesWrapper = $('#content-wrapper');
+          var imagesWrapper = $('#categorypage-wrapper');
           imagesWrapper.imagesLoaded()
           .progress( onProgress )
           .always( onAlways );

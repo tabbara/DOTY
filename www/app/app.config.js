@@ -58,11 +58,13 @@ angular.module("dotyApp")
     controller: "daypageCtrl"
   })
   .state('categorypage', {
+    cache: false,
     url: "/explore/:categoryID",
     templateUrl: "views/categorypage.html",
     controller: 'categorypageCtrl'
   })
   .state('datepage', {
+    cache: false,
     url: "/date/:dateID",
     templateUrl: "views/datepage.html",
     controller: 'datepageCtrl'

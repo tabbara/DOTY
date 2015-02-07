@@ -43,8 +43,8 @@
 <i id="{{day.id}}" ng-class="{'icon ion-ios7-heart': day.liked, 'icon ion-ios7-heart-outline': !day.liked}" on-tap="setFavorite({{day.id}})">
 </i>
 -->
-          <h2 class="stable">
-            {{day.title}}
+          <h2 class="stable" ng-bind-html="day.title">
+<!--            {{day.title}}-->
             <!--            <i ng-if="userData.pc_days.indexOf('{{day.id}}') > -1">Blabla</i>-->
           </h2>
           <h4 class="stable">{{day.date | date:'mediumDate'}}</h4>
