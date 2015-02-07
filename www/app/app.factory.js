@@ -247,6 +247,9 @@ angular.module("dotyApp")
     var colors = ["#ea493b", "#7fccbd", "#81c256", "#f6d24c",
                   "#9765b8", "#73a6db", "#9e4f64", "#e6b294"];
 
+    var lightercolors = ["#EE6D62", "#99D6CA", "#9ACE78", "#F8DB70",
+                  "#AC84C6", "#8FB8E2", "#B17283", "#EBC1A9"];
+
     $timeout(function () {
       $(".card-title").each(function(i) {
         this.style.background = colors[i % 8];
@@ -255,7 +258,11 @@ angular.module("dotyApp")
       $(".card-wrapper").each(function(i) {
         this.style.borderColor = colors[i % 8];
       });
-    }, 1);
+
+      $(".dayimage-container").each(function(i) {
+        this.style['background-color'] = lightercolors[i % 8];
+      });
+    }, 0, false);
 
   };
 
