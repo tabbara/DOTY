@@ -67,12 +67,17 @@ ng-click="setCategoryName('{{value}}')">
         <div class="list">
 
           <div ng-repeat="relatedday in relatedDays.days">
-            <a class="item item-thumbnail-left item-favorites" href="#/:{{relatedday.id}}">
-              <img class="image-favorites" ng-src="{{relatedday.image.thumbnail.url}}">
-              <h2>{{relatedday.title}}</h2>
-              <p>{{relatedday.date | date:'longDate'}}</p>
-              <!--        <i class="badge badge-positive badge-overlay-favorites">Blablablabla</i>         -->
-            </a>
+            <div class="related-content-image-container">
+              <img class="related-content-image" ng-src="{{relatedday.image.thumbnail.url}}">
+            </div>
+            <!--
+<a class="item item-thumbnail-left item-favorites" href="#/:{{relatedday.id}}">
+<img class="image-favorites" ng-src="{{relatedday.image.thumbnail.url}}">
+<h2>{{relatedday.title}}</h2>
+<p>{{relatedday.date | date:'longDate'}}</p>
+<i class="badge badge-positive badge-overlay-favorites">Blablablabla</i>
+</a>
+-->
           </div>
 
         </div>
