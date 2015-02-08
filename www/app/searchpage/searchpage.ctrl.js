@@ -1,5 +1,5 @@
 angular.module('searchpageModule')
-.controller('searchpageCtrl', function ($scope, queryAPI, $rootScope) {
+.controller('searchpageCtrl', function ($scope, queryAPI, $rootScope, $ionicScrollDelegate) {
 
   function onAlways () {
     console.log('finished loading images');
@@ -111,6 +111,9 @@ angular.module('searchpageModule')
                 imagesWrapper.imagesLoaded()
                 .progress( onProgress )
                 .always( onAlways );
+
+                $ionicScrollDelegate.scrollBy(0, 300, 1);
+
               }, 0, false);
 
             });
