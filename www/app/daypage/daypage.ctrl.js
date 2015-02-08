@@ -1,19 +1,50 @@
 angular.module('daypageModule')
-.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $rootScope, signinFac, $ionicPopover) {
+.controller('daypageCtrl', function($scope, queryAPI, $stateParams, $rootScope, signinFac, $ionicPopover, $ionicLoading) {
 
   var pageID = $stateParams.dayID.replace(/:/g,"");
+  //  <div class="spinner-animation"></div>
+
+  $scope.relatedDays = {
+    loading: true,
+  }
+
+  $scope.pageLoading = {
+    status: true,
+    loading: $ionicLoading.show({
+      template: '<div class="spinner-animation"></div>',
+      noBackdrop: false
+    })
+  }
+
+  function onProgress (imgLoad, image) {
+    console.log('loaded: ' + image.img.src);
+    var $imageEl = $(image.img).parent();
+    $(image.img).css('opacity', 1);
+//    $imageEl.removeClass('image-loading');
+//    $imageEl.children(".spinner-animation").remove();
+  }
 
   queryAPI.getDayById([pageID])
   .then(function(data) {
     if (data.status.code === 100) {
+      $scope.pageLoading.loading = false;
+      $ionicLoading.hide();
       queryAPI.cleanDay(data.result)
       .then(function (daysObject) {
         $scope.dayObj = daysObject[0];
+
+        setTimeout( function () {
+          var imagesWrapper = $('.content-image-container');
+          imagesWrapper.imagesLoaded()
+          .progress( onProgress );
+        }, 0, false);
 
         if ($scope.dayObj.tagArray.length > 0) {
           queryAPI.getDayByTag($scope.dayObj.tagArray, 5)
           .then(function(data) {
             if(data.status.code === 100) {
+              $scope.relatedDays.loading = false;
+
               var responseLength = data.result.length;
               var removeEntry = -1;
               if (responseLength) {
@@ -31,21 +62,32 @@ angular.module('daypageModule')
               }
               queryAPI.cleanDay(data.result)
               .then(function (daysObject) {
-                $scope.relatedDays = daysObject;
+                $scope.relatedDays.days = daysObject;
               });
             } else {
+              $scope.relatedDays.loading = false;
               console.log('Error retrieving DaysByTag: ' + data.status.code);
             }
           }, function (status) {
+            $scope.relatedDays.loading = false;
             console.log(status);
           });
+        } else {
+          console.log('no tags so no related content');
+          $scope.relatedDays.loading = false;
         }
 
       });
     } else {
+      $scope.pageLoading.loading = false;
+      $ionicLoading.hide();
+      $scope.relatedDays.loading = false;
       console.log('Error retrieving DayByID: ' + data.status.code);
     }
   }, function (status) {
+    $scope.pageLoading.loading = false;
+    $ionicLoading.hide();
+    $scope.relatedDays.loading = false;
     console.log(status);
   });
 

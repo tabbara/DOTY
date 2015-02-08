@@ -1,44 +1,28 @@
 <ion-view title="Days of the Year">
 
   <ion-nav-bar class="bar-dark">
-
-    <!--
-<ion-nav-buttons side="left">
-<button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
-</ion-nav-buttons>
--->
-
     <ion-nav-back-button class="button-clear">
       <i class="ion-arrow-left-c"></i> Back
     </ion-nav-back-button>
-
-    <!--    class="button button-icon ion-arrow-left-c"-->
-
-    <!--
-<ion-nav-buttons side="left">
-<a ui-sref="/"><button class="button button-icon ion-arrow-left-c"></button></a>
-</ion-nav-buttons>
--->
-
     <ion-nav-buttons side="right">
-      <button class="button button-icon" ng-click="bookmarkDay()"
-              ng-class="dayObj.bookmarked ? 'ion-ios7-heart' : 'ion-ios7-heart-outline'">
+      <button class="button-clear" ng-click="bookmarkDay()">
+        <div ng-class="dayObj.bookmarked ? 'heart-animation' : 'heart-outline'"></div>
       </button>
-
       <button class="button button-icon ion-more" ng-click="openPopover($event)"></button>
     </ion-nav-buttons>
-
   </ion-nav-bar>
 
   <ion-content has-bouncing="true">
-    <div>
-      <img style="width: 100%;" ng-src="{{dayObj.image.large.url}}">
-      </img>
-    <h1 class="padding-left content-title" ng-bind-html="dayObj.title">
-<!--      {{dayObj.title | uppercase}}-->
-    </h1>
 
-    <!--
+    <div ng-if="!pageLoading.loading">
+      <div class="content-image-container">
+        <img class="content-image" ng-src="{{dayObj.image.large.url}}">
+      </div>
+      <h1 class="padding-left content-title" ng-bind-html="dayObj.title">
+        <!--      {{dayObj.title | uppercase}}-->
+      </h1>
+
+      <!--
 <p class="item-text-wrap">
 <a ng-repeat="(key, value) in dayObj.tags"
 class="button button-small button-positive"
@@ -49,47 +33,53 @@ ng-click="setCategoryName('{{value}}')">
 </p>
 -->
 
-    <!--    <div class="card">-->
-    <div class="item-borderless">
-      <!--                  item-text-wrap">-->
-      <i class="content-text">{{dayObj.date | date:'mediumDate'}}</i>
-      <a href="#/explore/:{{dayObj.tag.slug}}"
-         class="badge badge-positive"
-         ng-click="setCategoryName(dayObj.tag.name)" ng-if="dayObj.tag.name">
-        {{dayObj.tag.name}}
-      </a>
-    </div>
-    <!--    </div>    -->
-
-    <hr class="content-line">
-
-    <p class="item-text-wrap" ng-bind-html="dayObj.content"></p>
-
-    </div>
-
-  <div ng-if="relatedDays">
-    <div class="item">
-      <h2 class="text-center">
-        <!--        Related upcoming days-->
-        You might also enjoy
-      </h2>
-    </div>
-
-    <div class="list">
-
-      <div ng-repeat="relatedday in relatedDays">
-        <a class="item item-thumbnail-left item-favorites" href="#/:{{relatedday.id}}">
-          <img class="image-favorites" ng-src="{{relatedday.image.thumbnail.url}}">
-          <h2>{{relatedday.title}}</h2>
-          <p>{{relatedday.date | date:'longDate'}}</p>
-          <!--        <i class="badge badge-positive badge-overlay-favorites">Blablablabla</i>         -->
+      <!--    <div class="card">-->
+      <div class="item-borderless">
+        <!--                  item-text-wrap">-->
+        <i class="content-text">{{dayObj.date | date:'mediumDate'}}</i>
+        <a href="#/explore/:{{dayObj.tag.slug}}"
+           class="badge badge-positive"
+           ng-click="setCategoryName(dayObj.tag.name)" ng-if="dayObj.tag.name">
+          {{dayObj.tag.name}}
         </a>
       </div>
+      <!--    </div>    -->
 
+      <hr class="content-line">
+
+      <p class="item-text-wrap" ng-bind-html="dayObj.content"></p>
+
+
+
+      <div ng-if="relatedDays.loading || relatedDays.days">
+        <div class="item">
+          <h2 class="text-center">
+            <!--        Related upcoming days-->
+            You might also enjoy
+          </h2>
+        </div>
+
+        <div ng-if="relatedDays.loading">
+          <br>
+          <div class="spinner-animation spinner-daypage"></div>
+        </div>
+
+        <div class="list">
+
+          <div ng-repeat="relatedday in relatedDays.days">
+            <a class="item item-thumbnail-left item-favorites" href="#/:{{relatedday.id}}">
+              <img class="image-favorites" ng-src="{{relatedday.image.thumbnail.url}}">
+              <h2>{{relatedday.title}}</h2>
+              <p>{{relatedday.date | date:'longDate'}}</p>
+              <!--        <i class="badge badge-positive badge-overlay-favorites">Blablablabla</i>         -->
+            </a>
+          </div>
+
+        </div>
+
+        <br>
+      </div>
     </div>
-
-    <br>
-  </div>
 
   </ion-content>
 
