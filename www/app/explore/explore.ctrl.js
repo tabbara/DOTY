@@ -1,10 +1,20 @@
 angular.module('exploreModule')
-.controller('exploreCtrl', function($scope, queryAPI, $rootScope) {
+.controller('exploreCtrl', function($scope, queryAPI, $rootScope, $ionicLoading) {
+
+  $scope.pageLoading = {
+    status: true,
+    loading: $ionicLoading.show({
+      template: '<div class="spinner-animation"></div>',
+      noBackdrop: false
+    })
+  }
 
   queryAPI.getTags()
   .then(function(data) {
-    if(data.status.code === 100)
-    {
+    if(data.status.code === 100) {
+      $scope.pageLoading.status = false;
+      $ionicLoading.hide();
+
       var tags = data.result;
       $scope.categories = [];
 
@@ -19,9 +29,13 @@ angular.module('exploreModule')
       queryAPI.setCategoryColors();
 
     } else {
+      $scope.pageLoading.status = false;
+      $ionicLoading.hide();
       console.log('Error retrieving Tags: ' + data.status.code);
     }
   }, function (status) {
+    $scope.pageLoading.status = false;
+    $ionicLoading.hide();
     $scope.categories = [];
     console.log(status);
   });
