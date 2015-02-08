@@ -35,6 +35,7 @@ angular.module("dotyApp")
     controller: "exploreCtrl"
   })
   .state('favorites', {
+    cache: false,
     url: "/favorites",
     templateUrl: "views/favorites.html",
     controller: "favoritesCtrl"
