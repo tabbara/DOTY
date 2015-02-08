@@ -68,6 +68,11 @@ body {
   animation: rotateplane 1.2s infinite ease-in-out;
 }
 
+.spinner-daypage {
+  background-color: #3896f5;
+  position: relative;
+}
+
 .spinner-animation-page {
   background-color: #4facff;
 }
@@ -174,13 +179,54 @@ border-left: 8px solid #444 !important;
   line-height: 44px;
 }
 
+/*HEART ANIMATION*/
+
+/*
+.ion-ios7-heart {
+  color: #FF4D00 !important;
+}
+
+.ion-ios7-outline {
+  color: #fff !important;
+}
+*/
+
+.heart-outline {
+  background: url('../img/heart-animation.png') 0 0 no-repeat;
+  width: 32px;
+  height: 28px;
+}
+
+.heart-animation {
+  background: url('../img/heart-animation.png') no-repeat -64px 0;
+  width: 32px;
+  height: 28px;
+  animation: heartAnimation 0.7s;
+  -webkit-animation: heartAnimation 0.7s;
+}
+
+@keyframes heartAnimation {
+  0% {transform: scale(1,1) }
+  20% {transform: scale(0.9,0.9) }
+  50% {transform: scale(1.15,1.15) }
+  80% {transform: scale(1,1) }
+}
+
+@-webkit-keyframes heartAnimation {
+  0% {-webkit-transform: scale(1,1)}
+  20% {-webkit-transform: scale(0.9,0.9) }
+  50% {-webkit-transform: scale(1.15,1.15) }
+  80% {-webkit-transform: scale(1,1) }
+}
+
+/*HEART ANIMATION END*/
+
+
 /*
 .button-small {
 box-shadow: inset 0px 1px 0px #ddd, 0px 2px 0px #c4cadb;
 }
 */
-
-
 
 /*
 .button.ng-hide{
