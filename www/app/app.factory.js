@@ -175,18 +175,16 @@ angular.module("dotyApp")
     var deferred = $q.defer();
 
     $.each(daysArray, function (index, _dayObj) {
-      _dayObj.title = _dayObj.title
-      .replace("&#8217;","'")
-      .replace("&#038;","&")
-      .replace("&#x00e9;","é");
+//      _dayObj.title = _dayObj.title
+//      .replace("&#8217;","'")
+//      .replace("&#038;","&")
+//      .replace("&#x00e9;","é");
 
       _dayObj.tag = {};
       _dayObj.tagArray = [];
       $.each(_dayObj.tags, function (_tagIndex, _tagValue) {
         _dayObj.tags[_tagIndex].name = _dayObj.tags[_tagIndex].name
-        .replace("&amp;","&")
-        .replace("&#8220;",'"')
-        .replace("&#8221;",'"');
+        .replace("&amp;","&");
 
         if (_dayObj.tags[_tagIndex].level === 0) {
           _dayObj.tag = {
