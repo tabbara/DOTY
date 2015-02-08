@@ -13,16 +13,26 @@
   </ion-nav-bar>
 
   <ion-content has-bouncing="true" class="custom-content">
-    <div class="list">
+    <div class="list" ng-if="!pageLoading.status">
 
       <div class="card" ng-if="!days">
         <h4 class="text-center">
           You have no favorites
         </h4>
         <div class="item item-text-wrap">
-          <p>
-            To add Days to your favorites simply open any Day and press the <i class="icon ion-ios7-heart assertive"></i> button in the top right corner!
-          </p>
+          <div>
+            To add Days to your favorites simply open any Day and press the
+            <div class="heart-animation" style="display: inline-block; transform: scale(0.75,0.75); margin: -7px -3px;"></div>
+            button in the top right corner!
+          </div>
+          <br>
+          <hr class="content-line">
+          <br>
+          <h2>What is this good for?</h2>
+          <span>Favorites help you keep track of the days you love! Your favorite days are added to your <b>Personal Calendar</b> together with staff-picked days we think you'll like.</span>
+          <br><br>
+          <span>And we'll make sure you never have to miss your Day of the Year as we'll notify you on your favorites days!</span>
+          <!--        <i class="icon ion-ios7-heart assertive"></i>-->
         </div>
       </div>
 
