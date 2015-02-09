@@ -3,20 +3,35 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/opensans-regular.ttf") format("truetype"), url("../fonts/opensans-regular.woff") format("woff"), url("../fonts/opensans-regular.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 html {
   width: 100%;
+  /*  font-family: verdana, arial, sans-serif !important;*/
+}
+
+.font-sans {
+  font-family: sans-serif !important;
+}
+
+.font-raleway {
+  font-family: raleway !important;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  /*  font-family: 'Raleway', sans-serif !important;*/
+  /*  font-family: 'Open Sans', 'Raleway', sans-serif !important;*/
   /*  'Raleway', */
   /*  -webkit-font-smoothing: antialiased;*/
 }
-
 
 body {
   font-family: sans-serif !important;
@@ -112,7 +127,7 @@ height: 200px;
   transition: opacity 0.6s;
 }
 
-/*SIDEMENU*/
+/*----------SIDEMENU---------*/
 /*
 .sidemenu {
 border-left: 8px solid #444 !important;
@@ -123,6 +138,12 @@ border-left: 8px solid #444 !important;
   background: #CCDDFA !important;
   border-left: 8px solid #4a87ee !important;
 }
+
+.sidemenu-link {
+  font-family: raleway;
+}
+
+/*-------SIDEMENU END-------*/
 
 /*LOGIN*/
 
@@ -688,8 +709,8 @@ hr.content-line {
   color: #e0e0e0;
   background-color: #e0e0e0;
   width: 92%;
-  margin-top: 12px;
-  margin-bottom: 14px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .item-borderless {
@@ -709,23 +730,59 @@ ion-popover-view.fit ion-content {
   margin-top: 10px !important;
 }
 
+.related-content-list {
+  list-style-type: none;
+  width: 500px;
+}
+
+/*
+li img {
+float: left;
+margin: 0 15px 0 0;
+border-radius: 8px;
+}
+*/
+
+.related-content-title {
+  /*  word-wrap: break-word;*/
+  font-family: roboto;
+  font-size: 16px;
+  color: #282828;
+  margin-top: 4px;
+}
+
+.related-content-list p {
+  font: 500 15px raleway;
+  color: rgb(65, 65, 65);
+}
+
+.related-content-list-item {
+  padding: 10px 10px 10px 0;
+  overflow: auto;
+  border-bottom: solid 1px rgb(216, 216, 216);
+}
+
 .related-content-image-container {
-  width: 140px;
-  height: 140px;
+  margin: 0 14px 0 14px;
+  width: 88px;
+  height: 77px;
   position: relative;
   overflow: hidden;
+  float: left;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px -1px;
 }
 
 .related-content-image {
-  /* height: 100%; */
-  /* min-height: 100%; */
-  max-height: 100%;
+  height: 100%;
   top: 50%;
-  /* left: 50%; */
   position: absolute;
-  margin-left: -126px;
   margin-left: -50%;
-  margin-top: -50%;
+  margin-top: -43.75%;
+  /* margin-top: -50%;  */
+  /* left: 50%; */
+  /* min-height: 100%; */
+  /*  margin-left: -126px;*/
 }
 
 /*----------SEARCH---------*/
@@ -735,6 +792,11 @@ ion-popover-view.fit ion-content {
 
 .no-margin {
   margin: 0px;
+}
+
+.search-card {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 /*----------EXPLORE---------*/
