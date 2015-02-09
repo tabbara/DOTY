@@ -26,53 +26,28 @@
       <div id="search-box" class="bar item-input-inset">
         <div class="item-input-wrapper">
           <i class="icon ion-ios7-search-strong placeholder-icon"></i>
-          <input type="search" placeholder="Search Days of the Year" ng-model="data.searchQuery">
+          <input class="font-sans" type="search" placeholder="Search Days of the Year" ng-model="data.searchQuery">
         </div>
 
         <input type="submit" id="submit" class="button button-clear button-dark" value="Go"/>
 
-        <!--
-<button class="button button-clear button-dark" ng-click="search()">
-Go
-</button>
--->
       </div>
     </form>
 
-    <!--
-<h4>{{madeSearch.found}}</h4>
-<h4>{{madeSearch.finished}}</h4>
--->
-
-    <!--    <h4>a</h4>-->
-
-    <div class="card" ng-if="!madeSearch.found && madeSearch.finished">
-      <h4 class="text-center">
+    <div class="card search-card" ng-if="!madeSearch.found && madeSearch.finished">
+      <h4 class="text-center font-raleway">
         You search returned no results
       </h4>
     </div>
 
-    <!--
-<div class="card" ng-if="!days">
-<h4 class="text-center">
-You have no favorites
-</h4>
-<div class="item item-text-wrap">
-<p>
-To add Days to your favorites simply open any Day and press the <i class="icon ion-ios7-heart assertive"></i> button in the top right corner!
-</p>
-</div>
-</div>
--->
-
-    <div class="card" ng-if="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
-      <h4 class="text-center">
+    <div class="card search-card" ng-if="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
+      <h4 class="text-center font-raleway">
         Your search returned {{madeSearch.results}} results
       </h4>
     </div>
 
-    <div class="card" ng-if="!madeSearch.started">
-      <h4 class="text-center">
+    <div class="card search-card" ng-if="!madeSearch.started">
+      <h4 class="text-center font-raleway">
         Enter a search query in the box above
       </h4>
     </div>
