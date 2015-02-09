@@ -19,7 +19,7 @@ angular.module('datepageModule')
     status: true,
     loading: $ionicLoading.show({
       template: '<div class="spinner-animation"></div>',
-      noBackdrop: true
+      noBackdrop: false
     })
   }
 
