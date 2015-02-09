@@ -64,12 +64,18 @@ ng-click="setCategoryName('{{value}}')">
           <div class="spinner-animation spinner-daypage"></div>
         </div>
 
-        <div class="list">
-
+        <!--        <div class="list">-->
+        <ul class="related-content-list">
           <div ng-repeat="relatedday in relatedDays.days">
-            <div class="related-content-image-container">
-              <img class="related-content-image" ng-src="{{relatedday.image.thumbnail.url}}">
-            </div>
+
+            <li class="related-content-list-item">
+              <div class="related-content-image-container">
+                <img class="related-content-image" ng-src="{{relatedday.image.thumbnail.url}}">
+              </div>
+              <h3 class="related-content-title" ng-bind-html="relatedday.title"></h3>
+              <p>{{relatedday.date | date:'longDate'}}</p>
+            </li>
+
             <!--
 <a class="item item-thumbnail-left item-favorites" href="#/:{{relatedday.id}}">
 <img class="image-favorites" ng-src="{{relatedday.image.thumbnail.url}}">
@@ -79,8 +85,9 @@ ng-click="setCategoryName('{{value}}')">
 </a>
 -->
           </div>
+        </ul>
 
-        </div>
+        <!--        </div>-->
 
         <br>
       </div>
