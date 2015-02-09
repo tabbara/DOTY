@@ -7,7 +7,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
 
     <!--CSS-->
-    <link href='http://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:600' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
@@ -86,7 +86,7 @@
           <ion-content>
 
             <div class="list">
-              <a ng-repeat="view in views" class="item item-stable item-icon-left menu-close sidemenu" ui-sref="{{view.url}}" ui-sref-active="active">
+              <a ng-repeat="view in views" class="item item-stable item-icon-left menu-close sidemenu sidemenu-link" ui-sref="{{view.url}}" ui-sref-active="active">
                 <i class="icon {{view.icon}}"></i>
                 {{view.title}}
               </a>
