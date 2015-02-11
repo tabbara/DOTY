@@ -35,19 +35,19 @@
     </form>
 
     <div class="card search-card" ng-if="!madeSearch.found && madeSearch.finished">
-      <h4 class="text-center font-raleway">
+      <h4 class="text-center">
         You search returned no results
       </h4>
     </div>
 
     <div class="card search-card" ng-if="madeSearch.found && madeSearch.finished && madeSearch.results > 0">
-      <h4 class="text-center font-raleway">
+      <h4 class="text-center">
         Your search returned {{madeSearch.results}} results
       </h4>
     </div>
 
     <div class="card search-card" ng-if="!madeSearch.started">
-      <h4 class="text-center font-raleway">
+      <h4 class="text-center">
         Enter a search query in the box above
       </h4>
     </div>
