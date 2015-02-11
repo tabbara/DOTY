@@ -819,6 +819,12 @@ ion-popover-view.fit ion-content {
   margin-top: 10px !important;
 }
 
+
+/*----------DAYLIST---------*/
+.daylist {
+ background-color: white;
+}
+
 .daylist-title {
   /*  word-wrap: break-word;*/
   font-size: 16px;
