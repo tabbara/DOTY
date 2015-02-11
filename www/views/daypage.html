@@ -1,11 +1,12 @@
-<ion-view title="Days of the Year">
+<ion-view>
+  <!--  title="Days of the Year"-->
 
   <ion-nav-bar class="bar-dark">
     <ion-nav-back-button class="button-clear">
       <i class="ion-arrow-left-c"></i> Back
     </ion-nav-back-button>
     <ion-nav-buttons side="right">
-      <button class="button-clear" ng-click="bookmarkDay()">
+      <button class="button-clear heart-container" ng-click="bookmarkDay()">
         <div ng-class="dayObj.bookmarked ? 'heart-animation' : 'heart-outline'"></div>
       </button>
       <button class="button button-icon ion-more" ng-click="openPopover($event)"></button>
@@ -69,11 +70,15 @@ ng-click="setCategoryName('{{value}}')">
           <div ng-repeat="relatedday in relatedDays.days">
 
             <li class="related-content-list-item">
-              <div class="related-content-image-container">
-                <img class="related-content-image" ng-src="{{relatedday.image.thumbnail.url}}">
-              </div>
-              <h3 class="related-content-title" ng-bind-html="relatedday.title"></h3>
-              <p>{{relatedday.date | date:'longDate'}}</p>
+              <a ui-sref="daypage({ dayID: relatedday.id })">
+
+                <div class="related-content-image-container">
+                  <img class="related-content-image" ng-src="{{relatedday.image.thumbnail.url}}">
+                </div>
+
+                <h3 class="related-content-title" ng-bind-html="relatedday.title"></h3>
+                <p>{{relatedday.date | date:'longDate'}}</p>
+              </a>
             </li>
 
             <!--
