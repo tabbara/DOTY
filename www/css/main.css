@@ -5,9 +5,52 @@
 
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/opensans-regular.ttf") format("truetype"), url("../fonts/opensans-regular.woff") format("woff"), url("../fonts/opensans-regular.svg") format("svg");
+  src: url("../fonts/opensans-regular.ttf") format("truetype"),
+    url("../fonts/opensans-regular.woff") format("woff"),
+    url("../fonts/opensans-regular.svg") format("svg");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "Ionicons";
+  src: url("../fonts/ionicons.eot?v=1.5.2");
+  src: url("../fonts/ionicons.eot?v=1.5.2#iefix") format("embedded-opentype"),
+    url("../fonts/ionicons.ttf?v=1.5.2") format("truetype"),
+    url("../fonts/ionicons.woff?v=1.5.2") format("woff"),
+    url("../fonts/ionicons.svg?v=1.5.2#Ionicons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'raleway-r';
+  src: url("../fonts/raleway-r.eot");
+  src: url("../fonts/raleway-r.eot#iefix") format("embedded-opentype"),
+    url('../fonts/raleway-r.woff') format('woff'),
+    url('../fonts/raleway-r.ttf') format('truetype'),
+    url('../fonts/raleway-r.svg#raleway-r') format('svg');
+}
+
+.font-raleway {
+  font-family: 'raleway-r', sans-serif !important;
+}
+
+@font-face {
+  font-family: 'raleway-b';
+  src: url("../fonts/raleway-b.eot");
+  src: url("../fonts/raleway-b.eot#iefix") format("embedded-opentype"),
+    url('../fonts/raleway-b.woff') format('woff'),
+    url('../fonts/raleway-b.ttf') format('truetype'),
+    url('../fonts/raleway-b.svg#raleway-b') format('svg');
+}
+
+.font-raleway-bold {
+  font-family: 'raleway-b', sans-serif !important;
+}
+
+.font-sans {
+  font-family: sans-serif !important;
 }
 
 a {
@@ -19,18 +62,10 @@ html {
   /*  font-family: verdana, arial, sans-serif !important;*/
 }
 
-.font-sans {
-  font-family: sans-serif !important;
-}
 
-.font-raleway {
-  font-family: raleway !important;
-}
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  /*  font-family: 'Open Sans', 'Raleway', sans-serif !important;*/
-  /*  'Raleway', */
-  /*  -webkit-font-smoothing: antialiased;*/
+  font-family: 'raleway-b', sans-serif !important;
 }
 
 body {
@@ -133,15 +168,54 @@ height: 200px;
 border-left: 8px solid #444 !important;
 }
 */
+.sidemenu {
+  /*  line-height: 35px !important;*/
+  border-bottom: solid 1px rgb(216, 216, 216);
+  border-left: 7px solid #fff;
+  padding: 10px 10px 10px 10px;
+}
 
 .sidemenu.active {
   background: #CCDDFA !important;
-  border-left: 8px solid #4a87ee !important;
+  border-left: 7px solid #4a87ee !important;
 }
 
-.sidemenu-link {
-  font-family: raleway;
+.sidemenu a {
+  color: #212121;
+  padding-left: 20px;
+  font-family: raleway-r !important;
+  font-size: 18px;
 }
+
+nav > ul > li:before {
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  height: 34px;
+  width: 34px;
+  font-family: "Ionicons" !important;
+  line-height: 34px !important;
+  background-color: #00A4E4;
+}
+
+.sm-0:before {background-color: #ea493b !important}
+.sm-1:before {background-color: #7fccbd !important}
+.sm-2:before {background-color: #81c256 !important}
+.sm-3:before {background-color: #f6d24c !important}
+.sm-4:before {background-color: #9765b8 !important}
+.sm-5:before {background-color: #73a6db !important}
+.sm-6:before {background-color: #9e4f64 !important}
+.sm-7:before {background-color: #e6b294 !important}
+
+/*
+    var colors = ["#ea493b", "#7fccbd", "#81c256", "#f6d24c",
+                  "#9765b8", "#73a6db", "#9e4f64", "#e6b294"];
+
+    var lightercolors = ["#EE6D62", "#99D6CA", "#9ACE78", "#F8DB70",
+                  "#AC84C6", "#8FB8E2", "#B17283", "#EBC1A9"];
+*/
 
 /*-------SIDEMENU END-------*/
 
@@ -211,17 +285,21 @@ color: #FF4D00 !important;
 color: #fff !important;
 }
 */
+.heart-container {
+  min-height: 32px;
+}
 
 .heart-outline {
   background: url('../img/heart-animation.png') 0 0 no-repeat;
-  width: 32px;
-  height: 28px;
+  width: 28px;
+  height: 25px;
 }
 
 .heart-animation {
-  background: url('../img/heart-animation.png') no-repeat -64px 0;
-  width: 32px;
-  height: 28px;
+  background: url('../img/heart-animation.png') no-repeat -56px 0;
+  /*  no-repeat -56x 0;*/
+  width: 28px;
+  height: 25px;
   animation: heartAnimation 0.7s;
   -webkit-animation: heartAnimation 0.7s;
 }
@@ -401,6 +479,17 @@ margin: 0px 0px;
   background-color: #faf1e7;
 }
 
+input {
+font-family: raleway-r, sans-serif;
+}
+
+input.button {
+ font-family: raleway-b, sans-serif;
+}
+
+button {
+font-family: raleway-b, sans-serif;
+}
 
 /*----------HOME---------*/
 
@@ -506,7 +595,7 @@ min-width: 120px !important;
 }
 
 .calender-inner-wrap {
-  border: 1px solid #e5e5e5;
+  border: 1px solid #d8d8d8;
   border-width: 0px 1px 1px 1px;
 }
 
@@ -731,8 +820,10 @@ ion-popover-view.fit ion-content {
 }
 
 .related-content-list {
+  /*
   list-style-type: none;
   width: 500px;
+  */
 }
 
 /*
@@ -745,14 +836,13 @@ border-radius: 8px;
 
 .related-content-title {
   /*  word-wrap: break-word;*/
-  font-family: roboto;
   font-size: 16px;
   color: #282828;
   margin-top: 4px;
 }
 
 .related-content-list p {
-  font: 500 15px raleway;
+  font: 500 15px raleway-r;
   color: rgb(65, 65, 65);
 }
 
@@ -770,7 +860,7 @@ border-radius: 8px;
   overflow: hidden;
   float: left;
   border-radius: 4px;
-  box-shadow: 0 2px 2px -1px;
+/*  box-shadow: 0 2px 2px -1px black;*/
 }
 
 .related-content-image {
