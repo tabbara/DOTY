@@ -9,12 +9,12 @@ angular.module('dotyApp')
   };
 
   $scope.views = [
-    { title: 'Home', url: "home", icon: "ion-home" },
-    { title: 'Calendar', url: "calendar", icon: "ion-ios7-calendar-outline" },
-    { title: 'Explore', url: "explore", icon: "ion-earth" },
-    { title: 'Favorites', url: "favorites", icon: "ion-ios7-heart" },
-    { title: 'Profile', url: "profile", icon: "ion-person" },
-    { title: 'Settings', url: "settings", icon: "ion-ios7-gear" }
+    { title: 'Home', url: "home", icon: "ion-home", color: 'sm-0' },
+    { title: 'Calendar', url: "calendar", icon: "ion-ios7-calendar-outline", color: 'sm-1' },
+    { title: 'Explore', url: "explore", icon: "ion-earth", color: 'sm-2' },
+    { title: 'Favorites', url: "favorites", icon: "ion-ios7-heart", color: 'sm-3' },
+    { title: 'Profile', url: "profile", icon: "ion-person", color: 'sm-4' },
+    { title: 'Settings', url: "settings", icon: "ion-ios7-gear", color: 'sm-5' }
   ];
 
 //  $scope.setFavorite = function (dayid) {
