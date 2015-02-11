@@ -44,7 +44,6 @@ ng-click="setCategoryName('{{value}}')">
           {{dayObj.tag.name}}
         </a>
       </div>
-      <!--    </div>    -->
 
       <hr class="content-line">
 
@@ -55,7 +54,6 @@ ng-click="setCategoryName('{{value}}')">
       <div ng-if="relatedDays.loading || relatedDays.days">
         <div class="item">
           <h2 class="text-center">
-            <!--        Related upcoming days-->
             You might also enjoy
           </h2>
         </div>
@@ -65,7 +63,6 @@ ng-click="setCategoryName('{{value}}')">
           <div class="spinner-animation spinner-daypage"></div>
         </div>
 
-        <!--        <div class="list">-->
         <ul class="daylist">
           <div ng-repeat="relatedday in relatedDays.days">
 
