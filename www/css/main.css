@@ -819,40 +819,25 @@ ion-popover-view.fit ion-content {
   margin-top: 10px !important;
 }
 
-.related-content-list {
-  /*
-  list-style-type: none;
-  width: 500px;
-  */
-}
-
-/*
-li img {
-float: left;
-margin: 0 15px 0 0;
-border-radius: 8px;
-}
-*/
-
-.related-content-title {
+.daylist-title {
   /*  word-wrap: break-word;*/
   font-size: 16px;
   color: #282828;
   margin-top: 4px;
 }
 
-.related-content-list p {
+.daylist p {
   font: 500 15px raleway-r;
   color: rgb(65, 65, 65);
 }
 
-.related-content-list-item {
+.daylist-item {
   padding: 10px 10px 10px 0;
   overflow: auto;
   border-bottom: solid 1px rgb(216, 216, 216);
 }
 
-.related-content-image-container {
+.daylist-image-container {
   margin: 0 14px 0 14px;
   width: 88px;
   height: 77px;
@@ -863,16 +848,12 @@ border-radius: 8px;
 /*  box-shadow: 0 2px 2px -1px black;*/
 }
 
-.related-content-image {
+.daylist-image {
   height: 100%;
   top: 50%;
   position: absolute;
   margin-left: -50%;
   margin-top: -43.75%;
-  /* margin-top: -50%;  */
-  /* left: 50%; */
-  /* min-height: 100%; */
-  /*  margin-left: -126px;*/
 }
 
 /*----------SEARCH---------*/
