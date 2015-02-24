@@ -1,5 +1,5 @@
 angular.module('categorypageModule')
-.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope, $ionicLoading) {
+.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope, $ionicLoading, $ionicPopover) {
 
   var pageID = $stateParams.categoryID.replace(/:/g,"");
 
@@ -13,7 +13,6 @@ angular.module('categorypageModule')
 
   function onAlways (imgLoad) {
     console.log('finished loading images', imgLoad);
-
   }
 
   function onProgress (imgLoad, image) {
@@ -61,4 +60,35 @@ angular.module('categorypageModule')
     console.log(status);
   });
 
+  $ionicPopover.fromTemplateUrl('modals/showCategories.html', {
+    scope: $scope,
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
+
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+    console.log('Opening showMore popover');
+  };
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+    console.log('Closing showMore popover');
+  };
+  //Cleanup the popover when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.popover.remove();
+    console.log('Destroying showMore popover');
+  });
+
+  $scope.subcategories = [];
+  for (var i = 0; i < $rootScope.categoryList.length; i++) {
+    if ($rootScope.categoryList[i].slug === pageID) {
+      $scope.subcategories = $rootScope.categoryList[i].children;
+      //        break;
+    }
+  }
+
+  $scope.setSubcategory = function (slug) {
+    console.log('setting to: ' + slug);
+  }
 });

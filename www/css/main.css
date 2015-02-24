@@ -210,11 +210,11 @@ nav > ul > li:before {
 .sm-7:before {background-color: #e6b294 !important}
 
 /*
-    var colors = ["#ea493b", "#7fccbd", "#81c256", "#f6d24c",
-                  "#9765b8", "#73a6db", "#9e4f64", "#e6b294"];
+var colors = ["#ea493b", "#7fccbd", "#81c256", "#f6d24c",
+"#9765b8", "#73a6db", "#9e4f64", "#e6b294"];
 
-    var lightercolors = ["#EE6D62", "#99D6CA", "#9ACE78", "#F8DB70",
-                  "#AC84C6", "#8FB8E2", "#B17283", "#EBC1A9"];
+var lightercolors = ["#EE6D62", "#99D6CA", "#9ACE78", "#F8DB70",
+"#AC84C6", "#8FB8E2", "#B17283", "#EBC1A9"];
 */
 
 /*-------SIDEMENU END-------*/
@@ -264,6 +264,12 @@ nav > ul > li:before {
   background-color: #3498db;
   border-left:solid 1px #6fbaec;
   box-shadow: inset 0px 1px 0px #73b0d8, 0px 3px 0px #2980b9;
+}
+
+.button-custom-icon:after {
+  line-height: 46px !important;
+  padding-left: 4px !important;
+  position: relative;
 }
 
 .button {
@@ -480,15 +486,15 @@ margin: 0px 0px;
 }
 
 input {
-font-family: raleway-r, sans-serif;
+  font-family: raleway-r, sans-serif;
 }
 
 input.button {
- font-family: raleway-b, sans-serif;
+  font-family: raleway-b, sans-serif;
 }
 
 button {
-font-family: raleway-b, sans-serif;
+  font-family: raleway-b, sans-serif;
 }
 
 /*----------HOME---------*/
@@ -822,7 +828,7 @@ ion-popover-view.fit ion-content {
 
 /*----------DAYLIST---------*/
 .daylist {
- background-color: white;
+  background-color: white;
 }
 
 .daylist-title {
@@ -851,7 +857,8 @@ ion-popover-view.fit ion-content {
   overflow: hidden;
   float: left;
   border-radius: 4px;
-/*  box-shadow: 0 2px 2px -1px black;*/
+  box-shadow: 0 1px 1px -1px black;
+  /*  box-shadow: 0 2px 2px -1px black;*/
 }
 
 .daylist-image {

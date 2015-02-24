@@ -2,16 +2,16 @@
 
   <ion-nav-bar class="custom-bar">
 
-<!--
-    <ion-nav-buttons side="left">
-      <a ui-sref="explore"><button class="button button-icon ion-arrow-left-c"></button></a>
-    </ion-nav-buttons>
+    <!--
+<ion-nav-buttons side="left">
+<a ui-sref="explore"><button class="button button-icon ion-arrow-left-c"></button></a>
+</ion-nav-buttons>
 -->
 
-<!--
-    <ion-nav-buttons side="left">
-      <button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
-    </ion-nav-buttons>
+    <!--
+<ion-nav-buttons side="left">
+<button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
+</ion-nav-buttons>
 -->
 
     <ion-nav-back-button class="button-clear custom-back-button">
@@ -28,19 +28,23 @@
 
   <ion-content has-bouncing="true" class="custom-content" id="categorypage-wrapper">
 
+    <div style="padding-left: 10px; padding-top: 10px;">
+      <button ng-click="openPopover($event)" class="button icon-right ion-chevron-down buttom-custom button-custom-icon button-blue">Filter by Subcategory</button>
+    </div>
+
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
-          <div class="image-loading dayimage-container">
-            <div class="spinner-animation"></div>
-            <img ng-src="{{day.image.large.url}}" class="day-image">
-          </div>
-          <i class="badge badge-positive badge-overlay">{{day.tag.name}}</i>
+        <div class="image-loading dayimage-container">
+          <div class="spinner-animation"></div>
+          <img ng-src="{{day.image.large.url}}" class="day-image">
+        </div>
+        <i class="badge badge-positive badge-overlay">{{day.tag.name}}</i>
       </a>
 
       <div class="card-title" >
         <a href="#/:{{day.id}}">
           <h2 class="stable" ng-bind-html="day.title">
-<!--            {{day.title}}-->
+            <!--            {{day.title}}-->
           </h2>
           <h4 class="stable">{{day.date | date:'mediumDate'}}</h4>
         </a>
@@ -52,12 +56,12 @@
 
 
 <!--
-      <div class="card-title">
-        <a href="#/:{{day.id}}">
-          <h2 class="stable">
-            {{day.title}}
-          </h2>
-          <h4 class="stable">{{day.date | date:'mediumDate'}}</h4>
-        </a>
-      </div>
-    </div>-->
+<div class="card-title">
+<a href="#/:{{day.id}}">
+<h2 class="stable">
+{{day.title}}
+</h2>
+<h4 class="stable">{{day.date | date:'mediumDate'}}</h4>
+</a>
+</div>
+</div>-->

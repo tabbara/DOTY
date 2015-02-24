@@ -11,6 +11,7 @@ angular.module('loginModule')
       disableBack: true
     });
   };
+
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
   };

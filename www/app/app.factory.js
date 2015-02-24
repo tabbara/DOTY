@@ -175,10 +175,10 @@ angular.module("dotyApp")
     var deferred = $q.defer();
 
     $.each(daysArray, function (index, _dayObj) {
-//      _dayObj.title = _dayObj.title
-//      .replace("&#8217;","'")
-//      .replace("&#038;","&")
-//      .replace("&#x00e9;","é");
+      //      _dayObj.title = _dayObj.title
+      //      .replace("&#8217;","'")
+      //      .replace("&#038;","&")
+      //      .replace("&#x00e9;","é");
 
       _dayObj.tag = {};
       _dayObj.tagArray = [];
@@ -239,6 +239,12 @@ angular.module("dotyApp")
   fac.cleanCategory = function(categoryArray) {
     $.each(categoryArray, function (index, catObj) {
       catObj.name = catObj.name.replace("&amp;","&");
+      console.log(catObj);
+      if(catObj.children.length) {
+        $.each(catObj.children, function (index, subObj) {
+          subObj.name = subObj.name.replace("&amp;","&");
+        });
+      }
     });
     return categoryArray;
   };
@@ -248,10 +254,10 @@ angular.module("dotyApp")
                   "#9765b8", "#73a6db", "#9e4f64", "#e6b294"];
 
     var lightercolors = ["#EE6D62", "#99D6CA", "#9ACE78", "#F8DB70",
-                  "#AC84C6", "#8FB8E2", "#B17283", "#EBC1A9"];
+                         "#AC84C6", "#8FB8E2", "#B17283", "#EBC1A9"];
 
     var darkercolors = ["#bf544b", "#549f90", "#649543", "#aa964d",
-                  "#70478b", "#4b6e93", "#743a4a", "#9f7258"];
+                        "#70478b", "#4b6e93", "#743a4a", "#9f7258"];
 
     $timeout(function () {
       $(".card-title").each(function(i) {
@@ -261,7 +267,7 @@ angular.module("dotyApp")
       $(".card-wrapper").each(function(i) {
         this.style.borderColor = colors[i % 8];
         this.style['box-shadow'] = '0px 2px 0px 0px' + darkercolors[i % 8];
-//        rgba(175, 136, 114, 1)'
+        //        rgba(175, 136, 114, 1)'
       });
 
       $(".dayimage-container").each(function(i) {

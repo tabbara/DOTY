@@ -1,5 +1,5 @@
 angular.module('exploreModule')
-.controller('exploreCtrl', function($scope, queryAPI, $rootScope, $ionicLoading) {
+.controller('exploreCtrl', function($scope, queryAPI, $rootScope, $ionicLoading, $rootScope) {
 
   $scope.pageLoading = {
     status: true,
@@ -16,27 +16,41 @@ angular.module('exploreModule')
       $ionicLoading.hide();
 
       var tags = data.result;
-      $scope.categories = [];
+      $rootScope.categoryList = [];
 
+      var lookupParent = {};
       for (var tag in tags) {
         obj = tags[tag];
         if (obj.parent === "0") {
-          $scope.categories.push(obj);
+          $rootScope.categoryList.push(obj);
+          $rootScope.categoryList[$rootScope.categoryList.length-1].children = [];
+          lookupParent[obj.term_id] = obj;
+          lookupParent[obj.term_id].elementInArray = $rootScope.categoryList.length-1;
         };
       };
 
-      $scope.categories = queryAPI.cleanCategory($scope.categories);
+      for (var tag in tags) {
+        obj = tags[tag];
+        if (lookupParent[obj.parent]) {
+          $rootScope.categoryList[lookupParent[obj.parent].elementInArray].children.push(obj);
+        };
+      };
+
+//      a = $rootScope.categoryList;
+
+      $rootScope.categoryList = queryAPI.cleanCategory($rootScope.categoryList);
       queryAPI.setCategoryColors();
 
     } else {
       $scope.pageLoading.status = false;
       $ionicLoading.hide();
+      $rootScope.categoryList = [];
       console.log('Error retrieving Tags: ' + data.status.code);
     }
   }, function (status) {
     $scope.pageLoading.status = false;
     $ionicLoading.hide();
-    $scope.categories = [];
+    $rootScope.categoryList = [];
     console.log(status);
   });
 
