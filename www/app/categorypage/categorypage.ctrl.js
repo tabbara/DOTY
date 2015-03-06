@@ -1,13 +1,13 @@
 angular.module('categorypageModule')
-.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope, $ionicLoading, $ionicPopover, $ionicScrollDelegate) {
+.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope, $ionicLoading, signinFac, $ionicPopover, $ionicScrollDelegate) {
 
-  $scope.currentPage = $stateParams.categoryID.replace(/:/g,"");;
+  $scope.currentPage = $stateParams.categoryID.replace(/:/g,"");
 
   $scope.currentCategory = {'name': 'category'};
 
   if ($rootScope.currentCategory) {
     $scope.currentCategory.name = $rootScope.currentCategory.name;
-  };
+  }
 
   var tagArray = [$scope.currentPage];
 
@@ -109,6 +109,50 @@ angular.module('categorypageModule')
       });
     }
   }
+
+  $scope.bookmarkTag = function () {
+
+    var profileData = {
+      'type': 'tags'
+    };
+
+    console.log('logging: ', $rootScope.categoryListFull[$scope.currentPage].bookmarked);
+
+    if ($rootScope.categoryListFull[$scope.currentPage].bookmarked) {
+      profileData.remove = [$scope.currentPage];
+
+      if (typeof $rootScope.userData.pc_tags !== 'undefined') {
+        //Search for the to-be-removed slug and removed it, until it can't be found in the array
+        while ($rootScope.userData.pc_tags.indexOf($scope.currentPage) !== -1) {
+          $rootScope.userData.pc_tags.splice($rootScope.userData.pc_tags.indexOf($scope.currentPage), 1)
+        };
+
+        console.log('tags bookmarks: ', $rootScope.userData.pc_tags);
+
+      }
+
+    } else {
+      profileData.add = [$scope.currentPage];
+
+      if (typeof $rootScope.userData.pc_tags !== 'undefined') {
+        //If to-be-added slug doesn't already exist, add it to the array
+        if($rootScope.userData.pc_tags.indexOf($scope.currentPage) === -1) {
+          $rootScope.userData.pc_tags.push($scope.currentPage);
+          console.log('tags bookmarks: ', $rootScope.userData.pc_tags);
+        }
+      }
+    }
+
+    $rootScope.categoryListFull[$scope.currentPage].bookmarked = !$rootScope.categoryListFull[$scope.currentPage].bookmarked;
+
+    signinFac.updateBookmarks(profileData)
+    .then(function (status) {
+      console.log(status);
+    }, function (status) {
+      console.log(status);
+      //        $scope.dayObj.bookmarked = !$scope.dayObj.bookmarked;
+    });
+  };
 
   $ionicPopover.fromTemplateUrl('modals/showCategories.html', {
     scope: $scope,

@@ -6,19 +6,31 @@
       <i class="ion-arrow-left-c"></i> Back
     </ion-nav-back-button>
 
+    <!--
+<ion-nav-buttons side="right">
+<a ui-sref="searchpage">
+<button class="button button-icon ion-ios7-search-strong"></button>
+</a>
+</ion-nav-buttons>
+-->
+
     <ion-nav-buttons side="right">
-      <a ui-sref="searchpage">
-        <button class="button button-icon ion-ios7-search-strong"></button>
-      </a>
+      <button class="button-clear heart-container" ng-click="bookmarkTag()">
+        <div ng-class="categoryListFull[currentPage].bookmarked ? 'heart-animation-black' : 'heart-outline-black'"></div>
+      </button>
+<!--      <button class="button button-icon ion-more" ng-click="openPopover($event)"></button>-->
+      <button ng-if="subcategories.length" class="button icon-right ion-chevron-down button-bar-custom" ng-click="openPopover($event)">FILTER</button>
     </ion-nav-buttons>
 
   </ion-nav-bar>
 
   <ion-content has-bouncing="true" class="custom-content" id="categorypage-wrapper">
 
+<!--
     <div ng-if="subcategories.length" style="padding-left: 10px; padding-top: 10px;">
       <button ng-click="openPopover($event)" class="button icon-right ion-chevron-down buttom-custom button-custom-icon button-blue">Filter by Subcategory</button>
     </div>
+-->
 
     <div ng-repeat="day in days" class="card card-wrapper">
       <a href="#/:{{day.id}}">
