@@ -1,5 +1,5 @@
 angular.module('categorypageModule')
-.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope, $ionicLoading, $ionicPopover) {
+.controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope, $ionicLoading, $ionicPopover, $ionicScrollDelegate) {
 
   $scope.currentPage = $stateParams.categoryID.replace(/:/g,"");;
 
@@ -30,9 +30,19 @@ angular.module('categorypageModule')
     })
   }
 
-  queryAPI.getDayByTag(tagArray)
+  $scope.madeLookup = {
+    'results': 0,
+    'showing': 0,
+    'offset': 0,
+    'findingmore': false
+  };
+
+  queryAPI.getDayByTag({'tagArray': tagArray, 'limit': 10, 'offset': $scope.madeLookup.offset})
   .then(function(data) {
     if(data.status.code === 100) {
+      $scope.madeLookup.results = data.meta.results_total;
+      $scope.madeLookup.showing = Math.min(10,data.meta.results_total);
+
       queryAPI.cleanDay(data.result)
       .then(function (daysObject) {
         $scope.pageLoading.status = false;
@@ -60,6 +70,46 @@ angular.module('categorypageModule')
     console.log(status);
   });
 
+  $scope.showMore = function () {
+    if (!$scope.madeLookup.findingMore) {
+      $scope.madeLookup.findingMore = true;
+      $scope.madeLookup.offset += 10;
+
+      queryAPI.getDayByTag({'tagArray': tagArray, 'limit': 10, 'offset': $scope.madeLookup.offset})
+      .then(function(data) {
+        if(data.status.code === 100) {
+          $scope.madeLookup.showing = Math.min($scope.madeLookup.offset+10,data.meta.results_total);
+
+          queryAPI.cleanDay(data.result)
+          .then(function (daysObject) {
+
+            $scope.days = $scope.days.concat(daysObject);
+            queryAPI.setDayColors();
+
+            setTimeout( function () {
+              var imagesWrapper = $('#categorypage-wrapper');
+              imagesWrapper.imagesLoaded()
+              .progress( onProgress )
+              .always( onAlways );
+
+              $ionicScrollDelegate.scrollBy(0, 300, 1);
+
+            }, 0, false);
+
+          });
+        } else {
+          $scope.madeLookup.offset -= 10;
+          console.log('Error retrieving DaysByTag: ' + data.status.code);
+        }
+        $scope.madeLookup.findingMore = false;
+      }, function (status) {
+        console.log(status);
+        $scope.madeLookup.findingMore = false;
+        $scope.madeLookup.offset -= 10;
+      });
+    }
+  }
+
   $ionicPopover.fromTemplateUrl('modals/showCategories.html', {
     scope: $scope,
   }).then(function(popover) {
@@ -84,7 +134,6 @@ angular.module('categorypageModule')
   for (var i = 0; i < $rootScope.categoryList.length; i++) {
     if ($rootScope.categoryList[i].slug === $scope.currentPage) {
       $scope.subcategories = $rootScope.categoryList[i].children;
-      //        break;
     }
   }
 

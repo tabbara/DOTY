@@ -2,18 +2,6 @@
 
   <ion-nav-bar class="custom-bar">
 
-    <!--
-<ion-nav-buttons side="left">
-<a ui-sref="explore"><button class="button button-icon ion-arrow-left-c"></button></a>
-</ion-nav-buttons>
--->
-
-    <!--
-<ion-nav-buttons side="left">
-<button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
-</ion-nav-buttons>
--->
-
     <ion-nav-back-button class="button-clear custom-back-button">
       <i class="ion-arrow-left-c"></i> Back
     </ion-nav-back-button>
@@ -51,17 +39,11 @@
       </div>
     </div>
 
+    <div class="row no-top-padding" ng-if="madeSearch.showing < madeSearch.results">
+      <div class="col no-top-padding">
+        <button ng-click="showMore();" class="no-top-margin button button-block buttom-custom button-blue">Show More</button>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>
-
-
-<!--
-<div class="card-title">
-<a href="#/:{{day.id}}">
-<h2 class="stable">
-{{day.title}}
-</h2>
-<h4 class="stable">{{day.date | date:'mediumDate'}}</h4>
-</a>
-</div>
-</div>-->
