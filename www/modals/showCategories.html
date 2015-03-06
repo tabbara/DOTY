@@ -1,10 +1,10 @@
 <ion-popover-view>
   <ion-content>
     <div class="list">
-      <div ng-repeat="cat in subcategories" class="item item-icon-left">
-        <a href="#/explore/:{{cat.slug}}">
+      <div ng-repeat="cat in subcategories" class="item item-icon-left" ui-sref="categorypage({categoryID: cat.slug })">
+<!--        <a href="#/explore/:{{cat.slug}}">-->
           {{cat.name}}
-        </a>
+<!--        </a>-->
       </div>
       <!--
 <a ng-repeat="cat in subcategories" class="item item-icon-left" href="http://daysoftheyear.com" target="_blank">

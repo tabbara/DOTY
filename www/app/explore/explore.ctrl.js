@@ -55,11 +55,4 @@ angular.module('exploreModule')
     console.log(status);
   });
 
-  $scope.setCategoryName = function (categoryname) {
-    console.log("setting cat name to: " + categoryname);
-    $rootScope.currentCategory = {
-      'name': categoryname
-    };
-  };
-
 });
