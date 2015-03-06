@@ -40,7 +40,7 @@ angular.module('daypageModule')
         }, 0, false);
 
         if ($scope.dayObj.tagArray.length > 0) {
-          queryAPI.getDayByTag($scope.dayObj.tagArray, 5)
+          queryAPI.getDayByTag({'tagArray': $scope.dayObj.tagArray, 'limit': 5})
           .then(function(data) {
             if(data.status.code === 100) {
               $scope.relatedDays.loading = false;

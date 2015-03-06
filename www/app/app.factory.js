@@ -95,10 +95,14 @@ angular.module("dotyApp")
     return deferred.promise;
   };
 
-  fac.getDayByTag = function(tagArray, limit) {
+  fac.getDayByTag = function(options) {
+
+    var tagArray = options.tagArray;
+    var limit = options.limit || 10;
+    var offset = options.offset || 0;
+
     var deferred = $q.defer();
 
-    var limit = limit || 10; // Temporary. This function should grab days in the near future. Need to figure out if the API returns date sorted content.
     var url = "https://www.daysoftheyear.com/api/1.5/days?limit=" + limit;
 
     var tagArrayLength = tagArray.length;
