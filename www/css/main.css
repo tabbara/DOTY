@@ -85,6 +85,20 @@ body {
   color: #444 !important;
 }
 
+.button-bar-custom {
+  height: 30px;
+  color: #fff;
+  border: solid 0px;
+  background-color: #3498db;
+  border-left: solid 1px #6fbaec;
+  box-shadow: inset 0px 1px 0px #73b0d8, 0px 3px 0px #2980b9;
+}
+
+.button-bar-custom:after {
+  padding-left: 4px !important;
+  position: relative;
+}
+
 .image-loading img {
   opacity: 0;
 }
@@ -303,6 +317,21 @@ color: #fff !important;
 
 .heart-animation {
   background: url('../img/heart-animation.png') no-repeat -56px 0;
+  /*  no-repeat -56x 0;*/
+  width: 28px;
+  height: 25px;
+  animation: heartAnimation 0.7s;
+  -webkit-animation: heartAnimation 0.7s;
+}
+
+.heart-outline-black {
+  background: url('../img/heart-animation-black.png') 0 0 no-repeat;
+  width: 28px;
+  height: 25px;
+}
+
+.heart-animation-black {
+  background: url('../img/heart-animation-black.png') no-repeat -56px 0;
   /*  no-repeat -56x 0;*/
   width: 28px;
   height: 25px;
