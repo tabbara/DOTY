@@ -22,6 +22,15 @@ angular.module('exploreModule')
       var lookupParent = {};
       for (var tag in tags) {
         obj = tags[tag];
+
+        if ($rootScope.userData.pc_tags.indexOf(obj.slug) === -1) {
+          console.log('not bookmarked: ' + obj.slug);
+          obj.bookmarked = false;
+        } else {
+          console.log('bookmarked: ' + obj.slug);
+          obj.bookmarked = true;
+        }
+
         if (obj.parent === "0") {
           $rootScope.categoryList.push(obj);
           $rootScope.categoryList[$rootScope.categoryList.length-1].children = [];
