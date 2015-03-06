@@ -1,7 +1,7 @@
 <ion-popover-view>
   <ion-content>
     <div class="list">
-      <div ng-repeat="cat in subcategories" class="item item-icon-left" ui-sref="categorypage({categoryID: cat.slug })">
+      <div ng-repeat="cat in subcategories" class="item item-icon-left" ui-sref="categorypage({categoryID: cat.slug })" ng-if="cat.count">
 <!--        <a href="#/explore/:{{cat.slug}}">-->
           {{cat.name}}
 <!--        </a>-->
