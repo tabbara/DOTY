@@ -28,7 +28,7 @@
 
   <ion-content has-bouncing="true" class="custom-content" id="categorypage-wrapper">
 
-    <div style="padding-left: 10px; padding-top: 10px;">
+    <div ng-if="subcategories.length" style="padding-left: 10px; padding-top: 10px;">
       <button ng-click="openPopover($event)" class="button icon-right ion-chevron-down buttom-custom button-custom-icon button-blue">Filter by Subcategory</button>
     </div>
 
