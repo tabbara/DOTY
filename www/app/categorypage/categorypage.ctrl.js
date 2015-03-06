@@ -1,7 +1,7 @@
 angular.module('categorypageModule')
 .controller('categorypageCtrl', function ($scope, queryAPI, $stateParams, $rootScope, $ionicLoading, $ionicPopover) {
 
-  var pageID = $stateParams.categoryID.replace(/:/g,"");
+  $scope.currentPage = $stateParams.categoryID.replace(/:/g,"");;
 
   $scope.currentCategory = {'name': 'category'};
 
@@ -9,7 +9,7 @@ angular.module('categorypageModule')
     $scope.currentCategory.name = $rootScope.currentCategory.name;
   };
 
-  var tagArray = [pageID];
+  var tagArray = [$scope.currentPage];
 
   function onAlways (imgLoad) {
     console.log('finished loading images', imgLoad);
@@ -82,13 +82,10 @@ angular.module('categorypageModule')
 
   $scope.subcategories = [];
   for (var i = 0; i < $rootScope.categoryList.length; i++) {
-    if ($rootScope.categoryList[i].slug === pageID) {
+    if ($rootScope.categoryList[i].slug === $scope.currentPage) {
       $scope.subcategories = $rootScope.categoryList[i].children;
       //        break;
     }
   }
 
-  $scope.setSubcategory = function (slug) {
-    console.log('setting to: ' + slug);
-  }
 });
