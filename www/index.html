@@ -88,21 +88,13 @@
           <nav role="navigation">
             <ul>
 
-                <li ng-repeat="view in views" class="cat-item sidemenu {{view.icon}} {{view.color}}" ui-sref-active="active">
-                  <a class="menu-close" ui-sref="{{view.url}}" >{{view.title}}</a>
+                <li ng-repeat="view in views" class="cat-item menu-close sidemenu {{view.icon}} {{view.color}}" ui-sref-active="active" ui-sref="{{view.url}}">
+                  <a>{{view.title}}</a>
                 </li>
 
             </ul>
           </nav>
 
-          <!--
-<div class="list">
-<a ng-repeat="view in views" class="item item-stable item-icon-left menu-close sidemenu sidemenu-link" ui-sref="{{view.url}}" ui-sref-active="active">
-<i class="icon {{view.icon}}"></i>
-{{view.title}}
-</a>
-</div>
--->
         </ion-content>
       </ion-side-menu>
 
