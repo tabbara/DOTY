@@ -1,5 +1,5 @@
 angular.module("accountModule")
-.factory('signinFac', function($rootScope, $q, $http, $state, $ionicModal, $timeout, $ionicActionSheet) {
+.factory('signinFac', function($rootScope, $q, $http, $state, $ionicModal, $timeout, $ionicActionSheet, queryAPI) {
   var fac = {};
 
   fac.showIntroductionBroadcast = function (show) {
@@ -23,10 +23,14 @@ angular.module("accountModule")
         $rootScope.userSession.signedIn = true;
         fac.userSaveCredentials(userEmail, userPassword);
 
+        var signinSteps = 2; // getUserData and getTagData, each subtracts 1 step if succesful, if the steps counter reaches 0 the process is succesful.
+        console.log(signinSteps);
+
         fac.getUserData(userEmail)
         .then(function(userData) {
           $rootScope.userData = userData;
-          deferred.resolve("succesful login & data retrieval");
+          signinSteps -= 1;
+          console.log(signinSteps);
 
           //          var loginSuccessSheet = $ionicActionSheet.show({
           //            titleText: 'Hi ' + userData.firstname +"! You're now logged in",
@@ -37,15 +41,30 @@ angular.module("accountModule")
           //          }, 2500);
 
         }, function(status) {
-          deferred.resolve("succesful login, automatic data retrieval failed");
           console.log(status);
         });
+
+        fac.getTagData()
+        .then(function (status) {
+          console.log(status);
+          signinSteps -= 1;
+          console.log(signinSteps);
+        }, function (status) {
+          console.log(status);
+        });
+
+        if (signinSteps === 0) {
+          deferred.resolve("succesful login & data/tag retrieval");
+        } else {
+          deferred.resolve("succesful login but data/tag retrieval failed");
+        }
 
       } else {
         $rootScope.userSession.signedIn = false;
         fac.removeCredentials();
         deferred.reject("wrong email or password");
       }
+
     }).
     error(function(data, status) {
       $rootScope.userSession.signedIn = false;
@@ -162,6 +181,63 @@ angular.module("accountModule")
 
     return deferred.promise;
   };
+
+  fac.getTagData = function () {
+    var deferred = $q.defer();
+
+    queryAPI.getTags()
+    .then(function(data) {
+      if(data.status.code === 100) {
+        deferred.resolve('successfully retrieved and set tags');
+
+        $rootScope.categoryList = [];
+        var tags = data.result;
+
+        $rootScope.categoryListFull = {};
+        var lookupParent = {};
+        for (var tag in tags) {
+          obj = tags[tag];
+
+          if ($rootScope.userData.pc_tags.indexOf(obj.slug) === -1) {
+            obj.bookmarked = false;
+          } else {
+            obj.bookmarked = true;
+          }
+
+          if (obj.parent === "0") {
+            $rootScope.categoryList.push(obj);
+            $rootScope.categoryList[$rootScope.categoryList.length-1].children = [];
+            lookupParent[obj.term_id] = obj;
+            lookupParent[obj.term_id].elementInArray = $rootScope.categoryList.length-1;
+          };
+
+          $rootScope.categoryListFull[obj.slug] = obj;
+        };
+
+        for (var tag in tags) {
+          obj = tags[tag];
+          if (lookupParent[obj.parent]) {
+            $rootScope.categoryList[lookupParent[obj.parent].elementInArray].children.push(obj);
+          };
+        };
+
+        $rootScope.categoryList = queryAPI.cleanCategory($rootScope.categoryList);
+
+      } else {
+        deferred.reject('unsuccessfully retrieved and set tags');
+        $rootScope.categoryList = [];
+        $rootScope.categoryListFull = {};
+        console.log('Error retrieving Tags: ' + data.status.code);
+      }
+    }, function (status) {
+      deferred.reject('unsuccessfully retrieved and set tags');
+      $rootScope.categoryList = [];
+      $rootScope.categoryListFull = {};
+      console.log(status);
+    });
+
+    return deferred.promise;
+  }
 
   fac.logout = function() {
     $http({
@@ -281,8 +357,8 @@ angular.module("accountModule")
       $http({
         method: 'GET',
         url: updateUrl
-//        ,
-//        withCredentials: true
+        //        ,
+        //        withCredentials: true
       }).
       success(function(data, status) {
         console.log("bookmarks update query went through", status, data);
