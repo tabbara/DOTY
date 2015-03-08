@@ -626,20 +626,22 @@ min-width: 120px !important;
 /*----------CALENDAR---------*/
 .calendar-wrap {
   margin: 10px auto;
-  padding: 15px;
+  padding: 20px;
 }
 
 .calender-inner-wrap {
   border: 1px solid #d8d8d8;
   border-width: 0px 1px 1px 1px;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .calendar-header {
   background: #fff;
   /*  padding: 5px 10px 10px 20px;*/
-  height: 70px;
+  height: 80px;
   /*  position: relative;*/
-  border-top: 5px solid #ef4f69;
+  border-top: 7px solid #ef4f69;
   border-bottom: 1px solid #ddd;
 }
 
@@ -647,37 +649,41 @@ min-width: 120px !important;
 }
 
 .calendar-header-col-left {
-  padding-top: 22px;
+  padding-top: 10px;
   padding-left: 25px;
   margin: 0;
-  font-size: 25px;
+  font-size: 44px;
   color: #ef4f69;
   text-align: left;
 }
 
 .calendar-header-col-center {
-  padding-top: 15px;
+  padding-top: 12px;
   margin: 0;
   color: #000;
   text-align: center;
+  font-family: raleway-b;
+  font-size: 16px;
 }
 
 .calendar-month {
-  font-size: 21px;
+  font-size: 22px;
   display: block;
+  padding-bottom: 3px;
+  font-family: raleway-b;
 }
 
 .calendar-header-col-right {
-  padding-top: 22px;
+  padding-top: 10px;
   padding-right: 25px;
-  font-size: 25px;
+  font-size: 44px;
   margin: 0;
   color: #ef4f69;
   text-align: right;
 }
 
 .calendar-container {
-  height: 300px;
+  /*  height: 300px;*/
   width: auto;
   padding: 18px;
   background: #f6f6f6;
@@ -685,77 +691,83 @@ min-width: 120px !important;
 }
 
 .calendar-box {
-  border: 1px solid #ddd;
-  height: 90%;
-  width: 100%;
-  /*  margin: 3%;*/
+  position: relative;
+  width: 96%;		/* desired width */
+  margin: 5px auto 0;
+}
+
+.calendar-box:before{
+  content: "";
+  display: block;
+  padding-top: 71.42%; 	/* initial ratio of 1:1*/
 }
 
 .calendar-injected {
-  height: 100%;
-  width: 100%;
+  position:  absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .calendar-row {
-  border-bottom: 1px solid #ddd;
   padding: 0;
-  margin: 0 !important;
-  /*  height: 20%;*/
+  margin: 0;
+
+  display: flex;
+
+  justify-content: space-around;
 }
 
+/*
 .row-four {
-  height: 25%;
+height: 25%;
 }
 
 .row-five {
-  height: 20%;
+height: 20%;
 }
 
 .row-six {
-  height: 16.66%;
+height: 16.66%;
 }
+*/
 
+/*
 .calendar-row:last-child {
-  border-bottom: none;
+border-bottom: none;
 }
+*/
 
 .calendar-col {
-  border-right: 1px solid #ddd;
+  border-radius: 50%;
   background: #fff;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  vertical-align: middle;
-  height: 100%;
 
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
+    background: transparent;
+
+  width: 7vw;
+  height: 7vw;
+
+  color: white;
+  font-weight: bold;
+
   display: flex;
-  -webkit-flex-pack: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-flex-line-pack: center;
-  -ms-flex-line-pack: center;
-  -webkit-align-content: center;
   align-content: center;
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .calender-col-highlighted {
   background: #ef4f69;
+  border-radius: 50%;
 }
 
 .calendar-col a {
   color: #606265 !important;
-  font-size: 15px;
+  font-size: 3vw;
 }
 
 .calender-col-highlighted a {
@@ -772,8 +784,9 @@ min-width: 120px !important;
 
 .weekday-row {
   /*  border-bottom: 1px solid #ddd;*/
-  padding: 0;
-  margin: 0 !important;
+  /*  padding: 0;*/
+  /*  margin: 0 !important;*/
+  /*  padding: 5px 0px;*/
 }
 
 .weekday-col {

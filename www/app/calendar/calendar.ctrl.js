@@ -71,13 +71,13 @@ angular.module('calendarModule')
         } else { var cellClasses = ''; }
 
         if (dayIterator < dayStart) {
-          html = html + "<div class='col calendar-col " + cellClasses + "'></div>"
+          html = html + "<div class='calendar-col " + cellClasses + "'></div>"
         } else {
           if (dayIterator-dayStart > monthLength-1) {
-            html = html + "<div class='col calendar-col " + cellClasses + "'></div>"
+            html = html + "<div class='calendar-col " + cellClasses + "'></div>"
           } else {
             var tempDate = new Date(Date.UTC($scope.calendar.year,$scope.calendar.month, dayIterator-dayStart+1));
-            html = html + "<div class='col calendar-col " + cellClasses +"'> <a href='#/date/:" + Math.round(tempDate.getTime()/1000) + "'>" + (dayIterator-dayStart+1) + "</a></div>"
+            html = html + "<div class='calendar-col " + cellClasses +"'> <a href='#/date/:" + Math.round(tempDate.getTime()/1000) + "'>" + (dayIterator-dayStart+1) + "</a></div>"
           }
         }
 
