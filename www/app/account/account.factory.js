@@ -24,13 +24,11 @@ angular.module("accountModule")
         fac.userSaveCredentials(userEmail, userPassword);
 
         var signinSteps = 2; // getUserData and getTagData, each subtracts 1 step if succesful, if the steps counter reaches 0 the process is succesful.
-        console.log(signinSteps);
 
         fac.getUserData(userEmail)
         .then(function(userData) {
           $rootScope.userData = userData;
           signinSteps -= 1;
-          console.log(signinSteps);
 
           //          var loginSuccessSheet = $ionicActionSheet.show({
           //            titleText: 'Hi ' + userData.firstname +"! You're now logged in",
@@ -48,15 +46,15 @@ angular.module("accountModule")
         .then(function (status) {
           console.log(status);
           signinSteps -= 1;
-          console.log(signinSteps);
         }, function (status) {
           console.log(status);
         });
 
+        // COMPLETELY USELESS AS SIGNINSTEPS -=1 IS IN AN ASYNC CALL, THIS CODE EXECUTES BEFORE THESE CALLS FINISH. MUST CHAIN PROMISES FOR DESIRED EFFECT.
         if (signinSteps === 0) {
           deferred.resolve("succesful login & data/tag retrieval");
         } else {
-          deferred.resolve("succesful login but data/tag retrieval failed");
+          deferred.resolve("succesful login but data/tag retrieval failed -- ignore for now, likely did not fail anything at all");
         }
 
       } else {
