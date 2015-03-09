@@ -9,7 +9,8 @@ angular.module('favoritesModule')
         noBackdrop: false
       })
     }
-    queryAPI.getDayById($rootScope.userData.pc_days)
+
+    queryAPI.getDayById({'idArray': $rootScope.userData.pc_days})
     .then(function(data) {
       if (data.status.code === 100) {
         $scope.pageLoading.status = false;
