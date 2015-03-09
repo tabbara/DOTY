@@ -24,10 +24,8 @@ angular.module('exploreModule')
         obj = tags[tag];
 
         if ($rootScope.userData.pc_tags.indexOf(obj.slug) === -1) {
-          console.log('not bookmarked: ' + obj.slug);
           obj.bookmarked = false;
         } else {
-          console.log('bookmarked: ' + obj.slug);
           obj.bookmarked = true;
         }
 
