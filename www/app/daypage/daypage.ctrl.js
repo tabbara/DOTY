@@ -24,7 +24,7 @@ angular.module('daypageModule')
 //    $imageEl.children(".spinner-animation").remove();
   }
 
-  queryAPI.getDayById([pageID])
+  queryAPI.getDayById({'idArray': [pageID]})
   .then(function(data) {
     if (data.status.code === 100) {
       $scope.pageLoading.loading = false;
