@@ -39,19 +39,26 @@ angular.module("dotyApp")
     return deferred.promise;
   };
 
-  fac.getDayByDate = function(startDate, endDate) {
+  fac.getDayByDate = function(options) {
 
     var deferred = $q.defer();
 
-    endDate = endDate || startDate;
+    var startDate = options.startDate;
+    var endDate = options.endDate || startDate;
+    var tagArray = options.tagArray || -1;
 
-    console.log("Grabbing [day-by-date]: https://www.daysoftheyear.com/api/1.5/days/?date_start="
-                + startDate +"&date_end=" + endDate + "&limit=100");
+    var url = "https://www.daysoftheyear.com/api/1.5/days/?date_start="
+    + startDate +"&date_end=" + endDate + "&limit=100";
+
+    if (tagArray !== -1) {
+      url = url + '&tags=' + tagArray.valueOf();
+    }
+
+    console.log("Grabbing [day-by-date]: " + url);
 
     $http({
       method: 'GET',
-      url: "https://www.daysoftheyear.com/api/1.5/days/?date_start="
-      + startDate +"&date_end=" + endDate + "&limit=100"
+      url: url
     })
     .success(function(data) {
       deferred.resolve(data);
@@ -63,18 +70,33 @@ angular.module("dotyApp")
     return deferred.promise;
   };
 
-  fac.getDayById = function(idArray) {
+  fac.getDayById = function(options) {
     var deferred = $q.defer();
 
-    var url = "https://www.daysoftheyear.com/api/1.5/days?";
+    var url = "https://www.daysoftheyear.com/api/1.5/days?limit=100",
+        idArray = options.idArray,
+        startDate = options.startDate || -1,
+        endDate = options.startDate || -1,
+        idArrayLength = idArray.length;
 
-    var idArrayLength = idArray.length;
+//    options {'startDate': startDate, 'endDate': endDate, 'idArray': idArray}
 
     if (idArrayLength) {
-      url = url + '&ids=' + idArray[0];
-      for(var i = 1; i < idArrayLength; i++) {
-        url = url + ',' + idArray[i];
-      };
+
+      //      url = url + '&ids=' + idArray[0];
+      //      for(var i = 1; i < idArrayLength; i++) {
+      //        url = url + ',' + idArray[i];
+      //      };
+
+      url = url + '&ids=' + idArray.valueOf();
+
+      if (startDate !== -1) {
+        url = url + "&date_start=" + startDate;
+      }
+
+      if (endDate !== -1) {
+        url = url + "&date_end=" + endDate;
+      }
 
       console.log("grabbing [day-by-id]: " + url);
 
@@ -233,8 +255,7 @@ angular.module("dotyApp")
       //      console.log(_dayObj.content);
     });
 
-    console.log("cleaned up these days");
-    console.log(daysArray);
+    console.log("cleaned up these days", daysArray);
     deferred.resolve(daysArray);
 
     return deferred.promise;
@@ -243,7 +264,6 @@ angular.module("dotyApp")
   fac.cleanCategory = function(categoryArray) {
     $.each(categoryArray, function (index, catObj) {
       catObj.name = catObj.name.replace("&amp;","&");
-      console.log(catObj);
       if(catObj.children.length) {
         $.each(catObj.children, function (index, subObj) {
           subObj.name = subObj.name.replace("&amp;","&");
