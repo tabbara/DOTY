@@ -47,7 +47,7 @@ angular.module('datepageModule')
 
   console.log($scope.page);
 
-  queryAPI.getDayByDate($scope.page.timestamp)
+  queryAPI.getDayByDate({'startDate': $scope.page.timestamp})
   .then(function(data) {
     if (data.status.code === 100) {
       queryAPI.cleanDay(data.result)
