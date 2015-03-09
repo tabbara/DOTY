@@ -25,6 +25,7 @@ angular.module("dotyApp")
     controller: "homeCtrl"
   })
   .state('calendar', {
+    cache: false,
     url: "/calendar",
     templateUrl: "views/calendar.html",
     controller: "calendarCtrl"
