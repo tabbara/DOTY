@@ -41,22 +41,12 @@
         </h4>
       </div>
 
-<!--
-      <div ng-repeat="day in days">
-        <a class="item item-thumbnail-left item-favorites" href="#/:{{day.id}}">
-          <img class="image-favorites" ng-src="{{day.image.thumbnail.url}}">
-          <h2>{{day.title}}</h2>
-          <p>{{day.date | date:'longDate'}}</p>
-        </a>
-      </div>
--->
-
       <ul class="daylist">
         <div ng-repeat="day in days">
           <li class="daylist-item">
             <a ui-sref="daypage({ dayID: day.id })">
               <div class="daylist-image-container">
-                <img class="daylist-image" ng-src="{{day.image.thumbnail.url}}">
+                <img class="daylist-image" ng-src="{{day.image.small.url}}">
               </div>
               <h3 class="daylist-title" ng-bind-html="day.title"></h3>
               <p>{{day.date | date:'longDate'}}</p>
