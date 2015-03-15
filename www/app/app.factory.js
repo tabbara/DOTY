@@ -5,7 +5,7 @@ angular.module("dotyApp")
   fac.logout = function() {
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.5/user/?logout'
+      url: 'https://www.daysoftheyear.com/api/1.6/user/?logout'
     }).then(function() {
       fac.userRemoveData();
       fac.removeCredentials();
@@ -21,12 +21,12 @@ angular.module("dotyApp")
     var today = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()) / 1000;
     var todayB = Date.UTC(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()) / 1000;
 
-    console.log("Grabbing [day-by-date]: https://www.daysoftheyear.com/api/1.5/days/?date_start="
+    console.log("Grabbing [day-by-date]: https://www.daysoftheyear.com/api/1.6/days/?date_start="
                 + today +"&date_end=" + today + "&limit=100");
 
     $http({
       method: 'GET',
-      url: "https://www.daysoftheyear.com/api/1.5/days/?date_start="
+      url: "https://www.daysoftheyear.com/api/1.6/days/?date_start="
       + today +"&date_end=" + todayB + "&limit=100"
     })
     .success(function(data) {
@@ -48,7 +48,7 @@ angular.module("dotyApp")
     var tagArray = options.tagArray || -1;
     var dayGrade = options.dayGrade || -1;
 
-    var url = "https://www.daysoftheyear.com/api/1.5/days/?date_start="
+    var url = "https://www.daysoftheyear.com/api/1.6/days/?date_start="
     + startDate +"&date_end=" + endDate + "&limit=100";
 
     if (tagArray !== -1) {
@@ -79,7 +79,7 @@ angular.module("dotyApp")
   fac.getDayById = function(options) {
     var deferred = $q.defer();
 
-    var url = "https://www.daysoftheyear.com/api/1.5/days?limit=100",
+    var url = "https://www.daysoftheyear.com/api/1.6/days/?limit=100",
         idArray = options.idArray,
         startDate = options.startDate || -1,
         endDate = options.startDate || -1,
@@ -131,7 +131,7 @@ angular.module("dotyApp")
 
     var deferred = $q.defer();
 
-    var url = "https://www.daysoftheyear.com/api/1.5/days?limit=" + limit;
+    var url = "https://www.daysoftheyear.com/api/1.6/days/?limit=" + limit;
 
     var tagArrayLength = tagArray.length;
 
@@ -165,7 +165,7 @@ angular.module("dotyApp")
 
     var limit = 10; // Temporary. This function should grab days in the near future. Need to figure out if the API returns date sorted content.
     var offset = offset || 0;
-    var url = "https://www.daysoftheyear.com/api/1.5/days/?limit=" + limit + '&s=' + query + '&offset=' + offset;
+    var url = "https://www.daysoftheyear.com/api/1.6/days/?limit=" + limit + '&s=' + query + '&offset=' + offset;
 
     console.log('Grabbing [day-by-search]: ' + url);
 
@@ -188,7 +188,7 @@ angular.module("dotyApp")
 
     $http({
       method: 'GET',
-      url: "https://www.daysoftheyear.com/api/1.5/tags"
+      url: "https://www.daysoftheyear.com/api/1.6/tags"
     })
     .success(function (data) {
       deferred.resolve(data)

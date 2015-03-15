@@ -13,7 +13,7 @@ angular.module("accountModule")
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.5/users/?login&email=' + userEmail + '&password=' + userPassword + '&throwaway=' + timeNonce
+      url: 'https://www.daysoftheyear.com/api/1.6/users/?login&email=' + userEmail + '&password=' + userPassword + '&throwaway=' + timeNonce
     }).
     success(function(data, status, headers) {
       console.log("login query went through", status, data)
@@ -78,7 +78,7 @@ angular.module("accountModule")
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.5/users/?register&email=' + signupFormData.email + '&password=' + signupFormData.pw
+      url: 'https://www.daysoftheyear.com/api/1.6/users/?register&email=' + signupFormData.email + '&password=' + signupFormData.pw
     }).
     success(function(data, status) {
       console.log("signup query went through", status, data)
@@ -124,7 +124,7 @@ angular.module("accountModule")
 
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.5/users/?get_user_data=' + userEmail + '&throwaway=' + timeNonce
+      url: 'https://www.daysoftheyear.com/api/1.6/users/?get_user_data=' + userEmail + '&throwaway=' + timeNonce
       //      ,
       //      withCredentials: true,
       //      headers: {
@@ -240,7 +240,7 @@ angular.module("accountModule")
   fac.logout = function() {
     $http({
       method: 'GET',
-      url: 'https://www.daysoftheyear.com/api/1.5/users/?logout'
+      url: 'https://www.daysoftheyear.com/api/1.6/users/?logout'
     }).then(function() {
       fac.userRemoveData();
       fac.removeCredentials();
@@ -258,7 +258,7 @@ angular.module("accountModule")
       logThis = logThis + JSON.stringify(profileData);
       console.log(logThis);
 
-      var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?update&user_id=' + $rootScope.userData.id;
+      var updateUrl = 'https://www.daysoftheyear.com/api/1.6/users/?update&user_id=' + $rootScope.userData.id;
 
       if (profileData.hasOwnProperty('dob')) {
         updateUrl = updateUrl + '&dob=' + profileData.dob;
@@ -302,7 +302,7 @@ angular.module("accountModule")
       logThis = logThis + JSON.stringify(permissionsData);
       console.log(logThis);
 
-      var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?permissions&user_id=' + $rootScope.userData.email;
+      var updateUrl = 'https://www.daysoftheyear.com/api/1.6/users/?permissions&user_id=' + $rootScope.userData.email;
 
       if (permissionsData.hasOwnProperty('subscribed')) {
         updateUrl = updateUrl + '&subscribed=' + permissionsData.subscribed;
@@ -342,7 +342,7 @@ angular.module("accountModule")
       logThis = logThis + JSON.stringify(bookmarkData);
       console.log(logThis);
 
-      var updateUrl = 'https://www.daysoftheyear.com/api/1.5/users/?bookmarks&user_id=' + $rootScope.userData.id +'&type=' + bookmarkData.type;
+      var updateUrl = 'https://www.daysoftheyear.com/api/1.6/users/?bookmarks&user_id=' + $rootScope.userData.id +'&type=' + bookmarkData.type;
 
       if (bookmarkData.add) {
         updateUrl = updateUrl + '&add=' + bookmarkData.add.valueOf();
