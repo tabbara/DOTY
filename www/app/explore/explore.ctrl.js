@@ -12,6 +12,7 @@ angular.module('exploreModule')
   queryAPI.getTags()
   .then(function(data) {
     if(data.status.code === 100) {
+
       $scope.pageLoading.status = false;
       $ionicLoading.hide();
 
@@ -29,7 +30,7 @@ angular.module('exploreModule')
           obj.bookmarked = true;
         }
 
-        if (obj.parent === "0") {
+        if (obj.parent === 0) {
           $rootScope.categoryList.push(obj);
           $rootScope.categoryList[$rootScope.categoryList.length-1].children = [];
           lookupParent[obj.term_id] = obj;
@@ -41,12 +42,15 @@ angular.module('exploreModule')
 
       for (var tag in tags) {
         obj = tags[tag];
-        if (lookupParent[obj.parent]) {
-          $rootScope.categoryList[lookupParent[obj.parent].elementInArray].children.push(obj);
-        };
+        if (obj.count.day !== "") {
+          if (lookupParent[obj.parent]) {
+            $rootScope.categoryList[lookupParent[obj.parent].elementInArray].children.push(obj);
+          };
+        }
       };
 
       $rootScope.categoryList = queryAPI.cleanCategory($rootScope.categoryList);
+
       queryAPI.setCategoryColors();
 
     } else {
