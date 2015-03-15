@@ -37,15 +37,14 @@ angular.module('calendarModule')
 
   if($rootScope.userData.dob != null) {
     var birthDay = new Date(parseInt($rootScope.userData.dob)*1000);
-    console.log ('a', birthDay);
-  } else { var birthDay = -1; console.log ('b', birthDay);}
+  } else { var birthDay = -1;}
 
   function onAlways () {
     console.log('finished loading images');
   }
 
   function onProgress (imgLoad, image) {
-    console.log('loaded: ' + image.img.src);
+//    console.log('loaded: ' + image.img.src);
     var $imageEl = $(image.img).parent();
     $imageEl.removeClass('image-loading');
     $imageEl.children(".spinner-animation").remove();
@@ -59,52 +58,10 @@ angular.module('calendarModule')
         monthLength = new Date($scope.calendar.year, $scope.calendar.month+1,0).getDate(),
         html = '';
 
-    $scope.calendarSteps = 2; // load favorites & interests
-
     var tempFirstDay = Math.round(Date.UTC($scope.calendar.year, $scope.calendar.month, 1) / 1000);
     var tempLastDay = Math.round(Date.UTC($scope.calendar.year, $scope.calendar.month, monthLength) / 1000);
 
     console.log(tempFirstDay,tempLastDay);
-
-    var options = {
-      'startDate': tempFirstDay,
-      'endDate': tempLastDay
-    };
-
-    var tagArray = $rootScope.userData.pc_tags || [];
-    if (tagArray.length) {
-      options.tagArray = tagArray;
-    }
-
-    $scope.interestDays = [];
-
-    // add daygrade flag when content has been filled with daygrades properly
-
-    //    queryAPI.getDayByDate(options)
-    //    .then(function(data) {
-    //      $scope.calendarSteps -= 1;
-    //      if (data.status.code === 100) {
-    //        queryAPI.cleanDay(data.result)
-    //        .then(function (daysObject) {
-    //          $scope.interestDays = daysObject;
-    //
-    //          queryAPI.setDayColors();
-    //
-    //          setTimeout( function () {
-    //            var imagesWrapper = $('#calendar-wrapper');
-    //            imagesWrapper.imagesLoaded()
-    //            .progress( onProgress )
-    //            .always( onAlways );
-    //          }, 0, false);
-    //
-    //        });
-    //      } else {
-    //        console.log(data.status.code);
-    //      }
-    //    }, function (status) {
-    //      $scope.calendarSteps -= 1;
-    //      console.log(status);
-    //    });
 
     $scope.favoriteDays = [];
 
@@ -113,7 +70,6 @@ angular.module('calendarModule')
     if (idArray.length) {
       queryAPI.getDayById({'startDate': tempFirstDay, 'endDate': tempLastDay, 'idArray': idArray})
       .then(function(data) {
-        $scope.calendarSteps -= 1;
         if (data.status.code === 100) {
           queryAPI.cleanDay(data.result)
           .then(function (daysObject) {
@@ -151,12 +107,50 @@ angular.module('calendarModule')
           console.log('Error retrieving DaysById: ' +data.status.code);
         }
       }, function (status) {
-        $scope.calendarSteps -= 1;
         console.log(status);
       });
     } else {
-      $scope.calendarSteps -= 1;
+      console.log('no favorites to load in calendar');
     }
+
+    var options = {
+      'startDate': tempFirstDay,
+      'endDate': tempLastDay,
+      'dayGrade': 6
+    };
+
+    var tagArray = $rootScope.userData.pc_tags || [];
+    if (tagArray.length) {
+      options.tagArray = tagArray;
+    }
+
+    $scope.interestDays = [];
+
+    // add daygrade flag when content has been filled with daygrades properly
+
+    queryAPI.getDayByDate(options)
+    .then(function(data) {
+      if (data.status.code === 100) {
+        queryAPI.cleanDay(data.result)
+        .then(function (daysObject) {
+          $scope.interestDays = daysObject;
+
+          queryAPI.setDayColors();
+
+          setTimeout( function () {
+            var imagesWrapper = $('#calendar-wrapper');
+            imagesWrapper.imagesLoaded()
+            .progress( onProgress )
+            .always( onAlways );
+          }, 0, false);
+
+        });
+      } else {
+        console.log(data.status.code);
+      }
+    }, function (status) {
+      console.log(status);
+    });
 
     //    var percentageClass = '';
     //    var rowNumber = Math.ceil((dayStart+monthLength) / 7);
