@@ -44,7 +44,7 @@ angular.module('calendarModule')
   }
 
   function onProgress (imgLoad, image) {
-//    console.log('loaded: ' + image.img.src);
+    //    console.log('loaded: ' + image.img.src);
     var $imageEl = $(image.img).parent();
     $imageEl.removeClass('image-loading');
     $imageEl.children(".spinner-animation").remove();
@@ -68,7 +68,8 @@ angular.module('calendarModule')
     var idArray = $rootScope.userData.pc_days || [];
 
     if (idArray.length) {
-      queryAPI.getDayById({'startDate': tempFirstDay, 'endDate': tempLastDay, 'idArray': idArray})
+      queryAPI.getDayById({'idArray': idArray})
+//      'startDate': tempFirstDay, 'endDate': tempLastDay,
       .then(function(data) {
         if (data.status.code === 100) {
           queryAPI.cleanDay(data.result)
@@ -122,35 +123,36 @@ angular.module('calendarModule')
     var tagArray = $rootScope.userData.pc_tags || [];
     if (tagArray.length) {
       options.tagArray = tagArray;
+
+
+      $scope.interestDays = [];
+
+      // add daygrade flag when content has been filled with daygrades properly
+
+      queryAPI.getDayByDate(options)
+      .then(function(data) {
+        if (data.status.code === 100) {
+          queryAPI.cleanDay(data.result)
+          .then(function (daysObject) {
+            $scope.interestDays = daysObject;
+
+            queryAPI.setDayColors();
+
+            setTimeout( function () {
+              var imagesWrapper = $('#calendar-wrapper');
+              imagesWrapper.imagesLoaded()
+              .progress( onProgress )
+              .always( onAlways );
+            }, 0, false);
+
+          });
+        } else {
+          console.log(data.status.code);
+        }
+      }, function (status) {
+        console.log(status);
+      });
     }
-
-    $scope.interestDays = [];
-
-    // add daygrade flag when content has been filled with daygrades properly
-
-    queryAPI.getDayByDate(options)
-    .then(function(data) {
-      if (data.status.code === 100) {
-        queryAPI.cleanDay(data.result)
-        .then(function (daysObject) {
-          $scope.interestDays = daysObject;
-
-          queryAPI.setDayColors();
-
-          setTimeout( function () {
-            var imagesWrapper = $('#calendar-wrapper');
-            imagesWrapper.imagesLoaded()
-            .progress( onProgress )
-            .always( onAlways );
-          }, 0, false);
-
-        });
-      } else {
-        console.log(data.status.code);
-      }
-    }, function (status) {
-      console.log(status);
-    });
 
     //    var percentageClass = '';
     //    var rowNumber = Math.ceil((dayStart+monthLength) / 7);
