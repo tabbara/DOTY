@@ -46,6 +46,7 @@ angular.module("dotyApp")
     var startDate = options.startDate;
     var endDate = options.endDate || startDate;
     var tagArray = options.tagArray || -1;
+    var dayGrade = options.dayGrade || -1;
 
     var url = "https://www.daysoftheyear.com/api/1.5/days/?date_start="
     + startDate +"&date_end=" + endDate + "&limit=100";
@@ -53,6 +54,11 @@ angular.module("dotyApp")
     if (tagArray !== -1) {
       url = url + '&tags=' + tagArray.valueOf();
     }
+
+    // need to move to 1.6 and... don't know if its implemented?
+//    if (dayGrade !== -1) {
+//      url = url + '&daygrade=' + tagArray.valueOf();
+//    }
 
     console.log("Grabbing [day-by-date]: " + url);
 
@@ -79,7 +85,7 @@ angular.module("dotyApp")
         endDate = options.startDate || -1,
         idArrayLength = idArray.length;
 
-//    options {'startDate': startDate, 'endDate': endDate, 'idArray': idArray}
+    //    options {'startDate': startDate, 'endDate': endDate, 'idArray': idArray}
 
     if (idArrayLength) {
 
