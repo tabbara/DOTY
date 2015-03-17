@@ -235,6 +235,21 @@ var lightercolors = ["#EE6D62", "#99D6CA", "#9ACE78", "#F8DB70",
 
 /*LOGIN*/
 
+.login-logo {
+  width: 90%;
+  margin: 10px auto 30px;
+  display: block;
+  /*  margin: 10px 0px;*/
+}
+
+.slider-logo {
+  width: 638px;
+  max-width: 80%;
+  margin: 10px auto 30px;
+  display: block;
+  /*  margin: 10px 0px;*/
+}
+
 .slider {
   height: 100%;
 }
@@ -376,13 +391,6 @@ position: initial;
 .introduction .scroll {
   height: 100%;
 }
-
-/*
-.slider-logo {
-margin: 0px 0px;
-}
-*/
-
 
 
 #days-container ul {
@@ -740,9 +748,10 @@ height: 16.66%;
 
 .calendar-col {
   border-radius: 50%;
-  background: #fff;
+/*  background: transparent;*/
 
-  background: transparent;
+  background: rgba(239, 104, 79, 0.09);
+  border: 1px solid rgba(239, 79, 105, 0.15);
 
   width: 7vw;
   height: 7vw;
@@ -793,6 +802,7 @@ border-right: none;
 
 .calendar-row > div:empty {
   background: transparent !important;
+  border: none;
 }
 
 .weekday-row {
