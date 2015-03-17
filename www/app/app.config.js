@@ -15,6 +15,7 @@ angular.module("dotyApp")
   $urlRouterProvider.otherwise("/");
   $stateProvider
   .state('/', {
+    cache: false,
     url: "/",
     templateUrl: "views/login.html",
     controller: "loginCtrl"
