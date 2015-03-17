@@ -42,7 +42,7 @@ angular.module('exploreModule')
 
       for (var tag in tags) {
         obj = tags[tag];
-        if (obj.count.day !== "") {
+        if (obj.count.day !== 0) {
           if (lookupParent[obj.parent]) {
             $rootScope.categoryList[lookupParent[obj.parent].elementInArray].children.push(obj);
           };
