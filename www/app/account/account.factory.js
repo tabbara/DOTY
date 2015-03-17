@@ -1,5 +1,5 @@
 angular.module("accountModule")
-.factory('signinFac', function($rootScope, $q, $http, $state, $ionicModal, $timeout, $ionicActionSheet, queryAPI) {
+.factory('signinFac', function($rootScope, $q, $http, $state, $ionicModal, $ionicHistory, $timeout, $ionicActionSheet, queryAPI) {
   var fac = {};
 
   fac.showIntroductionBroadcast = function (show) {
@@ -245,6 +245,11 @@ angular.module("accountModule")
       fac.userRemoveData();
       fac.removeCredentials();
       $rootScope.userSession.signedIn = false;
+
+      $ionicHistory.nextViewOptions({
+        disableBack: true
+      });
+
       $state.go('/');
       //      fac.signinModalOpen();
     });
