@@ -56,6 +56,7 @@ angular.module('calendarModule')
     var highlightedDays = [];
     $scope.favoriteDays = [];
     $scope.interestDays = [];
+    $scope.calendar.html = '';
 
     var dayStart = $scope.calendar.date.getDay(),
         dayIterator = 0,
@@ -125,6 +126,7 @@ angular.module('calendarModule')
     }
 
     var calendarGetInterests = function () {
+
       var deferred = $q.defer();
 
       var options = {
@@ -174,7 +176,10 @@ angular.module('calendarModule')
           console.log(status);
           deferred.resolve();
         });
+      } else {
+        deferred.resolve();
       }
+      console.log('no interest tags to load in calendar');
       return deferred.promise;
     }
 
@@ -182,7 +187,7 @@ angular.module('calendarModule')
 //    var prom2 = calendarGetInterests();
 
     $q.all([calendarGetFavorites(), calendarGetInterests()]).then(function(){
-      console.log(highlightedDays);
+
       for (var w_row = 0; dayIterator-dayStart < monthLength; w_row++) {
 
         html = html + "<div class='calendar-row'>"
