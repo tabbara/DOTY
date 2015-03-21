@@ -4,12 +4,12 @@ angular.module('loginModule')
   $ionicSideMenuDelegate.canDragContent(false);
 
   $scope.startApp = function() {
-    $state.go('home');
-
     $ionicHistory.nextViewOptions({
-      disableAnimate: true,
+//      disableAnimate: true,
       disableBack: true
     });
+
+    $state.go('home');
   };
 
   $scope.next = function() {
@@ -24,18 +24,18 @@ angular.module('loginModule')
     $scope.slideIndex = index;
   };
 
-  $scope.showIntroduction = false;
+  $scope.showIntroduction = true;
 
-  signinFac.checkSignin()
-  .then(function (status) {
-    console.log(status);
-    signinFac.signinModalClose();
-    $scope.startApp();
-    //    $scope.showIntroduction = true;
-  }, function (status) {
-    console.log(status);
-    signinFac.signinModalOpen();
-  });
+//  signinFac.checkSignin()
+//  .then(function (status) {
+//    console.log(status);
+//    signinFac.signinModalClose();
+//    $scope.startApp();
+//    //    $scope.showIntroduction = true;
+//  }, function (status) {
+//    console.log(status);
+//    signinFac.signinModalOpen();
+//  });
 
   $scope.$on('showIntroductionHandle', function (event, show) {
     $scope.showIntroduction = show;
